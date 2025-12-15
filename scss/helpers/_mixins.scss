@@ -1,0 +1,118 @@
+@use 'sass:math';
+@use 'sass:string';
+@use 'sass:meta';
+@use 'sass:list';
+@use 'func' as *;
+
+@mixin fluid-text($max: 48, $min: 16) {
+  font-size: fluid($max, $min);
+}
+
+@mixin hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@mixin show {
+  opacity: 1;
+  visibility: visible;
+}
+
+@mixin flex-center($isInline: false) {
+  @if $isInline {
+    display: inline-flex;
+  } @else {
+    display: flex;
+  }
+
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin abs-center {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  translate: -50% -50%;
+}
+
+@mixin abs-x {
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+}
+
+@mixin abs-y {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+}
+
+@mixin size($inline-size, $block-size: null) {
+  inline-size: rem($inline-size);
+
+  @if $block-size {
+    block-size: rem($block-size);
+  } @else {
+    block-size: rem($inline-size);
+  }
+}
+
+@mixin visually-hidden {
+  // stylelint-disable declaration-no-important
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  /* stylelint-disable-next-line property-no-deprecated */
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(100%) !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  // stylelint-enable declaration-no-important
+}
+
+@mixin transition(
+  $t-property: (
+    color,
+    opacity,
+  ),
+  $t-duration: (
+    var(--transition-duration),
+  ),
+  $t-function: var(--transition-timing-f),
+  $t-delay: null
+) {
+  & {
+    transition-property: $t-property;
+    transition-duration: $t-duration;
+
+    transition-timing-function: $t-function;
+  }
+
+  @if $t-delay {
+    transition-delay: $t-delay;
+  }
+}
+
+@mixin hovered {
+  @include transition(opacity);
+
+  & {
+    will-change: opacity;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: 0.65;
+    }
+  }
+
+  @media (any-hover: none) {
+    &:active {
+      opacity: 0.65;
+    }
+  }
+}

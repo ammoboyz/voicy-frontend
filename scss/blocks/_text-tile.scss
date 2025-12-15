@@ -1,0 +1,48 @@
+@use '../helpers' as *;
+
+.text-tile {
+  display: flex;
+  flex-direction: column;
+  row-gap: rem(15);
+  font-size: rem(14);
+  color: var(--color-text);
+
+  // .text-tile__caption
+
+  &__caption {
+    font-size: rem(16);
+    font-weight: 700;
+  }
+
+  // .text-tile__list
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(15);
+    counter-reset: num;
+    list-style: none;
+  }
+
+  // .text-tile__list-item
+
+  &__list-item {
+    display: flex;
+    gap: rem(10);
+
+    &::before {
+      content: counter(num) '.';
+      counter-increment: num;
+    }
+  }
+
+  // .text-tile__descr
+
+  &__descr {
+  }
+
+  a {
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+}

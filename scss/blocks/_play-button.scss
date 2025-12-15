@@ -1,0 +1,48 @@
+@use '../helpers' as *;
+
+.play-button {
+  position: relative;
+  display: flex;
+  inline-size: rem(48);
+  block-size: rem(48);
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  @include hovered;
+
+  svg {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+
+    inline-size: 100%;
+    block-size: auto;
+
+    transform: translate(-50%, -50%);
+
+    @include transition((opacity));
+  }
+
+  &__icon-play {
+  }
+
+  &.is-active &__icon-play {
+    opacity: 0;
+  }
+
+  &__icon-stop {
+    opacity: 0;
+  }
+
+  &.is-active &__icon-stop {
+    opacity: 1;
+  }
+
+  &__icon-circle {
+    color: var(--color-accent-2);
+  }
+
+  &__icon-decor {
+    color: var(--color-white);
+  }
+}

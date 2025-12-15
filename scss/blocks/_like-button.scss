@@ -1,0 +1,23 @@
+@use '../helpers' as *;
+
+.like-button {
+  color: rgba(var(--color-accent-2-rgba), 0.6);
+  fill: transparent;
+
+  @include transition((color, fill));
+
+  &.is-active {
+    color: var(--color-red);
+    fill: var(--color-red);
+  }
+
+  // .like-button__icon
+
+  &__icon {
+    inline-size: rem(18);
+  }
+
+  svg, path {
+    fill: inherit;
+  }
+}

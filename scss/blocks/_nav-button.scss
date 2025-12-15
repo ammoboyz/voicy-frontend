@@ -1,0 +1,26 @@
+@use '../helpers' as *;
+
+.nav-button {
+  padding-inline: rem(16);
+  padding-block: rem(8);
+  font-size: rem(16);
+  font-weight: 600;
+
+  color: var(--color-white);
+  border-radius: rem(20);
+
+  &.is-active {
+    color: var(--color-accent-2);
+    background: var(--color-white);
+  }
+
+  &:not(.is-active) {
+    @include hovered;
+  }
+
+  &--has-icon {
+    display: flex;
+    align-items: center;
+    gap: rem(4);
+  }
+}

@@ -1,0 +1,7 @@
+@use '../helpers' as *;
+
+.container {
+  margin-inline: auto;
+  max-inline-size: var(--container-width-full);
+  padding-inline: var(--container-offset-x);
+}

@@ -1,0 +1,78 @@
+@use './helpers' as *;
+
+html {
+  font-size: clamp(
+    0.75rem,
+    0.023rem + 3.636vw,
+    1rem
+  ); // values: 12 to 16, viewport: 320 to 430
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--color-white);
+  background-color: var(--color-background-page);
+}
+
+textarea {
+  resize: none;
+}
+
+button {
+  color: inherit;
+}
+
+a,
+button {
+  justify-content: center;
+
+  transition-property:
+    color, background-color, border-color, box-shadow, opacity;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-f);
+
+  text-align: center;
+}
+
+button,
+input,
+textarea {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+svg {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+[data-custom-select] {
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.disable-scroll {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+
+  inline-size: 100%;
+  block-size: 100vh;
+
+  overflow-y: scroll;
+}

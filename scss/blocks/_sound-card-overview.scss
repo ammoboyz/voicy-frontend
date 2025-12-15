@@ -1,0 +1,22 @@
+@use '../helpers' as *;
+
+.sound-card-overview {
+  // .sound-card-overview__nav
+
+  &__nav {
+    margin-block-end: rem(24);
+
+    &:not(:has(.sound-card-overview__search)) {
+      margin-block-end: rem(36);
+    }
+  }
+
+  &__button {
+    
+  }
+
+  // .sound-card-overview__content
+
+  &__content {
+  }
+}

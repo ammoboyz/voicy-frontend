@@ -1,0 +1,66 @@
+@use '../helpers' as *;
+
+.page {
+  display: none;
+
+  &--main {
+  }
+
+  &--form {
+  }
+
+  &--show {
+    display: block;
+  }
+
+  // .page__header
+
+  &__header {
+    padding-block: rem(24);
+  }
+
+  // .page__content
+
+  &__content {
+    padding-block-end: rem(100);
+  }
+
+  &:not(:has(.page__header)) {
+    padding-block-start: rem(24);
+  }
+
+  // .page__footer
+
+  &__footer {
+    position: fixed;
+    inset-block-end: 0;
+    z-index: var(--layer-page-footer);
+    inline-size: 100%;
+    inset-inline: 0;
+
+    padding-block: rem(15);
+    background: rgba(var(--color-white-rgba), 0.6);
+    // backdrop-filter: blur(3px);
+
+    // backdrop-filter: blur(4px);
+    // -webkit-backdrop-filter: blur(4px);
+
+    // @supports not (hanging-punctuation: first) {
+    //   backdrop-filter: url(#displacementFilter) blur(2px);
+    //   -webkit-backdrop-filter: url(#displacementFilter) blur(2px);
+    // }
+  }
+
+  // .page__footer-button
+
+  &__footer-button {
+    inline-size: 100%;
+
+    transition-property: background !important;
+
+    @include hover {
+      opacity: 1 !important;
+      background: hsl(200 100% 62% / 1);
+    }
+  }
+}

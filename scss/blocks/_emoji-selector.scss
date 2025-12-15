@@ -1,0 +1,122 @@
+@use '../helpers' as *;
+
+.emoji-selector {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(15);
+
+  cursor: pointer;
+
+  // .emoji-selector__input
+
+  &__input {
+    display: none;
+  }
+
+  // .emoji-selector__circle
+
+  &__circle {
+    position: relative;
+    display: flex;
+    inline-size: rem(80);
+    block-size: rem(80);
+    justify-content: center;
+    align-items: center;
+    
+    background: var(--color-white);
+    border-radius: 50%;
+
+    @include transition((scale, border-color));
+  }
+
+  &:hover &__circle,
+  &.is-active &__circle {
+    border-color: var(--color-accent-2);
+    scale: 1.05;
+  }
+
+  &.is-selected &__circle {
+    border-color: var(--color-accent-2);
+  }
+
+  // .emoji-selector__icon
+
+  &__icon {
+    color: var(--color-accent-2);
+    
+    @include transition((color, opacity));
+    
+    svg {
+      display: block;
+      inline-size: rem(54);
+    }
+  }
+
+  &:hover &__icon {
+    color: var(--color-accent-2);
+  }
+
+  &.is-selected &__icon {
+    opacity: 0;
+  }
+
+  // .emoji-selector__selected
+
+  &__selected {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: rem(35);
+    line-height: 0;
+    opacity: 0;
+
+    scale: 0;
+    translate: -50% -50%;
+
+    @include transition((opacity, scale));
+  }
+
+  &.is-selected &__selected {
+    opacity: 1;
+    scale: 1;
+  }
+
+  // .emoji-selector__caption
+
+  &__caption {
+    font-size: rem(18);
+    font-weight: 600;
+  }
+
+  // .emoji-selector__picker-container
+
+  &__picker-container {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: var(--layer-form-block);
+
+    max-width: calc(100vw - 32px);
+    border-radius: 16px;
+
+    opacity: 0;
+    transform: translateX(-50%);
+    box-shadow: 0 8px 32px rgb(0 0 0 / 50%);
+    overflow: auto;
+    pointer-events: none;
+
+    @include transition((opacity), 0.33s);
+
+    emoji-picker {
+      // width: 100%;
+    }
+  }
+
+  &.is-active &__picker-container {
+    opacity: 1;
+    pointer-events: all;
+  }
+}

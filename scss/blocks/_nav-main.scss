@@ -1,0 +1,36 @@
+@use '../helpers' as *;
+
+.nav-main {
+  // .nav-main__list
+
+  &__list {
+    display: flex;
+    align-items: center;
+  }
+
+  // .nav-main__item
+
+  &__item {
+  }
+
+  // .nav-main__button
+
+  &__button {
+  }
+
+  // .nav-main__button-icon
+
+  &__button-icon {
+    inline-size: rem(16);
+  }
+
+  // .nav-main__link-caption
+
+  &__link-caption {
+  }
+
+  // .nav-main__link-icon
+
+  &__link-icon {
+  }
+}

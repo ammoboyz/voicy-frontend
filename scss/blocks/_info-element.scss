@@ -1,0 +1,42 @@
+@use '../helpers' as *;
+
+.info-element {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(4);
+
+  padding-inline: rem(14);
+  padding-block: rem(8);
+  border: rem(1) solid var(--color-accent);
+
+  font-size: rem(14);
+  font-weight: 500;
+  color: var(--color-accent);
+
+  border-radius: rem(20);
+
+  &--state-check {
+    background: var(--color-white);
+    border-color: var(--color-white);
+  }
+
+  &--state-rejected {
+    color: var(--color-red);
+    background: var(--color-white);
+    border-color: var(--color-white);
+  }
+
+  &--views {
+  }
+
+  // .info-element__icon
+
+  &__icon {
+    inline-size: rem(14);
+  }
+
+  // .info-element__value
+
+  &__value {
+  }
+}

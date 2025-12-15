@@ -1,0 +1,51 @@
+@use '../helpers' as *;
+
+.sound-block {
+  // .sound-block__header
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-end: rem(12);
+    font-size: rem(16);
+    font-weight: 600;
+  }
+
+  // .sound-block__quantity
+
+  &__quantity {
+    color: var(--color-white);
+  }
+
+  // .sound-block__quantity-caption
+
+  &__quantity-caption {
+  }
+
+  // .sound-block__quantity-value
+
+  &__quantity-value {
+    color: rgba(var(--color-white-rgba), 0.8);
+  }
+
+  // .sound-block__category-dropdown
+
+  &__category-dropdown {
+    color: rgba(var(--color-white-rgba), 0.8);
+  }
+
+  // .sound-block__list
+
+  &__list {
+  }
+
+  // .sound-block__item
+
+  &__item {
+  }
+
+  &__item + &__item {
+    margin-block-start: rem(12);
+  }
+}

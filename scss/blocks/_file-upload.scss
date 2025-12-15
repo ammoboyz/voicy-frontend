@@ -1,0 +1,92 @@
+@use '../helpers' as *;
+
+.file-upload {
+  --t-duration: .5s;
+
+  position: relative;
+
+  // .file-upload__preloader
+
+  &__preloader {
+    // position: absolute;
+    // inset: 0;
+    // z-index: 1;
+    // background: #000;
+
+    // border-radius: rem(30);
+
+    // opacity: 0;
+    // pointer-events: none;
+  }
+
+  &.has-uploading &__preloader {
+    // opacity: 1;
+  }
+
+  // .file-upload__field
+
+  &__field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: rem(8);
+    padding-inline: rem(9);
+    padding-block: rem(16);
+    border: rem(2) dashed var(--color-white);
+    font-size: rem(18);
+    font-weight: 600;
+
+    background: #0091da;
+    border-radius: rem(30);
+
+    pointer-events: all;
+
+    // opacity: 1;
+
+    @include transition((opacity), (var(--t-duration)));
+    @include hovered;
+  }
+
+  &.is-upload &__field {
+    // opacity: 0;
+    pointer-events: none;
+  }
+
+  // .file-upload__field-input
+
+  &__field-input {
+    display: none;
+  }
+
+  // .file-upload__field-caption
+
+  &__field-caption {
+  }
+
+  // .file-upload__field-icon
+
+  &__field-icon {
+    inline-size: rem(24);
+  }
+
+  // .file-upload__player
+
+  &__player {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    block-size: 100%;
+    border: rem(1) solid transparent;
+
+    opacity: 0;
+    pointer-events: none;
+
+    @include transition((opacity, border-color), (var(--t-duration)));
+  }
+
+  &.is-upload &__player {
+    opacity: 1;
+    border-color: var(--color-accent-2);
+    pointer-events: all;
+  }
+}

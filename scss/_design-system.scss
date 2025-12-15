@@ -1,0 +1,160 @@
+@use './helpers' as *;
+
+:root {
+  // fonts
+  --font-family: 'Montserrat', sans-serif;
+
+  // colors
+  --color-accent-rgba: 92, 200, 255; // #5cc8ff
+  --color-accent: rgba(var(--color-accent-rgba));
+
+  --color-accent-2-rgba: 0, 170, 255; // #0af
+  --color-accent-2: rgba(var(--color-accent-2-rgba));
+
+  --color-red: #f00;
+  --color-white-rgba: 255, 255, 255;
+  --color-white: rgba(var(--color-white-rgba));
+
+  --color-background-page: var(--color-accent-2);
+  --color-tile-background: rgba(var(--color-white-rgba), 0.9);
+  --color-text: #00324b;
+
+  // transition
+  --transition-duration: 0.24s;
+  --transition-timing-f: ease;
+
+  // layout
+  --container-offset-x: #{rem(12)};
+  --container-width: 400px;
+
+  --container-width-full: calc(
+    var(--container-width) + var(--container-offset-x) * 2
+  );
+
+  // layer
+  --layer-dropdown: 500;
+  --layer-page-footer: 550;
+  --layer-form-block: 600;
+}
+
+.dark-theme {
+  --color-background-page: #11151e;
+  --color-tile-background: #1e2430;
+  --color-text: var(--color-white);
+
+  .page {
+    &__footer {
+      background: rgba(17, 21, 30, 0.6);
+    }
+  }
+
+  .sound-card {
+    &__category {
+      color: #a5a7ac;
+    }
+  }
+
+  .info-element {
+    color: #a5a7ac;
+    background: #2c3341;
+    border-color: #2c3341;
+
+    &--views {
+      color: var(--color-white);
+    }
+
+    &--state-check {
+      color: var(--color-accent-2);
+      background: #183f59;
+      border-color: #183f59;
+    }
+
+    &--state-rejected {
+      color: var(--color-red);
+      background: #4b1d26;
+      border-color: #4b1d26;
+    }
+  }
+
+  .nav-main {
+    &__button {
+      &.is-active {
+        color: var(--color-white);
+        background: #2c3341;
+      }
+    }
+  }
+
+  .nav-button {
+    &.is-active {
+      color: var(--color-white);
+      background: #2c3341;
+    }
+  }
+
+  .form {
+    &__icon {
+      border: rem(1) solid #a5a7ac;
+      color: #2c3341;
+      background: transparent;
+    }
+
+    &__submit {
+      color: var(--color-white);
+      background: var(--color-accent-2);
+    }
+  }
+
+  .form-field {
+    background: #2c3341;
+
+    &__input::placeholder,
+    &::placeholder,
+    &.dropdown__trigger {
+      color: #abadb3;
+    }
+  }
+
+  .file-upload {
+    &__field {
+      background: #1e2430;
+      border-color: #a5a7ac;
+    }
+  }
+
+  .emoji-selector {
+    &__circle {
+      border: rem(1) solid #a5a7ac;
+      background: transparent;
+    }
+
+    &__icon {
+      color: #a5a7ac;
+    }
+  }
+
+  .player {
+    &__button:where(:not(.play-button)) {
+      color: #a5a7ac;
+    }
+
+    &__button-reload {
+      background: #11151e;
+    }
+
+    &__button-delete {
+      background: #4b1d26;
+    }
+
+    &__size {
+      color: #a5a7ac;
+    }
+  }
+
+  .button {
+    &--muted {
+      color: #a5a7ac;
+      background: #1e2430;
+    }
+  }
+}

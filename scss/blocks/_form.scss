@@ -1,0 +1,61 @@
+@use '../helpers' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: rem(24);
+
+  // .form__emoji
+
+  &__emoji {
+    
+  }
+
+  // .form__add-file
+
+  &__add-file {
+  }
+
+  // .form__group-wrap
+
+  &__group-wrap {
+  }
+
+  // .form__group
+
+  &__group {
+  }
+
+  &__group + &__group {
+    margin-block-start: rem(17);
+  }
+
+  // .form__group-field
+
+  &__group-field {
+    margin-block-end: rem(10);
+  }
+
+  // .form__group-descr
+
+  &__group-descr {
+    font-size: rem(14);
+    font-weight: 500;
+    color: #e5f6ff;
+  }
+
+  // .form__foot
+
+  &__foot {
+  }
+
+  // .form__foot-button
+
+  &__foot-button {
+    inline-size: 100%;
+  }
+
+  &__foot-button + &__foot-button {
+    margin-block-start: rem(12);
+  }
+}

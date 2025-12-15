@@ -1,0 +1,50 @@
+@use '../helpers' as *;
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: rem(4);
+  padding-inline: rem(14);
+  padding-block: rem(8);
+
+  font-size: rem(14);
+  font-weight: 500;
+  color: var(--color-white);
+
+  border-radius: rem(20);
+
+  background-color: var(--color-accent-2);
+
+  @include hovered;
+
+  &--lg {
+    gap: rem(8);
+    padding-inline: rem(16);
+    padding-block: rem(13);
+
+    font-size: rem(18);
+    font-weight: 600;
+
+    border-radius: rem(24);
+  }
+
+  &--lg &__icon {
+    inline-size: rem(18);
+  }
+
+  &--light {
+    color: var(--color-accent-2);
+    background: var(--color-white);
+  }
+
+  &--muted {
+    color: var(--color-accent-2);
+    background: var(--color-white);
+    opacity: 0.8;
+  }
+
+  &:not(.button--lg) &__icon {
+    inline-size: rem(14);
+  }
+}

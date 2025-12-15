@@ -1,0 +1,13 @@
+@use '../helpers' as *;
+
+.form-dropdown {
+  .dropdown {
+    &__trigger {
+      justify-content: space-between;
+    }
+  }
+
+  &.is-choice .dropdown__trigger {
+    color: var(--color-white);
+  }
+}

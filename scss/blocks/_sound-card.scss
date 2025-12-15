@@ -1,0 +1,66 @@
+@use '../helpers' as *;
+
+.sound-card {
+  padding: rem(12);
+  background: var(--color-tile-background);
+  border-radius: rem(24);
+
+  // .sound-card__top
+
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: rem(11);
+    margin-block-end: rem(11);
+  }
+
+  // .sound-card__play-button
+
+  &__play-button {
+    
+  }
+
+  // .sound-card__play-button-icon
+
+  &__play-button-icon {
+  }
+
+  // .sound-card__top-text
+
+  &__top-text {
+  }
+
+  // .sound-card__title
+
+  &__title {
+    margin-block-end: rem(3);
+    font-size: rem(16);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  // .sound-card__category
+
+  &__category {
+    font-size: rem(14);
+    font-weight: 500;
+    color: rgba(0, 50, 75, 0.6);
+  }
+
+  // .sound-card__foot
+
+  &__foot {
+    display: flex;
+    align-items: center;
+    gap: rem(5);
+  }
+
+  // .sound-card__foot-right
+
+  &__foot-right {
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+    margin-inline-start: auto;
+  }
+}

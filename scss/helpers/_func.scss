@@ -1,0 +1,80 @@
+// @use "../helpers" as *;
+@use 'sass:math';
+@use 'sass:meta';
+
+@function strip-unit($number) {
+  @if meta.type-of($number) == 'number' and not math.is-unitless($number) {
+    @return math.div($number, ($number * 0 + 1px));
+  }
+
+  @return $number;
+}
+
+@function rem($pixel) {
+  $value: $pixel;
+
+  // Если число имеет единицы измерения, убираем их
+  @if not math.is-unitless($pixel) {
+    $value: math.div($pixel, $pixel * 0 + 1);
+  }
+
+  // Теперь $value точно без единиц, конвертируем в rem
+  @return math.div($value, 16) * 1rem;
+}
+
+@function em($pixel, $base-font-size: 16) {
+  $value: $pixel;
+
+  @if not math.is-unitless($pixel) {
+    $value: math.div($pixel, $pixel * 0 + 1);
+  }
+
+  @return math.div($value, $base-font-size) * 1em;
+}
+
+// Теперь можно: em(24, 14) = 1.714em при font-size: 14px
+
+@function fluid(
+  $max: 100,
+  $min: 10,
+  $maxViewportWidth: 1300,
+  $minViewportWidth: 430
+) {
+  $maxSize: math.div($max, 16);
+  $minSize: math.div($min, 16);
+  $maxWidth: math.div($maxViewportWidth, 16);
+  $minWidth: math.div($minViewportWidth, 16);
+  $slope: math.div(($maxSize - $minSize), ($maxWidth - $minWidth));
+  $yAxisIntersection: -$minWidth * $slope + $minSize;
+
+  @return clamp(
+    #{$minSize * 1rem},
+    #{$yAxisIntersection * 1rem} + #{$slope * 100vw},
+    #{$maxSize * 1rem}
+  );
+}
+
+@function percent($width, $total: 1300) {
+  @return math.div($width, $total) * 100%;
+}
+
+@function percent-of($percentage, $total) {
+  @return rem(math.div($percentage, 100) * $total);
+}
+
+@function gcd($a, $b) {
+  @if $b == 0 {
+    // Обычное сравнение НЕ deprecated
+    @return $a;
+  }
+
+  @return gcd($b, $a % $b);
+}
+
+@function aspect-ratio($width, $height) {
+  $width-num: strip-unit($width);
+  $height-num: strip-unit($height);
+  $g: gcd($width-num, $height-num);
+
+  @return '#{math.div($width-num, $g)} / #{math.div($height-num, $g)}';
+}

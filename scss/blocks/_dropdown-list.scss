@@ -1,0 +1,31 @@
+@use '../helpers' as *;
+
+.dropdown-list {
+  padding: rem(12);
+
+  background: rgba(var(--color-accent-2-rgba), 0.8);
+  border-radius: rem(12);
+  backdrop-filter: blur(3px);
+
+  // .dropdown-list__item
+
+  &__item {
+    font-size: rem(13);
+    font-weight: 600;
+    color: var(--color-white);
+  }
+
+  &__item + &__item {
+    margin-block-start: rem(8);
+  }
+
+  // .dropdown-list__button
+
+  &__button {
+    inline-size: 100%;
+    justify-content: flex-start;
+    text-align: left;
+
+    @include hovered;
+  }
+}

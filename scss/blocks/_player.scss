@@ -1,0 +1,71 @@
+@use '../helpers' as *;
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: rem(8);
+  padding-block: rem(10);
+
+  // .player__button
+
+  &__button {
+    inline-size: rem(32);
+    block-size: rem(32);
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    &:where(:not(.play-button)) {
+      color: var(--color-accent-2);
+      background: var(--color-white);
+
+      @include hovered;
+
+      svg {
+        inline-size: rem(14);
+        block-size: auto;
+      }
+    }
+  }
+
+  // .player__button-play
+
+  &__button-play {
+    color: var(--color-white);
+  }
+
+  // .player__info
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // .player__duration
+
+  &__duration {
+    display: block;
+
+    font-size: rem(14);
+  }
+
+  // .player__size
+
+  &__size {
+    font-size: rem(12);
+    color: var(--color-text);
+  }
+
+  // .player__button-reload
+
+  &__button-reload {
+    margin-left: auto;
+  }
+
+  // .player__button-delete
+
+  &__button-delete.player__button {
+    color: var(--color-red);
+  }
+}

@@ -1,0 +1,11 @@
+@use '../helpers' as *;
+
+.tabs {
+  &__content-item {
+    display: none;
+
+    &.is-active {
+      display: block;
+    }
+  }
+}

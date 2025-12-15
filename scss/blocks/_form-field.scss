@@ -1,0 +1,33 @@
+@use '../helpers' as *;
+
+.form-field {
+  inline-size: 100%;
+  padding-inline: rem(24);
+  padding-block: rem(14);
+
+  font-size: rem(16);
+  font-weight: 500;
+  color: var(--color-white);
+
+  background: #0091da;
+  border-radius: rem(24);
+
+  &__input::placeholder, &::placeholder, &.dropdown__trigger {
+    color: #99d3f0;
+  }
+
+  &--has-icon {
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+  }
+
+  &__icon {
+    inline-size: rem(16);
+    color: #99d3f0;
+  }
+
+  &__input {
+    color: inherit;
+  }
+}
