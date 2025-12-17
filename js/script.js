@@ -10,6 +10,8 @@ if (tg) {
   console.log('Running outside Telegram (dev mode)');
 }
 
+DEBUG_TEST_TOKEN = "Bearer query_id=AAG5QY8xAAAAALlBjzFSrgY9&user=%7B%22id%22%3A831472057%2C%22first_name%22%3A%22%D0%90%D1%80%D1%82%D1%83%D1%80%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22ammo_boy%22%2C%22language_code%22%3A%22ru%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%2C%22photo_url%22%3A%22https%3A%5C%2F%5C%2Ft.me%5C%2Fi%5C%2Fuserpic%5C%2F320%5C%2FxNzBJ4g0DncwPRWRot-mVts_2AnlhikOBA-9piDhfrk.svg%22%7D&auth_date=1765992956&signature=lQRujIer91rJcZvbtx6jOA07ovS3bAGU2GM1umnsz4_zpt4IAGCUNSZsvAYdjQ64w1GERNpWVYVbCXlc3VP5Dw&hash=60cb3f50c6f997990ee31c900e0e1b8122750c249f66f9088a21051dbdbbf846"
+
 document.documentElement.classList.add("theme-ready");
 applyTelegramThemeClass();
 
@@ -194,7 +196,7 @@ document.addEventListener('click', async (e) => {
     await apiFetch(`/api/sounds/${id}/like`, {
       method: wasLiked ? "DELETE" : "POST",
       headers: {
-        Authorization: `Bearer ${tg.initData}`,
+        Authorization: `Bearer ${DEBUG_TEST_TOKEN}`,
       },
     });
 
@@ -550,7 +552,7 @@ async function fetchSounds(reset = false) {
   try {
     const data = await apiFetch(`${urlBase}?${params.toString()}`, {
       headers: {
-        Authorization: `Bearer ${tg.initData}`,
+        Authorization: `Bearer ${DEBUG_TEST_TOKEN}`,
       },
     });
 
@@ -884,7 +886,7 @@ async function shareVoiceLikeSounds(soundId) {
     const data = await apiFetch(`/api/sounds/share/${encodeURIComponent(soundId)}`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${tg.initData}`,
+        Authorization: `Bearer ${DEBUG_TEST_TOKEN}`,
       },
     });
 
@@ -976,7 +978,7 @@ async function publishVoice() {
     const created = await apiFetch("/api/sounds/send", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${tg.initData}`,
+        Authorization: `Bearer ${DEBUG_TEST_TOKEN}`,
       },
       body: fd, // FormData
     });
