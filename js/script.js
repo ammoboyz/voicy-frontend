@@ -1478,17 +1478,29 @@ function initUploadCategories() {
 }
 
 function enableHapticFeedback(parent, selector, pattern = 20) {
-  const canVibrate =
-    typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function'
-
   if (!parent) return
 
   parent.addEventListener('click', (e) => {
     const el = e.target.closest(selector)
     if (!el || !parent.contains(el)) return
 
-    if (canVibrate) {
-      navigator.vibrate(pattern)
+    try {
+      if (
+        typeof window !== 'undefined' &&
+        window.Telegram &&
+        Telegram.WebApp &&
+        Telegram.WebApp.HapticFeedback &&
+        typeof Telegram.WebApp.HapticFeedback.impactOccurred === 'function'
+      ) {
+        Telegram.WebApp.HapticFeedback.impactOccurred('light')
+      }
+      else if (
+        typeof navigator !== 'undefined' &&
+        typeof navigator.vibrate === 'function'
+      ) {
+        navigator.vibrate(pattern)
+      }
+    } catch (err) {
     }
 
     el.classList.add('haptic-pressed')
