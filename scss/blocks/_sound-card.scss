@@ -1,6 +1,8 @@
 @use '../helpers' as *;
 
 .sound-card {
+  position: relative;
+
   padding: rem(12);
   background: var(--color-tile-background);
   border-radius: rem(24);
@@ -17,7 +19,7 @@
   // .sound-card__play-button
 
   &__play-button {
-    
+    position: relative;
   }
 
   // .sound-card__play-button-icon
@@ -50,6 +52,8 @@
   // .sound-card__foot
 
   &__foot {
+    position: relative;
+
     display: flex;
     align-items: center;
     gap: rem(5);
