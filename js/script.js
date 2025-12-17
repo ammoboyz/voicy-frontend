@@ -3,26 +3,23 @@ import { apiFetch } from "./apiFetch.js";
 
 const tg = window.Telegram?.WebApp;
 
-let DEBUG = false;
+let DEBUG = !tg;
 let DEBUG_TEST_TOKEN = "";
 
-if (window.Telegram && Telegram.WebApp) {
+if (!DEBUG) {
   tg.expand();
   tg.ready();
-  DEBUG = false;
 } else {
-  DEBUG = true;
-  console.log('Running outside Telegram (dev mode)');
+  console.log("Running outside Telegram (dev mode)");
 }
 
-let API_SOUNDS_URL = '/api/sounds'
+let API_SOUNDS_URL = "/api/sounds";
 
 if (DEBUG) {
-  API_SOUNDS_URL = 'https://test.aichatpro.ru/api/sounds';
-  DEBUG_TEST_TOKEN =
-    "query_id=AAG5QY8xAAAAALlBjzFSrgY9&user=%7B%22id%22%3A831472057%2C%22first_name%22%3A%22%D0%90%D1%80%D1%82%D1%83%D1%80%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22ammo_boy%22%2C%22language_code%22%3A%22ru%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%2C%22photo_url%22%3A%22https%3A%5C%2F%5C%2Ft.me%5C%2Fi%5C%2Fuserpic%5C%2F320%5C%2FxNzBJ4g0DncwPRWRot-mVts_2AnlhikOBA-9piDhfrk.svg%22%7D&auth_date=1765992956&signature=lQRujIer91rJcZvbtx6jOA07ovS3bAGU2GM1umnsz4_zpt4IAGCUNSZsvAYdjQ64w1GERNpWVYVbCXlc3VP5Dw&hash=60cb3f50c6f997990ee31c900e0e1b8122750c249f66f9088a21051dbdbbf846";
+  API_SOUNDS_URL = "https://test.aichatpro.ru/api/sounds";
+  DEBUG_TEST_TOKEN = "query_id=...&user=...&hash=...";
 } else {
-  DEBUG_TEST_TOKEN = tg.WebApp.initData;
+  DEBUG_TEST_TOKEN = tg.initData; // <-- ВОТ ТАК
 }
 
 document.documentElement.classList.add("theme-ready");
