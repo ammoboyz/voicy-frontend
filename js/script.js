@@ -3,29 +3,18 @@ import { apiFetch } from "./apiFetch.js";
 
 const tg = window.Telegram?.WebApp;
 
-let DEBUG = !tg;
-let DEBUG_TEST_TOKEN = "";
-
-if (!DEBUG) {
+if (tg) {
   tg.expand();
   tg.ready();
 } else {
-  console.log("Running outside Telegram (dev mode)");
-}
-
-let API_SOUNDS_URL = "/api/sounds";
-
-if (DEBUG) {
-  API_SOUNDS_URL = "https://test.aichatpro.ru/api/sounds";
-  DEBUG_TEST_TOKEN = "query_id=...&user=...&hash=...";
-} else {
-  DEBUG_TEST_TOKEN = tg.initData; // <-- ВОТ ТАК
+  console.log('Running outside Telegram (dev mode)');
 }
 
 document.documentElement.classList.add("theme-ready");
 applyTelegramThemeClass();
 
 const searchInput = document.getElementById('sound-search');
+const API_SOUNDS_URL = '/api/sounds';
 const AUDIO_TTL = 60_000; // 60 секунд
 const audioCache = new Map(); // url -> { audio, expires }
 
@@ -205,7 +194,7 @@ document.addEventListener('click', async (e) => {
     await apiFetch(`/api/sounds/${id}/like`, {
       method: wasLiked ? "DELETE" : "POST",
       headers: {
-        Authorization: `Bearer ${DEBUG_TEST_TOKEN}`,
+        Authorization: `Bearer ${tg.initData}`,
       },
     });
 
@@ -561,7 +550,7 @@ async function fetchSounds(reset = false) {
   try {
     const data = await apiFetch(`${urlBase}?${params.toString()}`, {
       headers: {
-        Authorization: `Bearer ${DEBUG_TEST_TOKEN}`,
+        Authorization: `Bearer ${tg.initData}`,
       },
     });
 
@@ -895,7 +884,7 @@ async function shareVoiceLikeSounds(soundId) {
     const data = await apiFetch(`/api/sounds/share/${encodeURIComponent(soundId)}`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${DEBUG_TEST_TOKEN}`,
+        Authorization: `Bearer ${tg.initData}`,
       },
     });
 
@@ -987,7 +976,7 @@ async function publishVoice() {
     const created = await apiFetch("/api/sounds/send", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${DEBUG_TEST_TOKEN}`,
+        Authorization: `Bearer ${tg.initData}`,
       },
       body: fd, // FormData
     });
