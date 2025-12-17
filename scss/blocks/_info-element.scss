@@ -5,8 +5,7 @@
   align-items: center;
   gap: rem(4);
 
-  padding-inline: rem(14);
-  padding-block: rem(8);
+  padding: 8px 14px;
   border: rem(1) solid var(--color-accent);
 
   font-size: rem(14);
@@ -21,18 +20,18 @@
   }
 
   &--state-rejected {
-    color: var(--color-red);
     background: var(--color-white);
     border-color: var(--color-white);
+    color: var(--color-red);
   }
 
   &--views {
+
   }
 
   // .info-element__icon
 
   &__icon {
-    inline-size: rem(14);
   }
 
   // .info-element__value

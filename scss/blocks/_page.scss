@@ -2,10 +2,6 @@
 
 .page {
   display: none;
-  block-size: 100vh;
-  overflow: auto;
-
-  scrollbar-gutter: stable;
 
   &--main {
   }
@@ -38,7 +34,6 @@
   &__footer {
     position: fixed;
     inset-block-end: 0;
-    z-index: var(--layer-page-footer);
     inline-size: 100%;
     inset-inline: 0;
 

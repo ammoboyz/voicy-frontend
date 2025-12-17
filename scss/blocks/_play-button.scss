@@ -6,24 +6,22 @@
   inline-size: rem(48);
   block-size: rem(48);
   flex-shrink: 0;
+  background: var(--color-accent-2);
   border-radius: 50%;
 
-  // @include hovered;
+  @include hovered;
 
   svg {
     position: absolute;
-    inset-block-start: 50%;
-    inset-inline-start: 50%;
-
-    inline-size: 100%;
-    block-size: auto;
-
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
 
     @include transition((opacity));
   }
 
   &__icon-play {
+    margin-left: rem(2);
   }
 
   &.is-active &__icon-play {
@@ -31,24 +29,11 @@
   }
 
   &__icon-stop {
+    margin-left: rem(1);
     opacity: 0;
   }
 
   &.is-active &__icon-stop {
     opacity: 1;
-  }
-
-  &__icon-circle {
-    color: var(--color-accent-2);
-
-    @include transition(color);
-  }
-
-  &:hover &__icon-circle {
-    color: rgb(0, 150, 224);
-  }
-
-  &__icon-decor {
-    color: var(--color-white);
   }
 }

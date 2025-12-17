@@ -1,17 +1,7 @@
 @use './helpers' as *;
 
-html,
-body {
-  width: 100%;
-  overflow: hidden;
-}
-
 html {
-  font-size: clamp(
-    0.75rem,
-    0.023rem + 3.636vw,
-    1rem
-  ); // values: 12 to 16, viewport: 320 to 430
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -82,6 +72,3 @@ a {
   overflow-y: scroll;
 }
 
-.haptic-pressed {
-  transform: scale(0.97);
-}

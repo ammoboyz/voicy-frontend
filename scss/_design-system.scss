@@ -33,7 +33,6 @@
 
   // layer
   --layer-dropdown: 500;
-  --layer-page-footer: 550;
   --layer-form-block: 600;
 }
 
@@ -134,20 +133,10 @@
   }
 
   .player {
-    &__button:where(:not(.play-button)) {
+    &__button:not(.play-button) {
       color: #a5a7ac;
-    }
 
-    &__button-reload {
       background: #11151e;
-    }
-
-    &__button-delete {
-      background: #4b1d26;
-    }
-
-    &__size {
-      color: #a5a7ac;
     }
   }
 

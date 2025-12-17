@@ -29,10 +29,6 @@
     border-radius: rem(24);
   }
 
-  &--lg &__icon {
-    inline-size: rem(18);
-  }
-
   &--light {
     color: var(--color-accent-2);
     background: var(--color-white);
@@ -42,9 +38,5 @@
     color: var(--color-accent-2);
     background: var(--color-white);
     opacity: 0.8;
-  }
-
-  &:not(.button--lg) &__icon {
-    inline-size: rem(14);
   }
 }
