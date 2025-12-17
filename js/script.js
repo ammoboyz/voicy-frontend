@@ -1,238 +1,238 @@
 import '../lib/emoji-picker-element.js'
-import { apiFetch } from "./apiFetch.js";
+import { apiFetch } from './apiFetch.js'
 
-const tg = window.Telegram?.WebApp;
+const tg = window.Telegram?.WebApp
 
 const DEBUG_ITEMS = [
   {
-      "id": 7965,
-      "title": "😱 Хуееееэеээе бр бр патапим",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/DoyUqrsGKcPmsyVlUOcjIkLWpIlnPt"
+    id: 7965,
+    title: '😱 Хуееееэеээе бр бр патапим',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/DoyUqrsGKcPmsyVlUOcjIkLWpIlnPt',
   },
   {
-      "id": 7950,
-      "title": "🤙 Бр бр патапим хуеэуээеэеэ",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/KlJiAXdCMoArJyhacTRjxNInjOyIrT"
+    id: 7950,
+    title: '🤙 Бр бр патапим хуеэуээеэеэ',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/KlJiAXdCMoArJyhacTRjxNInjOyIrT',
   },
   {
-      "id": 7856,
-      "title": "🐵 Qotag'ini uzilar pidarasni",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/ejFAFByEcUsTdllxTtDGucfaOElSJU"
+    id: 7856,
+    title: "🐵 Qotag'ini uzilar pidarasni",
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/ejFAFByEcUsTdllxTtDGucfaOElSJU',
   },
   {
-      "id": 7051,
-      "title": "🙏 Молюсь об этом каждый день",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/PWhmuTDgawuaVfdAMZUSLCVtUjQhEo"
+    id: 7051,
+    title: '🙏 Молюсь об этом каждый день',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/PWhmuTDgawuaVfdAMZUSLCVtUjQhEo',
   },
   {
-      "id": 7041,
-      "title": "🤙 э котак басина туда встань",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/dylLWetDxtsqVRWZjDsZAZVCHUyVTy"
+    id: 7041,
+    title: '🤙 э котак басина туда встань',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/dylLWetDxtsqVRWZjDsZAZVCHUyVTy',
   },
   {
-      "id": 6869,
-      "title": "😴 Але, мужик, тебе нормально?",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/aMyiswYTCjeGmcnnVRidhuWnIVFuXV"
+    id: 6869,
+    title: '😴 Але, мужик, тебе нормально?',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/aMyiswYTCjeGmcnnVRidhuWnIVFuXV',
   },
   {
-      "id": 6867,
-      "title": "🤥 Та шо?",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/LnfKTlobcMGdDYUAKqHOIuvEWrWFuo"
+    id: 6867,
+    title: '🤥 Та шо?',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/LnfKTlobcMGdDYUAKqHOIuvEWrWFuo',
   },
   {
-      "id": 6865,
-      "title": "👋 я передаю привет анечке",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/rNTQwzAUmPbCIfulnSTEcVzZfjFOHs"
+    id: 6865,
+    title: '👋 я передаю привет анечке',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/rNTQwzAUmPbCIfulnSTEcVzZfjFOHs',
   },
   {
-      "id": 6855,
-      "title": "🥮 Халяль чебуреки пахлава все по скидк",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/sCxtELOcihIBVjhSoZoMLBEgUVcwse"
+    id: 6855,
+    title: '🥮 Халяль чебуреки пахлава все по скидк',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/sCxtELOcihIBVjhSoZoMLBEgUVcwse',
   },
   {
-      "id": 5659,
-      "title": "😀 Даша Дешик ",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/OLQiLElYewbUKqHkHdDBDtrhguJZAr"
+    id: 5659,
+    title: '😀 Даша Дешик ',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/OLQiLElYewbUKqHkHdDBDtrhguJZAr',
   },
   {
-      "id": 5366,
-      "title": "😌 Golden knight ",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/zhSLWMceHAyAmvEgdXXtJeiYdYrZCf"
+    id: 5366,
+    title: '😌 Golden knight ',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/zhSLWMceHAyAmvEgdXXtJeiYdYrZCf',
   },
   {
-      "id": 4032,
-      "title": "🧔‍♂️ Драться можно каждый день ",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/yuTzPloVUvFGxfWVpTCvIRBvXtIBXM"
+    id: 4032,
+    title: '🧔‍♂️ Драться можно каждый день ',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/yuTzPloVUvFGxfWVpTCvIRBvXtIBXM',
   },
   {
-      "id": 3972,
-      "title": "😅 McGregor: Break out the red panties",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/zGZKlUXsPkrHoDdvTTbNaZgkpKdTcP"
+    id: 3972,
+    title: '😅 McGregor: Break out the red panties',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/zGZKlUXsPkrHoDdvTTbNaZgkpKdTcP',
   },
   {
-      "id": 3929,
-      "title": "👍 Потому что вы демо не смотрите",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/wmOOFYQTFnbOQanpPEdnPYuCgVZKRr"
+    id: 3929,
+    title: '👍 Потому что вы демо не смотрите',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/wmOOFYQTFnbOQanpPEdnPYuCgVZKRr',
   },
   {
-      "id": 3927,
-      "title": "😁 St-Pierre: But i know",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/kTbbGBmxSyUKFCQyBfYCttbMdbZSKQ"
+    id: 3927,
+    title: '😁 St-Pierre: But i know',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/kTbbGBmxSyUKFCQyBfYCttbMdbZSKQ',
   },
   {
-      "id": 3926,
-      "title": "😀 St-Pierre: I think you work so much",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/LbLUEGXWTJagpAikOdGSfItYRuKAWJ"
+    id: 3926,
+    title: '😀 St-Pierre: I think you work so much',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/LbLUEGXWTJagpAikOdGSfItYRuKAWJ',
   },
   {
-      "id": 3920,
-      "title": "😀 Max Holloway: I kind of mad, guys",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/oTxfiftNLSdAeNfYvhtmjYFObXlgwG"
+    id: 3920,
+    title: '😀 Max Holloway: I kind of mad, guys',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/oTxfiftNLSdAeNfYvhtmjYFObXlgwG',
   },
   {
-      "id": 3888,
-      "title": "😂 Khabib: I am born ready, bro",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": true,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/pfANQmBeBSOFzpyuWzRwroVNzooMgx"
+    id: 3888,
+    title: '😂 Khabib: I am born ready, bro',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: true,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/pfANQmBeBSOFzpyuWzRwroVNzooMgx',
   },
   {
-      "id": 3780,
-      "title": "👍 St-Pierre: Time physical damage",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/wUdLCEEtAoCEEjVVWEluELbfEQLlDP"
+    id: 3780,
+    title: '👍 St-Pierre: Time physical damage',
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/wUdLCEEtAoCEEjVVWEluELbfEQLlDP',
   },
   {
-      "id": 3778,
-      "title": "😊 Emelianenko: Today I'm coming",
-      "description": null,
-      "views_count": 1,
-      "category_id": null,
-      "liked": false,
-      "moderation_status": "approved",
-      "url": "https://test.aichatpro.ru/api/sounds/play/AMLIglcfLEqgzERFzoPPnxMpCstaNy"
-  }
+    id: 3778,
+    title: "😊 Emelianenko: Today I'm coming",
+    description: null,
+    views_count: 1,
+    category_id: null,
+    liked: false,
+    moderation_status: 'approved',
+    url: 'https://test.aichatpro.ru/api/sounds/play/AMLIglcfLEqgzERFzoPPnxMpCstaNy',
+  },
 ]
 
 if (tg) {
-  tg.expand();
-  tg.ready();
+  tg.expand()
+  tg.ready()
 } else {
-  console.log('Running outside Telegram (dev mode)');
+  console.log('Running outside Telegram (dev mode)')
 }
 
-document.documentElement.classList.add("theme-ready");
-applyTelegramThemeClass();
+document.documentElement.classList.add('theme-ready')
+applyTelegramThemeClass()
 
-const searchInput = document.getElementById('sound-search');
-const API_SOUNDS_URL = '/api/sounds';
-const AUDIO_TTL = 60_000; // 60 секунд
-const audioCache = new Map(); // url -> { audio, expires }
+const searchInput = document.getElementById('sound-search')
+const API_SOUNDS_URL = '/api/sounds'
+const AUDIO_TTL = 60_000 // 60 секунд
+const audioCache = new Map() // url -> { audio, expires }
 
 const AUDIO_CATEGORIES = {
   all: 'Все',
-  memes: "Мемы",
-  cringe: "Кринж",
-  relationships: "Отношения",
-  work_study: "Работа и учёба",
-  games: "Игры",
-  streams: "Стримы",
-  movies: "Кино",
-  anime: "Аниме",
-  ambience: "Атмосфера",
-};
+  memes: 'Мемы',
+  cringe: 'Кринж',
+  relationships: 'Отношения',
+  work_study: 'Работа и учёба',
+  games: 'Игры',
+  streams: 'Стримы',
+  movies: 'Кино',
+  anime: 'Аниме',
+  ambience: 'Атмосфера',
+}
 
 let soundState = {
   context: 'popular',
@@ -242,21 +242,21 @@ let soundState = {
   loading: false,
   search: null,
   categories: null,
-};
+}
 
-let currentAudio = null;
-let currentButton = null;
+let currentAudio = null
+let currentButton = null
 
-let selectedAudioFile = null;
-let selectedEmoji = '';
+let selectedAudioFile = null
+let selectedEmoji = ''
 
 document.addEventListener('click', (e) => {
-  const trigger = e.target.closest('.dropdown__trigger');
-  if (!trigger) return;
+  const trigger = e.target.closest('.dropdown__trigger')
+  if (!trigger) return
 
-  const dropdown = trigger.closest('.dropdown');
-  dropdown?.classList.toggle('is-active');
-});
+  const dropdown = trigger.closest('.dropdown')
+  dropdown?.classList.toggle('is-active')
+})
 
 document.querySelectorAll('.sound-block__list').length
 
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
   setItemActive('.like-button')
   setItemActive('.play-button')
 
-  renderCategories();
+  renderCategories()
 
   // dropdowns
   init_selectionList()
@@ -275,8 +275,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // page
   init_pageSwitch()
 
-
-  initUploadCategories();
+  initUploadCategories()
 
   // glass
   if (document.body.classList.contains('is-liquid')) {
@@ -291,161 +290,166 @@ document.addEventListener('DOMContentLoaded', function () {
   enableHapticFeedback('.play-button')
   enableHapticFeedback('.like-button')
 
-  let scrollLocked = false;
+  let scrollLocked = false
 
-  const scroller = document.querySelector('.page--main'); // <-- важно
-  scroller.addEventListener('scroll', () => {
-    if (scrollLocked) return;
+  const scroller = document.querySelector('.page--main') // <-- важно
+  scroller.addEventListener(
+    'scroll',
+    () => {
+      if (scrollLocked) return
 
-    const scrollTop = scroller.scrollTop;
-    const clientHeight = scroller.clientHeight;
-    const scrollHeight = scroller.scrollHeight;
+      const scrollTop = scroller.scrollTop
+      const clientHeight = scroller.clientHeight
+      const scrollHeight = scroller.scrollHeight
 
-    if (scrollTop + clientHeight >= scrollHeight - 200) {
-      scrollLocked = true;
-      fetchSounds().finally(() => (scrollLocked = false));
-    }
-  }, { passive: true });
+      if (scrollTop + clientHeight >= scrollHeight - 200) {
+        scrollLocked = true
+        fetchSounds().finally(() => (scrollLocked = false))
+      }
+    },
+    { passive: true },
+  )
 
-  renderSounds(DEBUG_ITEMS);
+  renderSounds(DEBUG_ITEMS)
   // fetchSounds(true);
-});
-
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest(".share-btn");
-  if (!btn) return;
-  shareVoiceLikeSounds(btn.getAttribute("data-share-sound-id"));
-});
-
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest("#publish-voice");
-  if (!btn) return;
-
-  publishVoice()
-});
+})
 
 document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.play-button');
-  if (!btn) return;
+  const btn = e.target.closest('.share-btn')
+  if (!btn) return
+  shareVoiceLikeSounds(btn.getAttribute('data-share-sound-id'))
+})
 
-  const url = btn.dataset.url;
-  if (!url) return;
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('#publish-voice')
+  if (!btn) return
+
+  publishVoice()
+})
+
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.play-button')
+  if (!btn) return
+
+  const url = btn.dataset.url
+  if (!url) return
 
   // клик по той же кнопке = play / pause
   if (currentAudio && currentButton === btn) {
     if (currentAudio.paused) {
-      currentAudio.play();
-      btn.classList.add('is-active');
+      currentAudio.play()
+      btn.classList.add('is-active')
     } else {
-      currentAudio.pause();
-      btn.classList.remove('is-active');
+      currentAudio.pause()
+      btn.classList.remove('is-active')
     }
-    return;
+    return
   }
 
   // если играло другое — полностью остановить
   if (currentAudio) {
-    currentAudio.pause();
-    currentAudio = null;
+    currentAudio.pause()
+    currentAudio = null
   }
   if (currentButton) {
-    currentButton.classList.remove('is-active');
+    currentButton.classList.remove('is-active')
   }
 
   // ВСЕГДА создаём новое аудио
-  const audio = new Audio(url);
-  audio.currentTime = 0;
+  const audio = new Audio(url)
+  audio.currentTime = 0
 
-  currentAudio = audio;
-  currentButton = btn;
-  btn.classList.add('is-active');
+  currentAudio = audio
+  currentButton = btn
+  btn.classList.add('is-active')
 
   audio.onended = () => {
-    btn.classList.remove('is-active');
-    currentAudio = null;
-    currentButton = null;
-  };
+    btn.classList.remove('is-active')
+    currentAudio = null
+    currentButton = null
+  }
 
   audio.play().catch(() => {
-    btn.classList.remove('is-active');
-    currentAudio = null;
-    currentButton = null;
-  });
-});
+    btn.classList.remove('is-active')
+    currentAudio = null
+    currentButton = null
+  })
+})
 
 document.addEventListener('click', (e) => {
-  const btn = e.target.closest('[data-open-sounds]');
-  if (!btn) return;
+  const btn = e.target.closest('[data-open-sounds]')
+  if (!btn) return
 
-  setContext(btn.dataset.openSounds);
-});
+  setContext(btn.dataset.openSounds)
+})
 
 document.addEventListener('click', async (e) => {
-  const btn = e.target.closest('.like-button');
-  if (!btn) return;
+  const btn = e.target.closest('.like-button')
+  if (!btn) return
 
-  const id = btn.dataset.id;
-  if (!id) return;
+  const id = btn.dataset.id
+  if (!id) return
 
-  const wasLiked = btn.classList.contains('is-active');
-  const ctx = soundState.context; // 'popular' | 'favorites' | 'uploads'
-  const itemEl = btn.closest('.sound-block__item'); // <li>
+  const wasLiked = btn.classList.contains('is-active')
+  const ctx = soundState.context // 'popular' | 'favorites' | 'uploads'
+  const itemEl = btn.closest('.sound-block__item') // <li>
 
   // оптимистично UI
-  btn.classList.toggle('is-active');
+  btn.classList.toggle('is-active')
 
   try {
     await apiFetch(`/api/sounds/${id}/like`, {
-      method: wasLiked ? "DELETE" : "POST",
+      method: wasLiked ? 'DELETE' : 'POST',
       headers: {
         Authorization: `Bearer ${tg.initData}`,
       },
-    });
+    })
 
     // ✅ если сняли лайк в избранном — убираем элемент из списка
     if (ctx === 'favorites' && wasLiked) {
-      itemEl?.remove();
+      itemEl?.remove()
 
       // (опционально) уменьшить счётчик "Всего звуков -"
-      const block = itemEl?.closest('.sound-block');
-      const countEl = block?.querySelector('.sound-block__quantity-value');
+      const block = itemEl?.closest('.sound-block')
+      const countEl = block?.querySelector('.sound-block__quantity-value')
       if (countEl) {
-        const current = Number(String(countEl.textContent).replace(/[^\d]/g, '')) || 0;
-        countEl.textContent = String(Math.max(0, current - 1));
+        const current =
+          Number(String(countEl.textContent).replace(/[^\d]/g, '')) || 0
+        countEl.textContent = String(Math.max(0, current - 1))
       }
 
       // (опционально) если список пуст — можно догрузить/перерендерить с сервера
-      const list = getSoundListEl('favorites');
+      const list = getSoundListEl('favorites')
       if (list && list.children.length === 0) {
         // чтобы точно синхронизироваться с бэком
-        fetchSounds(true);
+        fetchSounds(true)
       }
     }
   } catch (err) {
-    btn.classList.toggle('is-active');
-    alert(err.message);
-    console.error('Like request failed', err);
+    btn.classList.toggle('is-active')
+    alert(err.message)
+    console.error('Like request failed', err)
   }
-});
+})
 
 function getCachedAudio(url) {
-  const now = Date.now();
-  const cached = audioCache.get(url);
+  const now = Date.now()
+  const cached = audioCache.get(url)
 
   if (cached && cached.expires > now) {
-    return cached.audio;
+    return cached.audio
   }
 
   // expired
-  audioCache.delete(url);
-  return null;
+  audioCache.delete(url)
+  return null
 }
 
 function setCachedAudio(url, audio) {
   audioCache.set(url, {
     audio,
     expires: Date.now() + AUDIO_TTL,
-  });
+  })
 }
 
 function setItemActive(
@@ -677,143 +681,148 @@ function init_liquidGlass() {
 }
 
 if (searchInput) {
-  searchInput.addEventListener('input', debounce(e => {
-    soundState.search = e.target.value || null;
-    fetchSounds(true);
-  }, 400));
+  searchInput.addEventListener(
+    'input',
+    debounce((e) => {
+      soundState.search = e.target.value || null
+      fetchSounds(true)
+    }, 400),
+  )
 }
 
 function debounce(fn, delay) {
-  let timeout;
+  let timeout
   return (...args) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => fn(...args), delay);
-  };
+    clearTimeout(timeout)
+    timeout = setTimeout(() => fn(...args), delay)
+  }
 }
 
 function updateTotalCount(total, context = soundState.context) {
-  const list = getSoundListEl(context); // UL по data-sounds-context
-  const block = list?.closest('.sound-block'); // нужный sound-block вокруг списка
-  const el = block?.querySelector('.sound-block__quantity-value'); // нужный счётчик
-  if (!el) return;
+  const list = getSoundListEl(context) // UL по data-sounds-context
+  const block = list?.closest('.sound-block') // нужный sound-block вокруг списка
+  const el = block?.querySelector('.sound-block__quantity-value') // нужный счётчик
+  if (!el) return
 
-  el.textContent = formatViews(total);
+  el.textContent = formatViews(total)
 }
 
 function getSoundListEl(context = soundState.context) {
-  return document.querySelector(`.sound-block__list[data-sounds-context="${context}"]`);
+  return document.querySelector(
+    `.sound-block__list[data-sounds-context="${context}"]`,
+  )
 }
 
 async function fetchSounds(reset = false) {
-  if (soundState.loading) return;
-  if (!soundState.hasNext && !reset) return;
+  if (soundState.loading) return
+  if (!soundState.hasNext && !reset) return
 
   console.log({
     activeTab: document.querySelector('.tabs__content-item.is-active'),
     list: getSoundListEl(),
-    context: getSoundListEl()?.dataset?.soundsContext
-  });
+    context: getSoundListEl()?.dataset?.soundsContext,
+  })
 
-  const list = getSoundListEl();
-  if (!list) return;
+  const list = getSoundListEl()
+  if (!list) return
 
-  const context = soundState.context;
+  const context = soundState.context
 
   console.log('[fetchSounds]', {
     list,
     context: list?.dataset?.soundsContext,
     page: soundState.page,
-  });
+  })
 
-  soundState.loading = true;
+  soundState.loading = true
 
   if (reset) {
-    soundState.page = 1;
-    soundState.hasNext = true;
-    list.innerHTML = '';
+    soundState.page = 1
+    soundState.hasNext = true
+    list.innerHTML = ''
   }
 
   const params = new URLSearchParams({
     page: soundState.page,
     limit: soundState.limit,
-  });
+  })
 
   // search только для popular
   if (soundState.search && context === 'popular') {
-    params.append('search', soundState.search);
+    params.append('search', soundState.search)
   }
 
   if (soundState.categories) {
-    params.append('categories', soundState.categories);
+    params.append('categories', soundState.categories)
   }
 
-  let urlBase = API_SOUNDS_URL;
-  if (context === 'favorites') urlBase = `${API_SOUNDS_URL}/my/favorite`;
-  if (context === 'uploads') urlBase = `${API_SOUNDS_URL}/my/upload`;
+  let urlBase = API_SOUNDS_URL
+  if (context === 'favorites') urlBase = `${API_SOUNDS_URL}/my/favorite`
+  if (context === 'uploads') urlBase = `${API_SOUNDS_URL}/my/upload`
 
   try {
     const data = await apiFetch(`${urlBase}?${params.toString()}`, {
       headers: {
         Authorization: `Bearer ${tg.initData}`,
       },
-    });
+    })
 
-    if (reset) updateTotalCount(data.total, context);
+    if (reset) updateTotalCount(data.total, context)
 
-    renderSounds(data.items);
+    renderSounds(data.items)
 
-    soundState.hasNext = data.has_next;
-    soundState.page += 1;
+    soundState.hasNext = data.has_next
+    soundState.page += 1
   } catch (err) {
-    alert(err.message);
-    console.error("Fetch sounds failed", err);
+    alert(err.message)
+    console.error('Fetch sounds failed', err)
   } finally {
-    soundState.loading = false;
+    soundState.loading = false
   }
 }
 
 function formatViews(count) {
-  const num = Number(count);
+  const num = Number(count)
 
   if (!Number.isFinite(num) || num < 0) {
-    return '0';
+    return '0'
   }
 
   if (num >= 1_000_000) {
-    const value = num / 1_000_000;
-    return (value % 1 === 0 ? value : value.toFixed(1)) + 'м';
+    const value = num / 1_000_000
+    return (value % 1 === 0 ? value : value.toFixed(1)) + 'м'
   }
 
   if (num >= 1_000) {
-    const value = num / 1_000;
-    return (value % 1 === 0 ? value : value.toFixed(1)) + 'к';
+    const value = num / 1_000
+    return (value % 1 === 0 ? value : value.toFixed(1)) + 'к'
   }
 
-  return String(Math.floor(num));
+  return String(Math.floor(num))
 }
 
 function renderSounds(items) {
-  if (!Array.isArray(items) || items.length === 0) return;
+  if (!Array.isArray(items) || items.length === 0) return
 
   // 1. Берём текущую вкладку
-  const context = soundState.context;
+  const context = soundState.context
 
   // 2. Берём UL, который ей соответствует
   const list = document.querySelector(
-    `.sound-block__list[data-sounds-context="${context}"]`
-  );
+    `.sound-block__list[data-sounds-context="${context}"]`,
+  )
 
   if (!list) {
-    console.warn('UL not found for context:', context);
-    return;
+    console.warn('UL not found for context:', context)
+    return
   }
 
-  items.forEach(sound => {
-    const li = document.createElement('li');
-    li.className = 'sound-block__item';
-    const status = sound.moderation_status; // pending | approved | rejected
+  items.forEach((sound) => {
+    const li = document.createElement('li')
+    li.className = 'sound-block__item'
+    const status = sound.moderation_status // pending | approved | rejected
 
-    const showViews = !(context === 'uploads' && status === 'rejected');
+    const showViews = !(context === 'uploads' && status === 'rejected')
 
     const viewsHtml = showViews
       ? `
@@ -823,17 +832,19 @@ function renderSounds(items) {
           </span>
         </div>
       `
-      : '';
+      : ''
 
-    const footLeftHtml = (context === 'uploads')
-      ? `
+    const footLeftHtml =
+      context === 'uploads'
+        ? `
         ${viewsHtml}
         ${renderUploadFootLeft(status)}
       `
-      : viewsHtml;
-    const footRightHtml = (context === 'uploads')
-      ? renderUploadStatusRight(status, sound.id)
-      : `
+        : viewsHtml
+    const footRightHtml =
+      context === 'uploads'
+        ? renderUploadStatusRight(status, sound.id)
+        : `
         <button class="like-button ${sound.liked ? 'is-active' : ''}" type="button" data-id="${sound.id}">
           <svg class="like-button__icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_52_11933)">
@@ -872,8 +883,7 @@ function renderSounds(items) {
 
           <span class="button__caption">Отправить</span>
         </button>
-      `;
-
+      `
 
     li.innerHTML = `
       <div class="sound-card" data-sound-id="${sound.id}">
@@ -894,10 +904,12 @@ function renderSounds(items) {
                 fill="#00AAFF"
               />
               <path
-                class="play-button__icon-decor"
-                d="M32.492 19.9695L22.954 12.9755C22.209 12.4299 21.3275 12.1014 20.4073 12.0262C19.487 11.951 18.5638 12.132 17.7402 12.5494C16.9165 12.9667 16.2245 13.6039 15.7408 14.3905C15.2572 15.177 15.0007 16.0821 15 17.0055V31.0005C14.9986 31.9247 15.2536 32.8312 15.7368 33.6191C16.22 34.407 16.9124 35.0453 17.7369 35.4631C18.5614 35.8808 19.4856 36.0615 20.4067 35.9851C21.3278 35.9088 22.2096 35.5783 22.954 35.0305L32.492 28.0365C33.1249 27.572 33.6395 26.9651 33.9942 26.2648C34.3489 25.5645 34.5338 24.7905 34.5338 24.0055C34.5338 23.2204 34.3489 22.4465 33.9942 21.7462C33.6395 21.0459 33.1249 20.4389 32.492 19.9745V19.9695Z"
-                fill="white"
-              />
+  class="play-button__icon-decor"
+  d="M32.492 19.9695L22.954 12.9755C22.209 12.4299 21.3275 12.1014 20.4073 12.0262C19.487 11.951 18.5638 12.132 17.7402 12.5494C16.9165 12.9667 16.2245 13.6039 15.7408 14.3905C15.2572 15.177 15.0007 16.0821 15 17.0055V31.0005C14.9986 31.9247 15.2536 32.8312 15.7368 33.6191C16.22 34.407 16.9124 35.0453 17.7369 35.4631C18.5614 35.8808 19.4856 36.0615 20.4067 35.9851C21.3278 35.9088 22.2096 35.5783 22.954 35.0305L32.492 28.0365C33.1249 27.572 33.6395 26.9651 33.9942 26.2648C34.3489 25.5645 34.5338 24.7905 34.5338 24.0055C34.5338 23.2204 34.3489 22.4465 33.9942 21.7462C33.6395 21.0459 33.1249 20.4389 32.492 19.9745V19.9695Z"
+  fill="white"
+  transform="translate(1.2 0)"
+/>
+
             </svg>
 
             <!-- STOP -->
@@ -940,10 +952,10 @@ function renderSounds(items) {
           </div>
         </div>
       </div>
-    `;
+    `
 
-    list.appendChild(li);
-  });
+    list.appendChild(li)
+  })
 }
 
 function renderUploadStatusRight(status, soundId) {
@@ -962,7 +974,7 @@ function renderUploadStatusRight(status, soundId) {
         </svg>
         <span class="info-element__value">На проверке</span>
       </div>
-    `;
+    `
   }
 
   if (status === 'rejected') {
@@ -978,7 +990,7 @@ function renderUploadStatusRight(status, soundId) {
         </svg>
         <span class="info-element__value">Отклонено</span>
       </div>
-    `;
+    `
   }
 
   // approved (по умолчанию)
@@ -995,39 +1007,39 @@ function renderUploadStatusRight(status, soundId) {
     <button class="button share-btn" data-share-sound-id="${soundId}" type="button">
       <span class="button__caption">Отправить</span>
     </button>
-  `;
+  `
 }
 
 function renderUploadFootLeft(status) {
   if (status === 'rejected') {
-    return `<div class="info-element"><span class="info-element__value">Не прошло проверку</span></div>`;
+    return `<div class="info-element"><span class="info-element__value">Не прошло проверку</span></div>`
   }
   // pending/approved: слева остаётся views как обычно (ничего не добавляем)
-  return '';
+  return ''
 }
 
 function setContext(nextCtx) {
-  if (!nextCtx || nextCtx === soundState.context) return;
+  if (!nextCtx || nextCtx === soundState.context) return
 
-  soundState.context = nextCtx;
-  soundState.page = 1;
-  soundState.hasNext = true;
+  soundState.context = nextCtx
+  soundState.page = 1
+  soundState.hasNext = true
 
-  const list = getSoundListEl(nextCtx);
-  if (list) list.innerHTML = '';
+  const list = getSoundListEl(nextCtx)
+  if (list) list.innerHTML = ''
 
-  fetchSounds(true);
+  fetchSounds(true)
 }
 
 function renderCategories() {
-  const lists = document.querySelectorAll('.dropdown-list.selection-list');
+  const lists = document.querySelectorAll('.dropdown-list.selection-list')
 
   lists.forEach((list) => {
-    list.innerHTML = '';
+    list.innerHTML = ''
 
     Object.entries(AUDIO_CATEGORIES).forEach(([key, label]) => {
-      const li = document.createElement('li');
-      li.className = 'dropdown-list__item';
+      const li = document.createElement('li')
+      li.className = 'dropdown-list__item'
 
       li.innerHTML = `
         <label class="checkbox">
@@ -1039,163 +1051,166 @@ function renderCategories() {
           <span class="checkbox__caption">${label}</span>
           <div class="checkbox__emulate"></div>
         </label>
-      `;
+      `
 
-      list.appendChild(li);
-    });
+      list.appendChild(li)
+    })
 
     // просто реагируем на выбор
     list.addEventListener('change', () => {
       const checked = Array.from(
-        list.querySelectorAll('.selection-list__element:checked')
-      );
+        list.querySelectorAll('.selection-list__element:checked'),
+      )
 
-      let selected = checked.map((el) => el.dataset.category);
+      let selected = checked.map((el) => el.dataset.category)
 
       // "all" = сброс фильтра
       if (selected.includes('all')) {
         // оставляем только all визуально (или вообще снимаем все — как хочешь)
         checked.forEach((el) => {
-          if (el.dataset.category !== 'all') el.checked = false;
-        });
-        selected = [];
+          if (el.dataset.category !== 'all') el.checked = false
+        })
+        selected = []
       } else {
         // если выбрали что-то кроме all — снимаем all
-        const allEl = list.querySelector('.selection-list__element[data-category="all"]');
-        if (allEl) allEl.checked = false;
+        const allEl = list.querySelector(
+          '.selection-list__element[data-category="all"]',
+        )
+        if (allEl) allEl.checked = false
       }
 
       // ВАЖНО: в стейт кладём строку или null
-      soundState.categories = selected.length ? selected.join(',') : null;
+      soundState.categories = selected.length ? selected.join(',') : null
 
-      fetchSounds(true);
-    });
-  });
+      fetchSounds(true)
+    })
+  })
 }
 
 async function shareVoiceLikeSounds(soundId) {
-  const tg = window.Telegram.WebApp;
+  const tg = window.Telegram.WebApp
 
-  const userId = tg.initDataUnsafe?.user?.id;
+  const userId = tg.initDataUnsafe?.user?.id
   if (!userId) {
-    alert("Открой мини-апп внутри Telegram");
-    return;
+    alert('Открой мини-апп внутри Telegram')
+    return
   }
 
-  let prepared_message_id;
+  let prepared_message_id
 
   try {
-    const data = await apiFetch(`/api/sounds/share/${encodeURIComponent(soundId)}`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${tg.initData}`,
+    const data = await apiFetch(
+      `/api/sounds/share/${encodeURIComponent(soundId)}`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${tg.initData}`,
+        },
       },
-    });
+    )
 
-    prepared_message_id = data.prepared_message_id;
+    prepared_message_id = data.prepared_message_id
   } catch (err) {
-    alert(err.message);
-    console.error("Share prepare failed", err);
-    return;
+    alert(err.message)
+    console.error('Share prepare failed', err)
+    return
   }
 
   // нативный Share Message (как на скрине)
   tg.shareMessage(prepared_message_id, (sent) => {
-    console.log("sent?", sent);
-  });
+    console.log('sent?', sent)
+  })
 }
 
 function applyTelegramThemeClass() {
-  if (!tg) return;
+  if (!tg) return
 
-  const isDark = tg.colorScheme === "dark";
+  const isDark = tg.colorScheme === 'dark'
 
-  document.documentElement.classList.toggle("dark-theme", isDark);
+  document.documentElement.classList.toggle('dark-theme', isDark)
 }
 
 function resetPublishForm() {
-  selectedAudioFile = null;
-  selectedEmoji = '';
+  selectedAudioFile = null
+  selectedEmoji = ''
 
-  const fileInput = document.querySelector(".add-file-element__input");
-  if (fileInput) fileInput.value = '';
+  const fileInput = document.querySelector('.add-file-element__input')
+  if (fileInput) fileInput.value = ''
 
-  const titleInput = document.querySelector('input[placeholder="Название"]');
-  if (titleInput) titleInput.value = '';
+  const titleInput = document.querySelector('input[placeholder="Название"]')
+  if (titleInput) titleInput.value = ''
 
-  const catTrigger = document.querySelector(".form-dropdown .dropdown__trigger");
+  const catTrigger = document.querySelector('.form-dropdown .dropdown__trigger')
   if (catTrigger) {
-    catTrigger.textContent = 'Категории';
-    delete catTrigger.dataset.value;
-    catTrigger.classList.remove('is-choice');
+    catTrigger.textContent = 'Категории'
+    delete catTrigger.dataset.value
+    catTrigger.classList.remove('is-choice')
   }
 
-  const emojiSelector = document.querySelector('.emoji-selector');
+  const emojiSelector = document.querySelector('.emoji-selector')
   if (emojiSelector) {
-    emojiSelector.classList.remove('is-selected');
-    const selected = emojiSelector.querySelector('.emoji-selector__selected');
-    if (selected) selected.textContent = '';
+    emojiSelector.classList.remove('is-selected')
+    const selected = emojiSelector.querySelector('.emoji-selector__selected')
+    if (selected) selected.textContent = ''
   }
 
-  const wrapper = document.querySelector('.file-upload');
+  const wrapper = document.querySelector('.file-upload')
   if (wrapper) {
-    wrapper.classList.remove('has-uploading', 'is-upload');
+    wrapper.classList.remove('has-uploading', 'is-upload')
   }
 }
 
 function goToPopularTab() {
   // закрываем форму
-  document.querySelector('.page--form')?.classList.remove('page--show');
-  document.querySelector('.page--main')?.classList.add('page--show');
+  document.querySelector('.page--form')?.classList.remove('page--show')
+  document.querySelector('.page--main')?.classList.add('page--show')
 
-  document.querySelector('[data-open-sounds="popular"]')?.click();
+  document.querySelector('[data-open-sounds="popular"]')?.click()
 }
 
 async function publishVoice() {
-  const titleInput = document.querySelector('input[placeholder="Название"]');
+  const titleInput = document.querySelector('input[placeholder="Название"]')
 
-  const file = selectedAudioFile;
-  const title = (titleInput?.value || "").trim();
+  const file = selectedAudioFile
+  const title = (titleInput?.value || '').trim()
 
-  const catTrigger = document.querySelector(".form-dropdown .dropdown__trigger");
+  const catTrigger = document.querySelector('.form-dropdown .dropdown__trigger')
   const category =
-    catTrigger?.dataset?.value ||
-    (catTrigger?.textContent || "").trim();
+    catTrigger?.dataset?.value || (catTrigger?.textContent || '').trim()
 
-  if (!file) return alert("Выбери файл (звук)");
-  if (!title) return alert("Введи название");
-  if (!category || category === "Категории") return alert("Выбери категорию");
+  if (!file) return alert('Выбери файл (звук)')
+  if (!title) return alert('Введи название')
+  if (!category || category === 'Категории') return alert('Выбери категорию')
 
-  const fd = new FormData();
+  const fd = new FormData()
 
-  fd.append("file", file, file.name);
-  fd.append("title", title);
-  fd.append("category_id", category);
+  fd.append('file', file, file.name)
+  fd.append('title', title)
+  fd.append('category_id', category)
 
   if (selectedEmoji) {
-    fd.append("emoji", selectedEmoji);
+    fd.append('emoji', selectedEmoji)
   }
 
   try {
-    const created = await apiFetch("/api/sounds/send", {
-      method: "POST",
+    const created = await apiFetch('/api/sounds/send', {
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${tg.initData}`,
       },
       body: fd, // FormData
-    });
+    })
 
-    console.log("Published:", created);
-    alert("Звук отправлен на модерацию ✅");
+    console.log('Published:', created)
+    alert('Звук отправлен на модерацию ✅')
 
     resetPublishForm()
     goToPopularTab()
   } catch (err) {
-    console.error("Publish failed:", err);
-    alert(err.message);
+    console.error('Publish failed:', err)
+    alert(err.message)
   }
 }
-
 
 function init_emoji() {
   const selector = document.querySelector('.emoji-selector')
@@ -1214,7 +1229,7 @@ function init_emoji() {
 
   pickerContainer.addEventListener('emoji-click', (e) => {
     const emoji = e.detail.unicode
-    selectedEmoji = emoji;
+    selectedEmoji = emoji
 
     selected.textContent = emoji
     hiddenInput.value = emoji
@@ -1324,7 +1339,7 @@ function init_audioplayer() {
       return
     }
 
-    selectedAudioFile = file;
+    selectedAudioFile = file
 
     // Сброс предыдущего состояния
     resetPlayer()
@@ -1408,15 +1423,17 @@ function init_audioplayer() {
 }
 
 function initUploadCategories() {
-  const uploadList = document.getElementById('upload-category-list');
-  const uploadTrigger = document.querySelector('.form-dropdown .dropdown__trigger');
+  const uploadList = document.getElementById('upload-category-list')
+  const uploadTrigger = document.querySelector(
+    '.form-dropdown .dropdown__trigger',
+  )
 
-  if (!uploadList || !uploadTrigger) return;
+  if (!uploadList || !uploadTrigger) return
 
-  uploadList.innerHTML = '';
+  uploadList.innerHTML = ''
 
   Object.entries(AUDIO_CATEGORIES).forEach(([key, name]) => {
-    if (key === 'all') return;
+    if (key === 'all') return
 
     uploadList.innerHTML += `
       <li>
@@ -1426,18 +1443,18 @@ function initUploadCategories() {
           ${name}
         </button>
       </li>
-    `;
-  });
+    `
+  })
 
   uploadList.onclick = (e) => {
-    const btn = e.target.closest('button');
-    if (!btn) return;
+    const btn = e.target.closest('button')
+    if (!btn) return
 
-    uploadTrigger.textContent = btn.textContent;
-    uploadTrigger.dataset.value = btn.dataset.value;
+    uploadTrigger.textContent = btn.textContent
+    uploadTrigger.dataset.value = btn.dataset.value
 
-    uploadTrigger.closest('.dropdown')?.classList.remove('is-active');
-  };
+    uploadTrigger.closest('.dropdown')?.classList.remove('is-active')
+  }
 }
 
 function enableHapticFeedback(selector, pattern = 20) {
