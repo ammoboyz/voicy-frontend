@@ -887,68 +887,86 @@ function renderSounds(items) {
 
     li.innerHTML = `
       <div class="sound-card" data-sound-id="${sound.id}">
-        <div class="sound-card__top">
-          <button class="sound-card__play-button play-button" type="button" data-url="${sound.url}">
-            <!-- PLAY -->
-            <svg
-              class="play-button__icon-play"
-              width="48"
-              height="48"
-              viewBox="0 0 48 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                class="play-button__icon-circle"
-                d="M48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24Z"
-                fill="#00AAFF"
-              />
-              <path
-  class="play-button__icon-decor"
-  d="M32.492 19.9695L22.954 12.9755C22.209 12.4299 21.3275 12.1014 20.4073 12.0262C19.487 11.951 18.5638 12.132 17.7402 12.5494C16.9165 12.9667 16.2245 13.6039 15.7408 14.3905C15.2572 15.177 15.0007 16.0821 15 17.0055V31.0005C14.9986 31.9247 15.2536 32.8312 15.7368 33.6191C16.22 34.407 16.9124 35.0453 17.7369 35.4631C18.5614 35.8808 19.4856 36.0615 20.4067 35.9851C21.3278 35.9088 22.2096 35.5783 22.954 35.0305L32.492 28.0365C33.1249 27.572 33.6395 26.9651 33.9942 26.2648C34.3489 25.5645 34.5338 24.7905 34.5338 24.0055C34.5338 23.2204 34.3489 22.4465 33.9942 21.7462C33.6395 21.0459 33.1249 20.4389 32.492 19.9745V19.9695Z"
-  fill="white"
-  transform="translate(1.2 0)"
-/>
+        <div class="sound-card__skeleton">
+          <div class="sound-card__top">
+                <div class="sound-card__skeleton-button is-skeleton"></div>
 
-            </svg>
-
-            <!-- STOP -->
-            <svg
-              class="play-button__icon-stop"
-              width="48"
-              height="48"
-              viewBox="0 0 48 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                class="play-button__icon-circle"
-                d="M48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24Z"
-                fill="#00AAFF"
-              />
-              <path
-                class="play-button__icon-decor"
-                d="M18.5 12C17.5717 12 16.6815 12.3687 16.0251 13.0251C15.3687 13.6815 15 14.5717 15 15.5V32.5C15 33.4282 15.3687 34.3185 16.0251 34.9749C16.6815 35.6312 17.5717 36 18.5 36C19.4283 36 20.3185 35.6312 20.9749 34.9749C21.6312 34.3185 22 33.4282 22 32.5V15.5C22 14.5717 21.6312 13.6815 20.9749 13.0251C20.3185 12.3687 19.4283 12 18.5 12Z"
-                fill="white"
-              />
-              <path
-                class="play-button__icon-decor"
-                d="M29.5001 12C28.5719 12 27.6816 12.3687 27.0253 13.0251C26.3689 13.6815 26.0001 14.5717 26.0001 15.5V32.5C26.0001 33.4282 26.3689 34.3185 27.0253 34.9749C27.6816 35.6312 28.5719 36 29.5001 36C30.4284 36 31.3186 35.6312 31.975 34.9749C32.6314 34.3185 33.0001 33.4282 33.0001 32.5V15.5C33.0001 14.5717 32.6314 13.6815 31.975 13.0251C31.3186 12.3687 30.4284 12 29.5001 12Z"
-                fill="white"
-              />
-            </svg>
-          </button>
-
-          <div class="sound-card__top-text">
-            <h3 class="sound-card__title">${sound.title ?? ''}</h3>
-            <p class="sound-card__category">${AUDIO_CATEGORIES[sound.category_id] ?? ''}</p>
+                <div class="sound-card__skeleton-top-text">
+                  <div class="sound-card__skeleton-title is-skeleton"></div>
+                  <div class="sound-card__skeleton-category is-skeleton"></div>
+                </div>
+          </div>
+        
+          <div class="sound-card__skeleton-foot sound-card__foot">
+            <div class="sound-card__skeleton-foot-left is-skeleton"></div>
+            
+            <div class="sound-card__skeleton-foot-right is-skeleton"></div>
           </div>
         </div>
+        <div class="sound-card__real">
+          <div class="sound-card__top">
+            <button class="sound-card__play-button play-button" type="button" data-url="${sound.url}">
+              <!-- PLAY -->
+              <svg
+                class="play-button__icon-play"
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  class="play-button__icon-circle"
+                  d="M48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24Z"
+                  fill="#00AAFF"
+                />
+                <path
+                  class="play-button__icon-decor"
+                  d="M32.492 19.9695L22.954 12.9755C22.209 12.4299 21.3275 12.1014 20.4073 12.0262C19.487 11.951 18.5638 12.132 17.7402 12.5494C16.9165 12.9667 16.2245 13.6039 15.7408 14.3905C15.2572 15.177 15.0007 16.0821 15 17.0055V31.0005C14.9986 31.9247 15.2536 32.8312 15.7368 33.6191C16.22 34.407 16.9124 35.0453 17.7369 35.4631C18.5614 35.8808 19.4856 36.0615 20.4067 35.9851C21.3278 35.9088 22.2096 35.5783 22.954 35.0305L32.492 28.0365C33.1249 27.572 33.6395 26.9651 33.9942 26.2648C34.3489 25.5645 34.5338 24.7905 34.5338 24.0055C34.5338 23.2204 34.3489 22.4465 33.9942 21.7462C33.6395 21.0459 33.1249 20.4389 32.492 19.9745V19.9695Z"
+                  fill="white"
+                  transform="translate(1.2 0)"
+                />
 
-        <div class="sound-card__foot">
-          ${footLeftHtml}
-          <div class="sound-card__foot-right">
-            ${footRightHtml}
+              </svg>
+
+              <!-- STOP -->
+              <svg
+                class="play-button__icon-stop"
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  class="play-button__icon-circle"
+                  d="M48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24Z"
+                  fill="#00AAFF"
+                />
+                <path
+                  class="play-button__icon-decor"
+                  d="M18.5 12C17.5717 12 16.6815 12.3687 16.0251 13.0251C15.3687 13.6815 15 14.5717 15 15.5V32.5C15 33.4282 15.3687 34.3185 16.0251 34.9749C16.6815 35.6312 17.5717 36 18.5 36C19.4283 36 20.3185 35.6312 20.9749 34.9749C21.6312 34.3185 22 33.4282 22 32.5V15.5C22 14.5717 21.6312 13.6815 20.9749 13.0251C20.3185 12.3687 19.4283 12 18.5 12Z"
+                  fill="white"
+                />
+                <path
+                  class="play-button__icon-decor"
+                  d="M29.5001 12C28.5719 12 27.6816 12.3687 27.0253 13.0251C26.3689 13.6815 26.0001 14.5717 26.0001 15.5V32.5C26.0001 33.4282 26.3689 34.3185 27.0253 34.9749C27.6816 35.6312 28.5719 36 29.5001 36C30.4284 36 31.3186 35.6312 31.975 34.9749C32.6314 34.3185 33.0001 33.4282 33.0001 32.5V15.5C33.0001 14.5717 32.6314 13.6815 31.975 13.0251C31.3186 12.3687 30.4284 12 29.5001 12Z"
+                  fill="white"
+                />
+              </svg>
+            </button>
+
+            <div class="sound-card__top-text">
+              <h3 class="sound-card__title">${sound.title ?? ''}</h3>
+              <p class="sound-card__category">${AUDIO_CATEGORIES[sound.category_id] ?? ''}</p>
+            </div>
+          </div>
+
+          <div class="sound-card__foot">
+            ${footLeftHtml}
+            <div class="sound-card__foot-right">
+              ${footRightHtml}
+            </div>
           </div>
         </div>
       </div>

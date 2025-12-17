@@ -67,4 +67,47 @@
     gap: rem(8);
     margin-inline-start: auto;
   }
+
+  // .sound-card__real
+
+  &.loading &__real {
+    display: none;
+  }
+
+  // 
+
+  &__skeleton {
+    &-button {
+      width: rem(48);
+      height: rem(48);
+      border-radius: 50%;
+    }
+
+    &-title {
+      width: rem(200);
+      height: rem(22);
+      margin-block-end: rem(5);
+    }
+
+    &-category {
+      width: rem(50);
+      height: rem(15);
+    }
+
+    &-foot-left {
+      width: rem(35);
+      height: rem(34);
+      border-radius: 50%;
+    }
+
+    &-foot-right {
+      width: rem(150);
+      height: rem(34);
+      margin-left: auto;
+    }
+  }
+
+  &:not(.loading) &__skeleton {
+    display: none;
+  }
 }
