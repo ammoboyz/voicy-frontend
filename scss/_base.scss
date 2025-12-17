@@ -1,16 +1,20 @@
 @use './helpers' as *;
 
+html,
+body {
+  width: 100%;
+  overflow: hidden;
+}
+
 html {
   font-size: clamp(
     0.75rem,
     0.023rem + 3.636vw,
     1rem
   ); // values: 12 to 16, viewport: 320 to 430
-  scrollbar-gutter: stable;
 }
 
 body {
-  block-size: 100%;
   font-family: var(--font-family);
   color: var(--color-white);
   background-color: var(--color-background-page);

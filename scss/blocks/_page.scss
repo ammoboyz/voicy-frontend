@@ -2,6 +2,10 @@
 
 .page {
   display: none;
+  block-size: 100vh;
+  overflow: auto;
+
+  scrollbar-gutter: stable;
 
   &--main {
   }
