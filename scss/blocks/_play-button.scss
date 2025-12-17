@@ -8,7 +8,7 @@
   flex-shrink: 0;
   border-radius: 50%;
 
-  @include hovered;
+  // @include hovered;
 
   svg {
     position: absolute;
@@ -40,6 +40,12 @@
 
   &__icon-circle {
     color: var(--color-accent-2);
+
+    @include transition(color);
+  }
+
+  &:hover &__icon-circle {
+    color: rgb(0, 150, 224);
   }
 
   &__icon-decor {

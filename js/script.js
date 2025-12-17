@@ -27,6 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //
   init_selectionList()
+
+  // vibro
+  enableHapticFeedback('.play-button')
+  enableHapticFeedback('.like-button')
 })
 // set active func
 
@@ -509,6 +513,24 @@ function init_selectionList() {
           }
         }
       })
+    })
+  })
+}
+
+function enableHapticFeedback(selector, pattern = 20) {
+  const elements = document.querySelectorAll(selector)
+  if (!elements.length) return
+
+  const canVibrate =
+    typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function'
+
+  elements.forEach((el) => {
+    el.addEventListener('click', () => {
+      if (canVibrate) {
+        navigator.vibrate(pattern)
+      }
+      el.classList.add('haptic-pressed')
+      setTimeout(() => el.classList.remove('haptic-pressed'), 120)
     })
   })
 }
