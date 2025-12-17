@@ -127,33 +127,29 @@ document.addEventListener('click', (e) => {
   const url = btn.dataset.url;
   if (!url) return;
 
-  // если клик по текущему — стоп
+  // клик по той же кнопке = play / pause
   if (currentAudio && currentButton === btn) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-    btn.classList.remove('is-active');
-    currentAudio = null;
-    currentButton = null;
+    if (currentAudio.paused) {
+      currentAudio.play();
+      btn.classList.add('is-active');
+    } else {
+      currentAudio.pause();
+      btn.classList.remove('is-active');
+    }
     return;
   }
 
-  // если играло другое — остановить
+  // если играло другое — полностью остановить
   if (currentAudio) {
     currentAudio.pause();
-    currentAudio.currentTime = 0;
+    currentAudio = null;
   }
   if (currentButton) {
     currentButton.classList.remove('is-active');
   }
 
-  // === КЭШ ===
-  let audio = getCachedAudio(url);
-
-  if (!audio) {
-    audio = new Audio(url);
-    setCachedAudio(url, audio);
-  }
-
+  // ВСЕГДА создаём новое аудио
+  const audio = new Audio(url);
   audio.currentTime = 0;
 
   currentAudio = audio;
