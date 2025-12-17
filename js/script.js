@@ -81,28 +81,28 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.insertAdjacentHTML('afterbegin', liquidHtml)
   }
 
-  let scrollLocked = false;
-
-  window.addEventListener('scroll', () => {
-    if (scrollLocked) return;
-
-    const doc = document.documentElement; // или document.scrollingElement
-    const scrollTop = doc.scrollTop;
-    const clientHeight = doc.clientHeight;
-    const scrollHeight = doc.scrollHeight;
-
-    if (scrollTop + clientHeight >= scrollHeight - 200) {
-      scrollLocked = true;
-      fetchSounds().finally(() => (scrollLocked = false));
-    }
-  }, { passive: true });
-
   init_emoji()
 
   init_audioplayer()
 
   enableHapticFeedback('.play-button')
   enableHapticFeedback('.like-button')
+
+  let scrollLocked = false;
+
+  const scroller = document.querySelector('.page--main'); // <-- важно
+  scroller.addEventListener('scroll', () => {
+    if (scrollLocked) return;
+
+    const scrollTop = scroller.scrollTop;
+    const clientHeight = scroller.clientHeight;
+    const scrollHeight = scroller.scrollHeight;
+
+    if (scrollTop + clientHeight >= scrollHeight - 200) {
+      scrollLocked = true;
+      fetchSounds().finally(() => (scrollLocked = false));
+    }
+  }, { passive: true });
 
   fetchSounds(true);
 });
