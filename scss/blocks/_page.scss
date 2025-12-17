@@ -5,6 +5,8 @@
   block-size: 100vh;
   overflow: auto;
 
+  background-color: var(--color-background-page);
+
   scrollbar-gutter: stable;
 
   &--main {
