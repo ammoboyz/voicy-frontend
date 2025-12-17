@@ -287,8 +287,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   init_audioplayer()
 
-  enableHapticFeedback('.play-button')
-  enableHapticFeedback('.like-button')
+  const cardsContainer = document.querySelector('.sound-block__list')
+
+  enableHapticFeedback(cardsContainer, '.play-button')
+  enableHapticFeedback(cardsContainer, '.like-button')
 
   let scrollLocked = false
 
@@ -1475,20 +1477,21 @@ function initUploadCategories() {
   }
 }
 
-function enableHapticFeedback(selector, pattern = 20) {
-  const elements = document.querySelectorAll(selector)
-  if (!elements.length) return
-
+function enableHapticFeedback(parent, selector, pattern = 20) {
   const canVibrate =
     typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function'
 
-  elements.forEach((el) => {
-    el.addEventListener('click', () => {
-      if (canVibrate) {
-        navigator.vibrate(pattern)
-      }
-      el.classList.add('haptic-pressed')
-      setTimeout(() => el.classList.remove('haptic-pressed'), 120)
-    })
+  if (!parent) return
+
+  parent.addEventListener('click', (e) => {
+    const el = e.target.closest(selector)
+    if (!el || !parent.contains(el)) return
+
+    if (canVibrate) {
+      navigator.vibrate(pattern)
+    }
+
+    el.classList.add('haptic-pressed')
+    setTimeout(() => el.classList.remove('haptic-pressed'), 120)
   })
 }
