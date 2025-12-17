@@ -11,48 +11,50 @@
 // blocks
 @use 'blocks/container';
 
-@use "blocks/page";
+@use 'blocks/page';
 
-@use "blocks/button";
+@use 'blocks/button';
 
-@use "blocks/sound-card";
+@use 'blocks/sound-card';
 
-@use "blocks/info-element";
+@use 'blocks/info-element';
 
-@use "blocks/like-button";
+@use 'blocks/like-button';
 
-@use "blocks/dropdown";
+@use 'blocks/dropdown';
 
-@use "blocks/sound-block";
+@use 'blocks/sound-block';
 
-@use "blocks/dropdown-list";
+@use 'blocks/dropdown-list';
 
-@use "blocks/nav-main";
+@use 'blocks/nav-main';
 
-@use "blocks/form-field";
+@use 'blocks/form-field';
 
-@use "blocks/form";
+@use 'blocks/form';
 
-@use "blocks/form-dropdown";
+@use 'blocks/form-dropdown';
 
-@use "blocks/tabs";
+@use 'blocks/tabs';
 
-@use "blocks/tile";
+@use 'blocks/tile';
 
-@use "blocks/text-tile";
+@use 'blocks/text-tile';
 
-@use "blocks/sound-card-overview";
+@use 'blocks/sound-card-overview';
 
-@use "blocks/verify-element";
+@use 'blocks/verify-element';
 
-@use "blocks/nav-button";
+@use 'blocks/nav-button';
 
-@use "blocks/play-button";
+@use 'blocks/play-button';
 
-@use "blocks/emoji-selector";
+@use 'blocks/emoji-selector';
 
-@use "blocks/file-upload";
+@use 'blocks/file-upload';
 
-@use "blocks/player";
+@use 'blocks/player';
 
-@use "blocks/checkbox";
+@use 'blocks/checkbox';
+
+@use 'blocks/is-skeleton';
