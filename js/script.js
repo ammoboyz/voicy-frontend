@@ -1490,16 +1490,26 @@ function initUploadCategories() {
 function enableHapticFeedback(parent, selector, pattern = 60) {
   if (!parent) return
 
+  if (!enableHapticFeedback._telegramInitialized && window.Telegram?.WebApp) {
+    try {
+      Telegram.WebApp.ready()
+      enableHapticFeedback._telegramInitialized = true
+    } catch (e) {
+      console.warn('Telegram WebApp init failed:', e)
+    }
+  }
+
   const isAndroid = /android/i.test(navigator.userAgent || '')
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent || '')
-  let locked = false
+  let vibrateLocked = false
+  let visualLocked = false
 
   const vibrateHandler = (e) => {
     const el = e.target.closest(selector)
     if (!el || !parent.contains(el)) return
-    if (locked) return
-    locked = true
-    setTimeout(() => (locked = false), 80)
+    if (vibrateLocked) return
+    vibrateLocked = true
+    setTimeout(() => (vibrateLocked = false), 80)
 
     if (isAndroid) {
       if (navigator.vibrate) {
@@ -1525,8 +1535,14 @@ function enableHapticFeedback(parent, selector, pattern = 60) {
   const visualHandler = (e) => {
     const el = e.target.closest(selector)
     if (!el || !parent.contains(el)) return
+    if (visualLocked) return
+    visualLocked = true
+
     el.classList.add('haptic-pressed')
-    setTimeout(() => el.classList.remove('haptic-pressed'), 120)
+    setTimeout(() => {
+      el.classList.remove('haptic-pressed')
+      visualLocked = false
+    }, 120)
   }
 
   parent.addEventListener('pointerdown', vibrateHandler, { passive: true })
