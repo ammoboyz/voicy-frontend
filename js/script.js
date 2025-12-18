@@ -3,209 +3,6 @@ import { apiFetch } from './apiFetch.js'
 
 const tg = window.Telegram?.WebApp
 
-const DEBUG_ITEMS = [
-  {
-    id: 7965,
-    title: '😱 Хуееееэеээе бр бр патапим',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/DoyUqrsGKcPmsyVlUOcjIkLWpIlnPt',
-  },
-  {
-    id: 7950,
-    title: '🤙 Бр бр патапим хуеэуээеэеэ',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/KlJiAXdCMoArJyhacTRjxNInjOyIrT',
-  },
-  {
-    id: 7856,
-    title: "🐵 Qotag'ini uzilar pidarasni",
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/ejFAFByEcUsTdllxTtDGucfaOElSJU',
-  },
-  {
-    id: 7051,
-    title: '🙏 Молюсь об этом каждый день',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/PWhmuTDgawuaVfdAMZUSLCVtUjQhEo',
-  },
-  {
-    id: 7041,
-    title: '🤙 э котак басина туда встань',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/dylLWetDxtsqVRWZjDsZAZVCHUyVTy',
-  },
-  {
-    id: 6869,
-    title: '😴 Але, мужик, тебе нормально?',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/aMyiswYTCjeGmcnnVRidhuWnIVFuXV',
-  },
-  {
-    id: 6867,
-    title: '🤥 Та шо?',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/LnfKTlobcMGdDYUAKqHOIuvEWrWFuo',
-  },
-  {
-    id: 6865,
-    title: '👋 я передаю привет анечке',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/rNTQwzAUmPbCIfulnSTEcVzZfjFOHs',
-  },
-  {
-    id: 6855,
-    title: '🥮 Халяль чебуреки пахлава все по скидк',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/sCxtELOcihIBVjhSoZoMLBEgUVcwse',
-  },
-  {
-    id: 5659,
-    title: '😀 Даша Дешик ',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/OLQiLElYewbUKqHkHdDBDtrhguJZAr',
-  },
-  {
-    id: 5366,
-    title: '😌 Golden knight ',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/zhSLWMceHAyAmvEgdXXtJeiYdYrZCf',
-  },
-  {
-    id: 4032,
-    title: '🧔‍♂️ Драться можно каждый день ',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/yuTzPloVUvFGxfWVpTCvIRBvXtIBXM',
-  },
-  {
-    id: 3972,
-    title: '😅 McGregor: Break out the red panties',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/zGZKlUXsPkrHoDdvTTbNaZgkpKdTcP',
-  },
-  {
-    id: 3929,
-    title: '👍 Потому что вы демо не смотрите',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/wmOOFYQTFnbOQanpPEdnPYuCgVZKRr',
-  },
-  {
-    id: 3927,
-    title: '😁 St-Pierre: But i know',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/kTbbGBmxSyUKFCQyBfYCttbMdbZSKQ',
-  },
-  {
-    id: 3926,
-    title: '😀 St-Pierre: I think you work so much',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/LbLUEGXWTJagpAikOdGSfItYRuKAWJ',
-  },
-  {
-    id: 3920,
-    title: '😀 Max Holloway: I kind of mad, guys',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/oTxfiftNLSdAeNfYvhtmjYFObXlgwG',
-  },
-  {
-    id: 3888,
-    title: '😂 Khabib: I am born ready, bro',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: true,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/pfANQmBeBSOFzpyuWzRwroVNzooMgx',
-  },
-  {
-    id: 3780,
-    title: '👍 St-Pierre: Time physical damage',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/wUdLCEEtAoCEEjVVWEluELbfEQLlDP',
-  },
-  {
-    id: 3778,
-    title: "😊 Emelianenko: Today I'm coming",
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/AMLIglcfLEqgzERFzoPPnxMpCstaNy',
-  },
-]
-
 if (tg) {
   tg.expand()
   tg.ready()
@@ -250,7 +47,7 @@ let selectedAudioFile = null
 let selectedEmoji = ''
 
 document.addEventListener('click', (e) => {
-  
+
   const trigger = e.target.closest('.dropdown__trigger')
   if (!trigger) return
 
@@ -312,8 +109,22 @@ document.addEventListener('DOMContentLoaded', function () {
     { passive: true },
   )
 
-  // fetchSounds(true)
-  renderSounds(DEBUG_ITEMS)
+  fetchSounds(true)
+  // renderSounds(DEBUG_ITEMS)
+})
+
+document.addEventListener('click', (e) => {
+  const activeDropdowns = document.querySelectorAll('.dropdown.is-active')
+
+  activeDropdowns.forEach((dropdown) => {
+    const selectionList = dropdown.querySelector('.selection-list--in-dropdown')
+
+    if (!selectionList) return
+
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove('is-active')
+    }
+  })
 })
 
 document.addEventListener('click', (e) => {
@@ -703,23 +514,10 @@ async function fetchSounds(reset = false) {
   if (soundState.loading) return
   if (!soundState.hasNext && !reset) return
 
-  console.log({
-    activeTab: document.querySelector('.tabs__content-item.is-active'),
-    list: getSoundListEl(),
-    context: getSoundListEl()?.dataset?.soundsContext,
-  })
-
   const list = getSoundListEl()
   if (!list) return
 
   const context = soundState.context
-
-  console.log('[fetchSounds]', {
-    list,
-    context: list?.dataset?.soundsContext,
-    page: soundState.page,
-  })
-
   soundState.loading = true
 
   if (reset) {
@@ -727,6 +525,8 @@ async function fetchSounds(reset = false) {
     soundState.hasNext = true
     list.innerHTML = ''
     showSkeleton(list, SKELETON_COUNT)
+  } else {
+    appendSkeleton(list, 3)
   }
 
   const params = new URLSearchParams({
@@ -734,7 +534,6 @@ async function fetchSounds(reset = false) {
     limit: soundState.limit,
   })
 
-  // search только для popular
   if (soundState.search && context === 'popular') {
     params.append('search', soundState.search)
   }
@@ -749,14 +548,11 @@ async function fetchSounds(reset = false) {
 
   try {
     const data = await apiFetch(`${urlBase}?${params.toString()}`, {
-      headers: {
-        Authorization: `Bearer ${tg.initData}`,
-      },
+      headers: { Authorization: `Bearer ${tg.initData}` },
     })
 
     if (reset) updateTotalCount(data.total, context)
 
-    hideSkeleton(list)
     renderSounds(data.items)
 
     soundState.hasNext = data.has_next
@@ -765,6 +561,8 @@ async function fetchSounds(reset = false) {
     alert(err.message)
     console.error('Fetch sounds failed', err)
   } finally {
+    // ✅ всегда убираем лоадеры снизу/сверху
+    hideSkeleton(list)
     soundState.loading = false
   }
 }
@@ -1580,4 +1378,36 @@ function showSkeleton(list, count = 6) {
 
 function hideSkeleton(list) {
   list.querySelectorAll('[data-skeleton="1"]').forEach((el) => el.remove())
+}
+
+function appendSkeleton(list, count = 3) {
+  // если уже есть скелеты — не дублим
+  if (list.querySelector('[data-skeleton="1"]')) return
+
+  const html = Array.from({ length: count })
+    .map(
+      () => `
+    <li class="sound-block__item" data-skeleton="1">
+      <div class="sound-card loading">
+        <div class="sound-card__skeleton">
+          <div class="sound-card__top">
+            <div class="sound-card__skeleton-button is-skeleton"></div>
+            <div class="sound-card__skeleton-top-text">
+              <div class="sound-card__skeleton-title is-skeleton"></div>
+              <div class="sound-card__skeleton-category is-skeleton"></div>
+            </div>
+          </div>
+          <div class="sound-card__skeleton-foot sound-card__foot">
+            <div class="sound-card__skeleton-foot-left is-skeleton"></div>
+            <div class="sound-card__skeleton-foot-right is-skeleton"></div>
+          </div>
+        </div>
+        <div class="sound-card__real"></div>
+      </div>
+    </li>
+  `,
+    )
+    .join('')
+
+  list.insertAdjacentHTML('beforeend', html)
 }
