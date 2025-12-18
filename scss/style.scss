@@ -11,6 +11,8 @@
 // blocks
 @use 'blocks/container';
 
+@use 'blocks/is-skeleton';
+
 @use 'blocks/page';
 
 @use 'blocks/button';
@@ -57,4 +59,3 @@
 
 @use 'blocks/checkbox';
 
-@use 'blocks/is-skeleton';
