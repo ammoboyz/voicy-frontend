@@ -2,7 +2,7 @@ import '../lib/emoji-picker-element.js'
 import { apiFetch } from './apiFetch.js'
 
 const tg = window.Telegram?.WebApp
-const sleep = (ms) => new Promise(r => setTimeout(r, ms))
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 if (tg) {
   tg.expand()
@@ -1291,7 +1291,7 @@ function enableHapticFeedback(parent, selector, pattern = 20) {
   const isAndroid =
     typeof navigator !== 'undefined' &&
     /android/i.test(navigator.userAgent || '')
-  const minAndroidMs = 40
+  const minAndroidMs = 60
 
   const getPattern = (p) => {
     if (Array.isArray(p)) return p
@@ -1315,7 +1315,7 @@ function enableHapticFeedback(parent, selector, pattern = 20) {
         typeof navigator.vibrate === 'function'
       ) {
         const t = now()
-        if (t - lastVibrateAt > 40) {
+        if (t - lastVibrateAt > 50) {
           navigator.vibrate(getPattern(pattern))
           lastVibrateAt = t
         }
@@ -1341,10 +1341,9 @@ function enableHapticFeedback(parent, selector, pattern = 20) {
       },
       { passive: true },
     )
-
     parent.addEventListener('click', handler, { passive: true })
   } else if (typeof window !== 'undefined' && 'ontouchstart' in window) {
-    parent.addEventListener('touchend', handler, { passive: true })
+    parent.addEventListener('touchstart', handler, { passive: true })
     parent.addEventListener('click', handler, { passive: true })
   } else {
     parent.addEventListener('click', handler, { passive: true })
