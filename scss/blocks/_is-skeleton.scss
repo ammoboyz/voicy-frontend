@@ -1,5 +1,8 @@
+@use '../helpers' as *;
+
 .is-skeleton {
   position: relative;
+  border-radius: rem(7);
   background-color: #99d3f0;
   overflow: hidden;
 
