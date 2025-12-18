@@ -1381,3 +1381,7 @@ function showSkeleton(list, count = 6) {
 function hideSkeleton(list) {
   list.querySelectorAll('[data-skeleton="1"]').forEach((el) => el.remove())
 }
+
+// document.addEventListener('click', () => {
+//   navigator.vibrate(200)
+// })
