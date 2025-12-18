@@ -2,6 +2,7 @@ import '../lib/emoji-picker-element.js'
 import { apiFetch } from './apiFetch.js'
 
 const tg = window.Telegram?.WebApp
+const sleep = (ms) => new Promise(r => setTimeout(r, ms))
 
 if (tg) {
   tg.expand()
