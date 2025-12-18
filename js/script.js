@@ -2,209 +2,7 @@ import '../lib/emoji-picker-element.js'
 import { apiFetch } from './apiFetch.js'
 
 const tg = window.Telegram?.WebApp
-
-const DEBUG_ITEMS = [
-  {
-    id: 7965,
-    title: '😱 Хуееееэеээе бр бр патапим',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/DoyUqrsGKcPmsyVlUOcjIkLWpIlnPt',
-  },
-  {
-    id: 7950,
-    title: '🤙 Бр бр патапим хуеэуээеэеэ',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/KlJiAXdCMoArJyhacTRjxNInjOyIrT',
-  },
-  {
-    id: 7856,
-    title: "🐵 Qotag'ini uzilar pidarasni",
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/ejFAFByEcUsTdllxTtDGucfaOElSJU',
-  },
-  {
-    id: 7051,
-    title: '🙏 Молюсь об этом каждый день',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/PWhmuTDgawuaVfdAMZUSLCVtUjQhEo',
-  },
-  {
-    id: 7041,
-    title: '🤙 э котак басина туда встань',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/dylLWetDxtsqVRWZjDsZAZVCHUyVTy',
-  },
-  {
-    id: 6869,
-    title: '😴 Але, мужик, тебе нормально?',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/aMyiswYTCjeGmcnnVRidhuWnIVFuXV',
-  },
-  {
-    id: 6867,
-    title: '🤥 Та шо?',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/LnfKTlobcMGdDYUAKqHOIuvEWrWFuo',
-  },
-  {
-    id: 6865,
-    title: '👋 я передаю привет анечке',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/rNTQwzAUmPbCIfulnSTEcVzZfjFOHs',
-  },
-  {
-    id: 6855,
-    title: '🥮 Халяль чебуреки пахлава все по скидк',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/sCxtELOcihIBVjhSoZoMLBEgUVcwse',
-  },
-  {
-    id: 5659,
-    title: '😀 Даша Дешик ',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/OLQiLElYewbUKqHkHdDBDtrhguJZAr',
-  },
-  {
-    id: 5366,
-    title: '😌 Golden knight ',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/zhSLWMceHAyAmvEgdXXtJeiYdYrZCf',
-  },
-  {
-    id: 4032,
-    title: '🧔‍♂️ Драться можно каждый день ',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/yuTzPloVUvFGxfWVpTCvIRBvXtIBXM',
-  },
-  {
-    id: 3972,
-    title: '😅 McGregor: Break out the red panties',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/zGZKlUXsPkrHoDdvTTbNaZgkpKdTcP',
-  },
-  {
-    id: 3929,
-    title: '👍 Потому что вы демо не смотрите',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/wmOOFYQTFnbOQanpPEdnPYuCgVZKRr',
-  },
-  {
-    id: 3927,
-    title: '😁 St-Pierre: But i know',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/kTbbGBmxSyUKFCQyBfYCttbMdbZSKQ',
-  },
-  {
-    id: 3926,
-    title: '😀 St-Pierre: I think you work so much',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/LbLUEGXWTJagpAikOdGSfItYRuKAWJ',
-  },
-  {
-    id: 3920,
-    title: '😀 Max Holloway: I kind of mad, guys',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/oTxfiftNLSdAeNfYvhtmjYFObXlgwG',
-  },
-  {
-    id: 3888,
-    title: '😂 Khabib: I am born ready, bro',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: true,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/pfANQmBeBSOFzpyuWzRwroVNzooMgx',
-  },
-  {
-    id: 3780,
-    title: '👍 St-Pierre: Time physical damage',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/wUdLCEEtAoCEEjVVWEluELbfEQLlDP',
-  },
-  {
-    id: 3778,
-    title: "😊 Emelianenko: Today I'm coming",
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/AMLIglcfLEqgzERFzoPPnxMpCstaNy',
-  },
-]
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 if (tg) {
   tg.expand()
@@ -311,8 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
     { passive: true },
   )
 
-  // fetchSounds(true)
-  renderSounds(DEBUG_ITEMS)
+  fetchSounds(true)
 })
 
 document.addEventListener('click', (e) => {
@@ -335,37 +132,46 @@ document.addEventListener('click', (e) => {
   const url = btn.dataset.url
   if (!url) return
 
-  // если нажали на ту же кнопку — стоп
+  // клик по той же кнопке = play / pause
   if (currentAudio && currentButton === btn) {
-    currentAudio.pause()
-    currentAudio.currentTime = 0
-    btn.classList.remove('is-active')
-    currentAudio = null
-    currentButton = null
+    if (currentAudio.paused) {
+      currentAudio.play()
+      btn.classList.add('is-active')
+    } else {
+      currentAudio.pause()
+      btn.classList.remove('is-active')
+    }
     return
   }
 
-  // если играло другое аудио — останавливаем его
+  // если играло другое — полностью остановить
   if (currentAudio) {
     currentAudio.pause()
-    currentAudio.currentTime = 0
+    currentAudio = null
   }
   if (currentButton) {
     currentButton.classList.remove('is-active')
   }
 
-  // запускаем новое
-  currentAudio = new Audio(url)
+  // ВСЕГДА создаём новое аудио
+  const audio = new Audio(url)
+  audio.currentTime = 0
+
+  currentAudio = audio
   currentButton = btn
   btn.classList.add('is-active')
 
-  currentAudio.play()
-
-  currentAudio.onended = () => {
+  audio.onended = () => {
     btn.classList.remove('is-active')
     currentAudio = null
     currentButton = null
   }
+
+  audio.play().catch(() => {
+    btn.classList.remove('is-active')
+    currentAudio = null
+    currentButton = null
+  })
 })
 
 document.addEventListener('click', (e) => {
@@ -455,15 +261,14 @@ function setItemActive(
 
 function init_selectionList() {
   const selectionLists = document.querySelectorAll('.selection-list')
+
   if (!selectionLists.length) return
 
   selectionLists.forEach((list) => {
     if (list.dataset.selectionListInitialized) return
 
     const maxSelection = parseInt(list.dataset.selectionElemCount, 10)
-    const checkboxes = Array.from(
-      list.querySelectorAll('.selection-list__element'),
-    )
+    const checkboxes = list.querySelectorAll('.selection-list__element')
     const isInDropdown = list.classList.contains('selection-list--in-dropdown')
 
     if (isNaN(maxSelection) || maxSelection <= 0) {
@@ -473,36 +278,22 @@ function init_selectionList() {
 
     list.dataset.selectionListInitialized = 'true'
 
-    const allCheckbox = checkboxes.find(
-      (c) => c.dataset.category === 'all',
-    )
-
     checkboxes.forEach((checkbox) => {
       checkbox.addEventListener('change', function () {
-        let checked = checkboxes.filter((c) => c.checked)
+        const selectedCount = list.querySelectorAll(
+          '.selection-list__element:checked',
+        ).length
 
-        if (allCheckbox && this !== allCheckbox && this.checked) {
-          allCheckbox.checked = false
-          checked = checkboxes.filter((c) => c.checked)
-        }
-
-        if (allCheckbox && this === allCheckbox && this.checked) {
-          checkboxes.forEach((c) => {
-            if (c !== allCheckbox) c.checked = false
-          })
-          checked = [allCheckbox]
-        }
-
-        // лимит выбора
-        if (this.checked && checked.length > maxSelection) {
+        if (this.checked && selectedCount > maxSelection) {
           this.checked = false
           return
         }
 
-        // автозакрытие дропдауна
-        if (isInDropdown && checked.length === maxSelection) {
+        if (isInDropdown && selectedCount === maxSelection) {
           const dropdown = list.closest('.dropdown')
-          dropdown?.classList.remove('is-active')
+          if (dropdown) {
+            dropdown.classList.remove('is-active')
+          }
         }
       })
     })
@@ -757,6 +548,7 @@ async function fetchSounds(reset = false) {
 
     if (reset) updateTotalCount(data.total, context)
 
+    await sleep(1000)
     hideSkeleton(list)
     renderSounds(data.items)
 
@@ -1491,44 +1283,27 @@ function initUploadCategories() {
   }
 }
 
-function enableHapticFeedback(parent, selector, pattern = 40) {
+function enableHapticFeedback(parent, selector, pattern = 60) {
   if (!parent) return
 
-  let last = 0
   const isAndroid = /android/i.test(navigator.userAgent || '')
-  const getPattern = (p) => (Array.isArray(p) ? p : [Number(p) || 40])
-
-  const vibrate = () => {
-    const t = Date.now()
-    if (t - last < 50) return
-    last = t
-
-    if (isAndroid) {
-      if (navigator.vibrate) navigator.vibrate(getPattern(pattern))
-      if (
-        window.Telegram &&
-        Telegram.WebApp &&
-        Telegram.WebApp.HapticFeedback
-      ) {
-        Telegram.WebApp.HapticFeedback.impactOccurred('light')
-      }
-    } else {
-      if (
-        window.Telegram &&
-        Telegram.WebApp &&
-        Telegram.WebApp.HapticFeedback
-      ) {
-        Telegram.WebApp.HapticFeedback.impactOccurred('light')
-      } else if (navigator.vibrate) {
-        navigator.vibrate(getPattern(pattern))
-      }
-    }
-  }
+  let locked = false
 
   const handler = (e) => {
     const el = e.target.closest(selector)
     if (!el || !parent.contains(el)) return
-    vibrate()
+    if (locked) return
+    locked = true
+    setTimeout(() => (locked = false), 80)
+
+    if (isAndroid && navigator.vibrate) {
+      navigator.vibrate(pattern)
+    }
+
+    if (window.Telegram && Telegram.WebApp && Telegram.WebApp.HapticFeedback) {
+      Telegram.WebApp.HapticFeedback.impactOccurred('light')
+    }
+
     el.classList.add('haptic-pressed')
     setTimeout(() => el.classList.remove('haptic-pressed'), 120)
   }
