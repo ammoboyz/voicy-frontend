@@ -1287,72 +1287,50 @@ function initUploadCategories() {
   }
 }
 
-function enableHapticFeedback(parent, selector, pattern = 20) {
+function enableHapticFeedback(parent, selector, pattern = 40) {
   if (!parent) return
 
-  let lastVibrateAt = 0
-  const now = () => Date.now()
-  const isAndroid =
-    typeof navigator !== 'undefined' &&
-    /android/i.test(navigator.userAgent || '')
-  const minAndroidMs = 60
+  let last = 0
+  const isAndroid = /android/i.test(navigator.userAgent || '')
+  const getPattern = (p) => (Array.isArray(p) ? p : [Number(p) || 40])
 
-  const getPattern = (p) => {
-    if (Array.isArray(p)) return p
-    const val = Number(p) || 0
-    return isAndroid && val < minAndroidMs ? [minAndroidMs] : [val]
-  }
+  const vibrate = () => {
+    const t = Date.now()
+    if (t - last < 50) return
+    last = t
 
-  const doHaptic = (el) => {
-    if (!el) return
-    try {
+    if (isAndroid) {
+      if (navigator.vibrate) navigator.vibrate(getPattern(pattern))
       if (
-        typeof window !== 'undefined' &&
         window.Telegram &&
         Telegram.WebApp &&
-        Telegram.WebApp.HapticFeedback &&
-        typeof Telegram.WebApp.HapticFeedback.impactOccurred === 'function'
+        Telegram.WebApp.HapticFeedback
       ) {
         Telegram.WebApp.HapticFeedback.impactOccurred('light')
-      } else if (
-        typeof navigator !== 'undefined' &&
-        typeof navigator.vibrate === 'function'
-      ) {
-        const t = now()
-        if (t - lastVibrateAt > 50) {
-          navigator.vibrate(getPattern(pattern))
-          lastVibrateAt = t
-        }
       }
-    } catch (err) {}
-
-    el.classList.add('haptic-pressed')
-    setTimeout(() => el.classList.remove('haptic-pressed'), 120)
+    } else {
+      if (
+        window.Telegram &&
+        Telegram.WebApp &&
+        Telegram.WebApp.HapticFeedback
+      ) {
+        Telegram.WebApp.HapticFeedback.impactOccurred('light')
+      } else if (navigator.vibrate) {
+        navigator.vibrate(getPattern(pattern))
+      }
+    }
   }
 
   const handler = (e) => {
     const el = e.target.closest(selector)
     if (!el || !parent.contains(el)) return
-    doHaptic(el)
+    vibrate()
+    el.classList.add('haptic-pressed')
+    setTimeout(() => el.classList.remove('haptic-pressed'), 120)
   }
 
-  if (typeof window !== 'undefined' && window.PointerEvent) {
-    parent.addEventListener(
-      'pointerdown',
-      (e) => {
-        if (e.pointerType === 'mouse') return
-        handler(e)
-      },
-      { passive: true },
-    )
-
-    parent.addEventListener('click', handler, { passive: true })
-  } else if (typeof window !== 'undefined' && 'ontouchstart' in window) {
-    parent.addEventListener('touchstart', handler, { passive: true })
-    parent.addEventListener('click', handler, { passive: true })
-  } else {
-    parent.addEventListener('click', handler, { passive: true })
-  }
+  parent.addEventListener('pointerdown', handler, { passive: true })
+  parent.addEventListener('click', handler, { passive: true })
 }
 
 function showSkeleton(list, count = 6) {
@@ -1386,3 +1364,8 @@ function showSkeleton(list, count = 6) {
 function hideSkeleton(list) {
   list.querySelectorAll('[data-skeleton="1"]').forEach((el) => el.remove())
 }
+
+// document.addEventListener('click', () => {
+//   navigator.vibrate(200)
+//   alert(navigator)
+// })
