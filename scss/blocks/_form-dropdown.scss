@@ -5,6 +5,12 @@
     &__trigger {
       justify-content: space-between;
     }
+
+    &-list {
+      &__item {
+        font-size: rem(16);
+      }
+    }
   }
 
   &.is-choice .dropdown__trigger {
