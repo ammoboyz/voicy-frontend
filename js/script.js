@@ -218,8 +218,7 @@ applyTelegramThemeClass()
 
 const searchInput = document.getElementById('sound-search')
 const API_SOUNDS_URL = '/api/sounds'
-const AUDIO_TTL = 60_000 // 60 секунд
-const audioCache = new Map() // url -> { audio, expires }
+const SKELETON_COUNT = 6
 
 const AUDIO_CATEGORIES = {
   all: 'Все',
@@ -433,26 +432,6 @@ document.addEventListener('click', async (e) => {
     console.error('Like request failed', err)
   }
 })
-
-function getCachedAudio(url) {
-  const now = Date.now()
-  const cached = audioCache.get(url)
-
-  if (cached && cached.expires > now) {
-    return cached.audio
-  }
-
-  // expired
-  audioCache.delete(url)
-  return null
-}
-
-function setCachedAudio(url, audio) {
-  audioCache.set(url, {
-    audio,
-    expires: Date.now() + AUDIO_TTL,
-  })
-}
 
 function setItemActive(
   parentSelector,
@@ -742,6 +721,7 @@ async function fetchSounds(reset = false) {
     soundState.page = 1
     soundState.hasNext = true
     list.innerHTML = ''
+    showSkeleton(list, 6)
   }
 
   const params = new URLSearchParams({
@@ -771,6 +751,8 @@ async function fetchSounds(reset = false) {
 
     if (reset) updateTotalCount(data.total, context)
 
+    await sleep(1000)
+    hideSkeleton(list)
     renderSounds(data.items)
 
     soundState.hasNext = data.has_next
@@ -898,10 +880,10 @@ function renderSounds(items) {
                   <div class="sound-card__skeleton-category is-skeleton"></div>
                 </div>
           </div>
-        
+
           <div class="sound-card__skeleton-foot sound-card__foot">
             <div class="sound-card__skeleton-foot-left is-skeleton"></div>
-            
+
             <div class="sound-card__skeleton-foot-right is-skeleton"></div>
           </div>
         </div>
@@ -1506,4 +1488,32 @@ function enableHapticFeedback(parent, selector, pattern = 20) {
     el.classList.add('haptic-pressed')
     setTimeout(() => el.classList.remove('haptic-pressed'), 120)
   })
+}
+
+function showSkeleton(list, count = 6) {
+  // рисуем "пустые" карточки, но с нужным классом loading
+  list.innerHTML = Array.from({ length: count }).map(() => `
+    <li class="sound-block__item" data-skeleton="1">
+      <div class="sound-card loading">
+        <div class="sound-card__skeleton">
+          <div class="sound-card__top">
+            <div class="sound-card__skeleton-button is-skeleton"></div>
+            <div class="sound-card__skeleton-top-text">
+              <div class="sound-card__skeleton-title is-skeleton"></div>
+              <div class="sound-card__skeleton-category is-skeleton"></div>
+            </div>
+          </div>
+          <div class="sound-card__skeleton-foot sound-card__foot">
+            <div class="sound-card__skeleton-foot-left is-skeleton"></div>
+            <div class="sound-card__skeleton-foot-right is-skeleton"></div>
+          </div>
+        </div>
+        <div class="sound-card__real"></div>
+      </div>
+    </li>
+  `).join('')
+}
+
+function hideSkeleton(list) {
+  list.querySelectorAll('[data-skeleton="1"]').forEach(el => el.remove())
 }
