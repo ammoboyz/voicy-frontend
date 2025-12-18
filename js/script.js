@@ -1468,10 +1468,8 @@ function initUploadCategories() {
     if (key === 'all') return
 
     uploadList.innerHTML += `
-      <li>
-        <button type="button"
-          class="dropdown__select-item"
-          data-value="${key}">
+      <li class="dropdown-list__item">
+        <button class="dropdown__select-item dropdown-list__button" type="button" data-value="${key}">
           ${name}
         </button>
       </li>
