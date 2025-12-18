@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
     { passive: true },
   )
 
-  fetchSounds(true);
+  fetchSounds(true)
 })
 
 document.addEventListener('click', (e) => {
@@ -1330,7 +1330,9 @@ function enableHapticFeedback(parent, selector, pattern = 20) {
 
 function showSkeleton(list, count = 6) {
   // рисуем "пустые" карточки, но с нужным классом loading
-  list.innerHTML = Array.from({ length: count }).map(() => `
+  list.innerHTML = Array.from({ length: count })
+    .map(
+      () => `
     <li class="sound-block__item" data-skeleton="1">
       <div class="sound-card loading">
         <div class="sound-card__skeleton">
@@ -1349,9 +1351,11 @@ function showSkeleton(list, count = 6) {
         <div class="sound-card__real"></div>
       </div>
     </li>
-  `).join('')
+  `,
+    )
+    .join('')
 }
 
 function hideSkeleton(list) {
-  list.querySelectorAll('[data-skeleton="1"]').forEach(el => el.remove())
+  list.querySelectorAll('[data-skeleton="1"]').forEach((el) => el.remove())
 }
