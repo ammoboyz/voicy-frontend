@@ -269,9 +269,7 @@ function init_selectionList() {
 
     list.dataset.selectionListInitialized = 'true'
 
-    const allCheckbox = checkboxes.find(
-      (c) => c.dataset.category === 'all',
-    )
+    const allCheckbox = checkboxes.find((c) => c.dataset.category === 'all')
 
     checkboxes.forEach((checkbox) => {
       checkbox.addEventListener('change', function () {
@@ -1289,11 +1287,10 @@ function initUploadCategories() {
 
 function enableHapticFeedback(parent, selector, pattern = 60) {
   if (!parent) return
-
   const isAndroid = /android/i.test(navigator.userAgent || '')
   let locked = false
 
-  const handler = (e) => {
+  const vibrateHandler = (e) => {
     const el = e.target.closest(selector)
     if (!el || !parent.contains(el)) return
     if (locked) return
@@ -1303,17 +1300,20 @@ function enableHapticFeedback(parent, selector, pattern = 60) {
     if (isAndroid && navigator.vibrate) {
       navigator.vibrate(pattern)
     }
-
     if (window.Telegram && Telegram.WebApp && Telegram.WebApp.HapticFeedback) {
       Telegram.WebApp.HapticFeedback.impactOccurred('light')
     }
+  }
 
+  const visualHandler = (e) => {
+    const el = e.target.closest(selector)
+    if (!el || !parent.contains(el)) return
     el.classList.add('haptic-pressed')
     setTimeout(() => el.classList.remove('haptic-pressed'), 120)
   }
 
-  parent.addEventListener('pointerdown', handler, { passive: true })
-  parent.addEventListener('click', handler, { passive: true })
+  parent.addEventListener('pointerdown', vibrateHandler, { passive: true })
+  parent.addEventListener('click', visualHandler, { passive: true })
 }
 
 function showSkeleton(list, count = 6) {
