@@ -14,10 +14,14 @@
   // .like-button__icon
 
   &__icon {
+    width: rem(22);
     inline-size: rem(22);
+    overflow: initial;
+    overflow-clip-margin: initial;
   }
 
-  svg, path {
+  svg,
+  path {
     fill: inherit;
   }
 }
