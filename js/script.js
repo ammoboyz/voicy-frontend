@@ -1480,10 +1480,21 @@ function initUploadCategories() {
 function enableHapticFeedback(parent, selector, pattern = 20) {
   if (!parent) return
 
-  parent.addEventListener('click', (e) => {
-    const el = e.target.closest(selector)
-    if (!el || !parent.contains(el)) return
+  let lastVibrateAt = 0
+  const now = () => Date.now()
+  const isAndroid =
+    typeof navigator !== 'undefined' &&
+    /android/i.test(navigator.userAgent || '')
+  const minAndroidMs = 40
 
+  const getPattern = (p) => {
+    if (Array.isArray(p)) return p
+    const val = Number(p) || 0
+    return isAndroid && val < minAndroidMs ? [minAndroidMs] : [val]
+  }
+
+  const doHaptic = (el) => {
+    if (!el) return
     try {
       if (
         typeof window !== 'undefined' &&
@@ -1493,17 +1504,43 @@ function enableHapticFeedback(parent, selector, pattern = 20) {
         typeof Telegram.WebApp.HapticFeedback.impactOccurred === 'function'
       ) {
         Telegram.WebApp.HapticFeedback.impactOccurred('light')
-      }
-      else if (
+      } else if (
         typeof navigator !== 'undefined' &&
         typeof navigator.vibrate === 'function'
       ) {
-        navigator.vibrate(pattern)
+        const t = now()
+        if (t - lastVibrateAt > 40) {
+          navigator.vibrate(getPattern(pattern))
+          lastVibrateAt = t
+        }
       }
-    } catch (err) {
-    }
+    } catch (err) {}
 
     el.classList.add('haptic-pressed')
     setTimeout(() => el.classList.remove('haptic-pressed'), 120)
-  })
+  }
+
+  const handler = (e) => {
+    const el = e.target.closest(selector)
+    if (!el || !parent.contains(el)) return
+    doHaptic(el)
+  }
+
+  if (typeof window !== 'undefined' && window.PointerEvent) {
+    parent.addEventListener(
+      'pointerdown',
+      (e) => {
+        if (e.pointerType === 'mouse') return
+        handler(e)
+      },
+      { passive: true },
+    )
+
+    parent.addEventListener('click', handler, { passive: true })
+  } else if (typeof window !== 'undefined' && 'ontouchstart' in window) {
+    parent.addEventListener('touchend', handler, { passive: true })
+    parent.addEventListener('click', handler, { passive: true })
+  } else {
+    parent.addEventListener('click', handler, { passive: true })
+  }
 }
