@@ -2,7 +2,6 @@ import '../lib/emoji-picker-element.js'
 import { apiFetch } from './apiFetch.js'
 
 const tg = window.Telegram?.WebApp
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 if (tg) {
   tg.expand()
@@ -132,46 +131,37 @@ document.addEventListener('click', (e) => {
   const url = btn.dataset.url
   if (!url) return
 
-  // клик по той же кнопке = play / pause
+  // если нажали на ту же кнопку — стоп
   if (currentAudio && currentButton === btn) {
-    if (currentAudio.paused) {
-      currentAudio.play()
-      btn.classList.add('is-active')
-    } else {
-      currentAudio.pause()
-      btn.classList.remove('is-active')
-    }
+    currentAudio.pause()
+    currentAudio.currentTime = 0
+    btn.classList.remove('is-active')
+    currentAudio = null
+    currentButton = null
     return
   }
 
-  // если играло другое — полностью остановить
+  // если играло другое аудио — останавливаем его
   if (currentAudio) {
     currentAudio.pause()
-    currentAudio = null
+    currentAudio.currentTime = 0
   }
   if (currentButton) {
     currentButton.classList.remove('is-active')
   }
 
-  // ВСЕГДА создаём новое аудио
-  const audio = new Audio(url)
-  audio.currentTime = 0
-
-  currentAudio = audio
+  // запускаем новое
+  currentAudio = new Audio(url)
   currentButton = btn
   btn.classList.add('is-active')
 
-  audio.onended = () => {
+  currentAudio.play()
+
+  currentAudio.onended = () => {
     btn.classList.remove('is-active')
     currentAudio = null
     currentButton = null
   }
-
-  audio.play().catch(() => {
-    btn.classList.remove('is-active')
-    currentAudio = null
-    currentButton = null
-  })
 })
 
 document.addEventListener('click', (e) => {
@@ -261,14 +251,15 @@ function setItemActive(
 
 function init_selectionList() {
   const selectionLists = document.querySelectorAll('.selection-list')
-
   if (!selectionLists.length) return
 
   selectionLists.forEach((list) => {
     if (list.dataset.selectionListInitialized) return
 
     const maxSelection = parseInt(list.dataset.selectionElemCount, 10)
-    const checkboxes = list.querySelectorAll('.selection-list__element')
+    const checkboxes = Array.from(
+      list.querySelectorAll('.selection-list__element'),
+    )
     const isInDropdown = list.classList.contains('selection-list--in-dropdown')
 
     if (isNaN(maxSelection) || maxSelection <= 0) {
@@ -278,22 +269,36 @@ function init_selectionList() {
 
     list.dataset.selectionListInitialized = 'true'
 
+    const allCheckbox = checkboxes.find(
+      (c) => c.dataset.category === 'all',
+    )
+
     checkboxes.forEach((checkbox) => {
       checkbox.addEventListener('change', function () {
-        const selectedCount = list.querySelectorAll(
-          '.selection-list__element:checked',
-        ).length
+        let checked = checkboxes.filter((c) => c.checked)
 
-        if (this.checked && selectedCount > maxSelection) {
+        if (allCheckbox && this !== allCheckbox && this.checked) {
+          allCheckbox.checked = false
+          checked = checkboxes.filter((c) => c.checked)
+        }
+
+        if (allCheckbox && this === allCheckbox && this.checked) {
+          checkboxes.forEach((c) => {
+            if (c !== allCheckbox) c.checked = false
+          })
+          checked = [allCheckbox]
+        }
+
+        // лимит выбора
+        if (this.checked && checked.length > maxSelection) {
           this.checked = false
           return
         }
 
-        if (isInDropdown && selectedCount === maxSelection) {
+        // автозакрытие дропдауна
+        if (isInDropdown && checked.length === maxSelection) {
           const dropdown = list.closest('.dropdown')
-          if (dropdown) {
-            dropdown.classList.remove('is-active')
-          }
+          dropdown?.classList.remove('is-active')
         }
       })
     })
@@ -548,7 +553,6 @@ async function fetchSounds(reset = false) {
 
     if (reset) updateTotalCount(data.total, context)
 
-    await sleep(1000)
     hideSkeleton(list)
     renderSounds(data.items)
 
@@ -1341,6 +1345,7 @@ function enableHapticFeedback(parent, selector, pattern = 20) {
       },
       { passive: true },
     )
+
     parent.addEventListener('click', handler, { passive: true })
   } else if (typeof window !== 'undefined' && 'ontouchstart' in window) {
     parent.addEventListener('touchstart', handler, { passive: true })
@@ -1381,8 +1386,3 @@ function showSkeleton(list, count = 6) {
 function hideSkeleton(list) {
   list.querySelectorAll('[data-skeleton="1"]').forEach((el) => el.remove())
 }
-
-document.addEventListener('click', () => {
-  navigator.vibrate(200)
-alert(navigator)
-})
