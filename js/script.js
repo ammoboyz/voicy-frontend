@@ -756,7 +756,7 @@ function renderSounds(items) {
   })
 }
 
-function truncate(text = '', max = 20) {
+function truncate(text = '', max = 30) {
   if (text.length <= max) return text
   return text.slice(0, max) + '...'
 }
