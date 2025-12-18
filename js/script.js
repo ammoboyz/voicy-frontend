@@ -1287,7 +1287,9 @@ function initUploadCategories() {
 
 function enableHapticFeedback(parent, selector, pattern = 60) {
   if (!parent) return
+
   const isAndroid = /android/i.test(navigator.userAgent || '')
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent || '')
   let locked = false
 
   const vibrateHandler = (e) => {
@@ -1297,11 +1299,24 @@ function enableHapticFeedback(parent, selector, pattern = 60) {
     locked = true
     setTimeout(() => (locked = false), 80)
 
-    if (isAndroid && navigator.vibrate) {
-      navigator.vibrate(pattern)
-    }
-    if (window.Telegram && Telegram.WebApp && Telegram.WebApp.HapticFeedback) {
-      Telegram.WebApp.HapticFeedback.impactOccurred('light')
+    if (isAndroid) {
+      if (navigator.vibrate) {
+        navigator.vibrate(pattern)
+      } else if (window.Telegram?.WebApp?.HapticFeedback) {
+        Telegram.WebApp.HapticFeedback.impactOccurred('light')
+      }
+    } else if (isIOS) {
+      if (window.Telegram?.WebApp?.HapticFeedback) {
+        Telegram.WebApp.HapticFeedback.impactOccurred('light')
+      } else if (navigator.vibrate) {
+        navigator.vibrate(pattern)
+      }
+    } else {
+      if (window.Telegram?.WebApp?.HapticFeedback) {
+        Telegram.WebApp.HapticFeedback.impactOccurred('light')
+      } else if (navigator.vibrate) {
+        navigator.vibrate(pattern)
+      }
     }
   }
 
