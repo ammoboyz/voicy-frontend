@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
   )
 
   // fetchSounds(true)
-  fetchSounds(true);
+  renderSounds(DEBUG_ITEMS)
 })
 
 document.addEventListener('click', (e) => {
