@@ -434,11 +434,7 @@ function init_pageSwitch() {
     formPage.classList.remove('page--show')
     mainPage.classList.add('page--show')
 
-    // const activeTab = mainPage.querySelector('.tabs__nav-button.is-active')
-    // const firstTab = mainPage.querySelector('.tabs__nav-button')
-
-    // activeTab?.classList.remove('is-active')
-    // firstTab?.classList.add('is-active')
+    document.querySelector('[data-open-sounds="popular"]')?.click()
   }
 
   openButton.addEventListener('click', openForm)
