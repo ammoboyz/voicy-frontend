@@ -1029,7 +1029,7 @@ async function publishVoice() {
     })
 
     console.log('Published:', created)
-    alert('Звук отправлен на модерацию ✅')
+    alert('Спасибо!\nЗвук отправлен на модерацию')
 
     resetPublishForm()
     goToPopularTab()
