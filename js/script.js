@@ -249,7 +249,6 @@ let selectedAudioFile = null
 let selectedEmoji = ''
 
 document.addEventListener('click', (e) => {
-
   const trigger = e.target.closest('.dropdown__trigger')
   if (!trigger) return
 
@@ -286,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   init_audioplayer()
 
-  const cardsContainer = document.querySelector('.sound-block__list')
+  const cardsContainer = document.querySelectorAll('.sound-block__list')
 
   enableHapticFeedback(cardsContainer, '.play-button')
   enableHapticFeedback(cardsContainer, '.like-button')
@@ -1484,9 +1483,18 @@ function initUploadCategories() {
   }
 }
 
-function enableHapticFeedback(parent, selector, pattern = 60) {
-  if (!parent) return
+function enableHapticFeedback(parentOrParents, selector, pattern = 60) {
+  if (!parentOrParents) return
 
+  // Normalize parents to an array of Elements
+  const parents = Array.isArray(parentOrParents)
+    ? parentOrParents
+    : parentOrParents instanceof NodeList ||
+        parentOrParents instanceof HTMLCollection
+      ? Array.from(parentOrParents)
+      : [parentOrParents]
+
+  // Lazy init of the Telegram WebApp once overall
   if (!enableHapticFeedback._telegramInitialized && window.Telegram?.WebApp) {
     try {
       Telegram.WebApp.ready()
@@ -1496,54 +1504,76 @@ function enableHapticFeedback(parent, selector, pattern = 60) {
     }
   }
 
+  // Keep track of which (parent, selector) pairs we've already attached to
+  if (!enableHapticFeedback._attached)
+    enableHapticFeedback._attached = new WeakMap()
+
   const isAndroid = /android/i.test(navigator.userAgent || '')
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent || '')
-  let vibrateLocked = false
-  let visualLocked = false
 
-  const vibrateHandler = (e) => {
-    const el = e.target.closest(selector)
-    if (!el || !parent.contains(el)) return
-    if (vibrateLocked) return
-    vibrateLocked = true
-    setTimeout(() => (vibrateLocked = false), 80)
+  parents.forEach((parent) => {
+    if (!parent || !(parent instanceof Element)) return
 
-    if (isAndroid) {
-      if (navigator.vibrate) {
-        navigator.vibrate(pattern)
-      } else if (window.Telegram?.WebApp?.HapticFeedback) {
-        Telegram.WebApp.HapticFeedback.impactOccurred('light')
-      }
-    } else if (isIOS) {
-      if (window.Telegram?.WebApp?.HapticFeedback) {
-        Telegram.WebApp.HapticFeedback.impactOccurred('light')
-      } else if (navigator.vibrate) {
-        navigator.vibrate(pattern)
-      }
-    } else {
-      if (window.Telegram?.WebApp?.HapticFeedback) {
-        Telegram.WebApp.HapticFeedback.impactOccurred('light')
-      } else if (navigator.vibrate) {
-        navigator.vibrate(pattern)
+    let attachedSet = enableHapticFeedback._attached.get(parent)
+    if (!attachedSet) {
+      attachedSet = new Set()
+      enableHapticFeedback._attached.set(parent, attachedSet)
+    }
+    const attachedKey = String(selector)
+    if (attachedSet.has(attachedKey)) {
+      // уже подключено для этого parent+selector — пропускаем
+      return
+    }
+    attachedSet.add(attachedKey)
+
+    // Locks are per-parent+selector so rapid events on one container don't affect others
+    let vibrateLocked = false
+    let visualLocked = false
+
+    const vibrateHandler = (e) => {
+      const el = e.target.closest(selector)
+      if (!el || !parent.contains(el)) return
+      if (vibrateLocked) return
+      vibrateLocked = true
+      setTimeout(() => (vibrateLocked = false), 80)
+
+      if (isAndroid) {
+        if (navigator.vibrate) {
+          navigator.vibrate(pattern)
+        } else if (window.Telegram?.WebApp?.HapticFeedback) {
+          Telegram.WebApp.HapticFeedback.impactOccurred('light')
+        }
+      } else if (isIOS) {
+        if (window.Telegram?.WebApp?.HapticFeedback) {
+          Telegram.WebApp.HapticFeedback.impactOccurred('light')
+        } else if (navigator.vibrate) {
+          navigator.vibrate(pattern)
+        }
+      } else {
+        if (window.Telegram?.WebApp?.HapticFeedback) {
+          Telegram.WebApp.HapticFeedback.impactOccurred('light')
+        } else if (navigator.vibrate) {
+          navigator.vibrate(pattern)
+        }
       }
     }
-  }
 
-  const visualHandler = (e) => {
-    const el = e.target.closest(selector)
-    if (!el || !parent.contains(el)) return
-    if (visualLocked) return
-    visualLocked = true
+    const visualHandler = (e) => {
+      const el = e.target.closest(selector)
+      if (!el || !parent.contains(el)) return
+      if (visualLocked) return
+      visualLocked = true
 
-    el.classList.add('haptic-pressed')
-    setTimeout(() => {
-      el.classList.remove('haptic-pressed')
-      visualLocked = false
-    }, 120)
-  }
+      el.classList.add('haptic-pressed')
+      setTimeout(() => {
+        el.classList.remove('haptic-pressed')
+        visualLocked = false
+      }, 120)
+    }
 
-  parent.addEventListener('pointerdown', vibrateHandler, { passive: true })
-  parent.addEventListener('click', visualHandler, { passive: true })
+    parent.addEventListener('pointerdown', vibrateHandler, { passive: true })
+    parent.addEventListener('click', visualHandler, { passive: true })
+  })
 }
 
 function showSkeleton(list, count = 6) {
