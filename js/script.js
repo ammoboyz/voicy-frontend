@@ -249,6 +249,8 @@ let currentButton = null
 let selectedAudioFile = null
 let selectedEmoji = ''
 
+let fetchActionOncePromise = null
+
 document.addEventListener('click', (e) => {
   const trigger = e.target.closest('.dropdown__trigger')
   if (!trigger) return
