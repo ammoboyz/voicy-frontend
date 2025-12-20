@@ -217,6 +217,7 @@ applyTelegramThemeClass()
 
 const searchInput = document.getElementById('sound-search')
 const API_SOUNDS_URL = '/api/sounds'
+const API_TRACKER_URL = '/api/tracker'
 const SKELETON_COUNT = 6
 
 const AUDIO_CATEGORIES = {
@@ -310,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function () {
     { passive: true },
   )
 
-  // fetchSounds(true)
+  fetchAction()
   renderSounds(DEBUG_ITEMS)
 })
 
@@ -1638,4 +1639,19 @@ function appendSkeleton(list, count = 3) {
     .join('')
 
   list.insertAdjacentHTML('beforeend', html)
+}
+
+async function fetchAction() {
+  if (fetchActionOncePromise) return fetchActionOncePromise // уже запускали
+
+  fetchActionOncePromise = (async () => {
+    const params = new URLSearchParams({ page: soundState.page })
+    const url = `${API_TRACKER_URL}?${params.toString()}`
+
+    return apiFetch(url, {
+      headers: { Authorization: `Bearer ${tg.initData}` },
+    })
+  })()
+
+  return fetchActionOncePromise
 }
