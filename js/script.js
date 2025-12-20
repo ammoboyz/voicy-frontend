@@ -1643,17 +1643,16 @@ function appendSkeleton(list, count = 3) {
   list.insertAdjacentHTML('beforeend', html)
 }
 
+
 async function fetchAction() {
-  if (fetchActionOncePromise) return fetchActionOncePromise // уже запускали
+  if (fetchActionOncePromise) return fetchActionOncePromise
 
-  fetchActionOncePromise = (async () => {
-    const params = new URLSearchParams({ page: soundState.page })
-    const url = `${API_TRACKER_URL}?${params.toString()}`
-
-    return apiFetch(url, {
-      headers: { Authorization: `Bearer ${tg.initData}` },
-    })
-  })()
+  fetchActionOncePromise = apiFetch(API_TRACKER_URL, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${tg.initData}`,
+    },
+  })
 
   return fetchActionOncePromise
 }
