@@ -802,7 +802,7 @@ function renderSounds(items) {
                   fill="white"
                 />
               </svg>
-              <span class="loader" aria-hidden="true"></span>
+              <span class="loader"></span>
             </button>
 
             <div class="sound-card__top-text">
