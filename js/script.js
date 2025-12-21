@@ -51,6 +51,18 @@ let selectedEmoji = ''
 
 let fetchActionOncePromise = null
 
+currentAudio.addEventListener('canplay', () => {
+  if (currentButton) {
+    currentButton.classList.remove('has-loading')
+  }
+})
+
+currentAudio.addEventListener('playing', () => {
+  if (currentButton) {
+    currentButton.classList.remove('has-loading')
+  }
+})
+
 document.addEventListener('click', (e) => {
   const trigger = e.target.closest('.dropdown__trigger')
   if (!trigger) return
@@ -155,7 +167,9 @@ document.addEventListener('click', (e) => {
   if (currentButton === btn) {
     currentAudio.pause()
     currentAudio.currentTime = 0
+
     btn.classList.remove('is-active')
+    btn.classList.remove('has-loading')
 
     currentButton = null
     currentUrl = null
@@ -166,9 +180,9 @@ document.addEventListener('click', (e) => {
   currentAudio.pause()
   currentAudio.currentTime = 0
 
-
   if (currentButton) {
     currentButton.classList.remove('is-active')
+    currentButton.classList.remove('has-loading')
   }
 
   // ставим новый src (только если изменился)
@@ -180,6 +194,7 @@ document.addEventListener('click', (e) => {
 
   currentButton = btn
   btn.classList.add('is-active')
+  btn.classList.add('has-loading')
 
   currentAudio.play().catch((err) => {
     if (err?.name === 'AbortError') return
@@ -192,8 +207,8 @@ document.addEventListener('click', (e) => {
 
     alert(`Не удалось воспроизвести звук\n\n${msg}`)
 
-
     btn.classList.remove('is-active')
+    btn.classList.remove('has-loading')
 
     currentButton = null
     currentUrl = null
@@ -787,6 +802,7 @@ function renderSounds(items) {
                   fill="white"
                 />
               </svg>
+              <span class="loader" aria-hidden="true"></span>
             </button>
 
             <div class="sound-card__top-text">
