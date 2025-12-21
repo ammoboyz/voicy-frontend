@@ -6,6 +6,7 @@
   inline-size: rem(48);
   block-size: rem(48);
   flex-shrink: 0;
+  background: var(--color-accent-2);
   border-radius: 50%;
 
   // @include hovered;
@@ -60,7 +61,7 @@
   }
 
   &:hover &__icon-circle {
-    color: rgb(0, 150, 224);
+    color: rgb(0 150 224);
   }
 
   &__icon-decor {
