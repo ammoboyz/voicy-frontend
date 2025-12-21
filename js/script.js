@@ -2,208 +2,6 @@ import '../lib/emoji-picker-element.js'
 import { apiFetch } from './apiFetch.js'
 
 const tg = window.Telegram?.WebApp
-const DEBUG_ITEMS = [
-  {
-    id: 7965,
-    title: '😱 Хуееееэеээе бр бр патапим',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/DoyUqrsGKcPmsyVlUOcjIkLWpIlnPt',
-  },
-  {
-    id: 7950,
-    title: '🤙 Бр бр патапим хуеэуээеэеэ',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/KlJiAXdCMoArJyhacTRjxNInjOyIrT',
-  },
-  {
-    id: 7856,
-    title: "🐵 Qotag'ini uzilar pidarasni",
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/ejFAFByEcUsTdllxTtDGucfaOElSJU',
-  },
-  {
-    id: 7051,
-    title: '🙏 Молюсь об этом каждый день',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/PWhmuTDgawuaVfdAMZUSLCVtUjQhEo',
-  },
-  {
-    id: 7041,
-    title: '🤙 э котак басина туда встань',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/dylLWetDxtsqVRWZjDsZAZVCHUyVTy',
-  },
-  {
-    id: 6869,
-    title: '😴 Але, мужик, тебе нормально?',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/aMyiswYTCjeGmcnnVRidhuWnIVFuXV',
-  },
-  {
-    id: 6867,
-    title: '🤥 Та шо?',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/LnfKTlobcMGdDYUAKqHOIuvEWrWFuo',
-  },
-  {
-    id: 6865,
-    title: '👋 я передаю привет анечке',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/rNTQwzAUmPbCIfulnSTEcVzZfjFOHs',
-  },
-  {
-    id: 6855,
-    title: '🥮 Халяль чебуреки пахлава все по скидк',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/sCxtELOcihIBVjhSoZoMLBEgUVcwse',
-  },
-  {
-    id: 5659,
-    title: '😀 Даша Дешик ',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/OLQiLElYewbUKqHkHdDBDtrhguJZAr',
-  },
-  {
-    id: 5366,
-    title: '😌 Golden knight ',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/zhSLWMceHAyAmvEgdXXtJeiYdYrZCf',
-  },
-  {
-    id: 4032,
-    title: '🧔‍♂️ Драться можно каждый день ',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/yuTzPloVUvFGxfWVpTCvIRBvXtIBXM',
-  },
-  {
-    id: 3972,
-    title: '😅 McGregor: Break out the red panties',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/zGZKlUXsPkrHoDdvTTbNaZgkpKdTcP',
-  },
-  {
-    id: 3929,
-    title: '👍 Потому что вы демо не смотрите',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/wmOOFYQTFnbOQanpPEdnPYuCgVZKRr',
-  },
-  {
-    id: 3927,
-    title: '😁 St-Pierre: But i know',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/kTbbGBmxSyUKFCQyBfYCttbMdbZSKQ',
-  },
-  {
-    id: 3926,
-    title: '😀 St-Pierre: I think you work so much',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/LbLUEGXWTJagpAikOdGSfItYRuKAWJ',
-  },
-  {
-    id: 3920,
-    title: '😀 Max Holloway: I kind of mad, guys',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/oTxfiftNLSdAeNfYvhtmjYFObXlgwG',
-  },
-  {
-    id: 3888,
-    title: '😂 Khabib: I am born ready, bro',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: true,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/pfANQmBeBSOFzpyuWzRwroVNzooMgx',
-  },
-  {
-    id: 3780,
-    title: '👍 St-Pierre: Time physical damage',
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/wUdLCEEtAoCEEjVVWEluELbfEQLlDP',
-  },
-  {
-    id: 3778,
-    title: "😊 Emelianenko: Today I'm coming",
-    description: null,
-    views_count: 1,
-    category_id: null,
-    liked: false,
-    moderation_status: 'approved',
-    url: 'https://test.aichatpro.ru/api/sounds/play/AMLIglcfLEqgzERFzoPPnxMpCstaNy',
-  },
-]
 
 if (tg) {
   tg.expand()
@@ -243,8 +41,10 @@ let soundState = {
   categories: null,
 }
 
-let currentAudio = null
+const currentAudio = new Audio()
+currentAudio.preload = 'auto'
 let currentButton = null
+let currentUrl = null
 
 let selectedAudioFile = null
 let selectedEmoji = ''
@@ -314,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
   )
 
   fetchAction()
-  renderSounds(DEBUG_ITEMS)
+  fetchSounds(true)
 })
 
 document.addEventListener('click', (e) => {
@@ -352,37 +152,62 @@ document.addEventListener('click', (e) => {
   if (!url) return
 
   // если нажали на ту же кнопку — стоп
-  if (currentAudio && currentButton === btn) {
+  if (currentButton === btn) {
     currentAudio.pause()
     currentAudio.currentTime = 0
     btn.classList.remove('is-active')
-    currentAudio = null
+
     currentButton = null
+    currentUrl = null
     return
   }
 
-  // если играло другое аудио — останавливаем его
-  if (currentAudio) {
-    currentAudio.pause()
-    currentAudio.currentTime = 0
-  }
+  // если играло другое аудио — останавливаем
+  currentAudio.pause()
+  currentAudio.currentTime = 0
+
+
   if (currentButton) {
     currentButton.classList.remove('is-active')
   }
 
-  // запускаем новое
-  currentAudio = new Audio(url)
+  // ставим новый src (только если изменился)
+  if (currentUrl !== url) {
+    currentUrl = url
+    currentAudio.src = url
+    currentAudio.load()
+  }
+
   currentButton = btn
   btn.classList.add('is-active')
 
-  currentAudio.play()
+  currentAudio.play().catch((err) => {
+    if (err?.name === 'AbortError') return
 
-  currentAudio.onended = () => {
+    console.error('Audio play failed:', err)
+
+    let msg = 'Неизвестная ошибка'
+    if (err?.name) msg = err.name
+    if (err?.message) msg += `: ${err.message}`
+
+    alert(`Не удалось воспроизвести звук\n\n${msg}`)
+
+
     btn.classList.remove('is-active')
-    currentAudio = null
+
     currentButton = null
-  }
+    currentUrl = null
+    currentAudio.pause()
+    currentAudio.currentTime = 0
+  })
 })
+
+currentAudio.onended = () => {
+  if (currentButton) currentButton.classList.remove('is-active')
+  currentButton = null
+  currentUrl = null
+  currentAudio.currentTime = 0
+}
 
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-open-sounds]')
@@ -1642,7 +1467,6 @@ function appendSkeleton(list, count = 3) {
 
   list.insertAdjacentHTML('beforeend', html)
 }
-
 
 async function fetchAction() {
   if (fetchActionOncePromise) return fetchActionOncePromise
