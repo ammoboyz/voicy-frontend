@@ -1,7 +1,6 @@
 services:
   frontend:
     build: .
-    container_name: circles-frontend
     ports:
       - "8081:80"
     restart: unless-stopped
