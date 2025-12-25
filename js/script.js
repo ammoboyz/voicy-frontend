@@ -44,6 +44,7 @@ let soundState = {
 const currentAudio = new Audio()
 currentAudio.preload = 'auto'
 let currentButton = null
+let currentUrl = null
 
 let selectedAudioFile = null
 let selectedEmoji = ''
