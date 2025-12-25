@@ -15,7 +15,6 @@ function setLang(lang) {
   const code = (lang || 'en').slice(0, 2)
 
   apiFetch(`i18n/${code}.json`)
-    .then(r => r.json())
     .then(dict => {
       DICT = dict
       applyI18n()
