@@ -28,7 +28,7 @@
                   type="button"
                   data-open-sounds="popular"
                 >
-                  <span class="nav-main__button-caption">Популярное</span>
+                  <span class="nav-main__button-caption" data-i18n="nav.popular">Популярное</span>
 
                   <svg
                     class="nav-main__button-icon"
@@ -59,13 +59,14 @@
                   class="nav-button tabs__nav-button"
                   type="button"
                   data-open-sounds="favorites"
+                  data-i18n="nav.my_sounds"
                 >
                   Мои звуки
                 </button>
               </li>
 
               <li class="nav-main__item">
-                <button href="#" class="nav-button tabs__nav-button" type="button">FAQ</button>
+                <button href="#" data-i18n="nav.faq" class="nav-button tabs__nav-button" type="button">FAQ</button>
               </li>
             </ul>
           </nav>
@@ -100,19 +101,19 @@
                     </defs>
                   </svg>
 
-                  <input id="sound-search" class="form-field__input" placeholder="Найти звук" />
+                  <input id="sound-search" class="form-field__input" data-i18n="search.placeholder" placeholder="Найти звук" />
                 </label>
               </div>
 
               <div class="sound-card-overview__content sound-block">
                 <header class="sound-block__header">
                   <div class="sound-block__quantity">
-                    <span class="sound-block__quantity-caption">Всего звуков -</span>
+                    <span class="sound-block__quantity-caption" data-i18n="sounds.total">Всего звуков -</span>
                     <span class="sound-block__quantity-value">0</span>
                   </div>
 
                   <div class="sound-block__category-dropdown dropdown">
-                    <button class="dropdown__trigger" type="button">Категории</button>
+                    <button class="dropdown__trigger" type="button" data-i18n="categories.title">Категории</button>
 
                     <div
                       class="dropdown__wrapper dropdown__wrapper--absolute dropdown__wrapper--right"
@@ -142,6 +143,7 @@
                   class="nav-button tabs__nav-button"
                   data-open-sounds="favorites"
                   type="button"
+                  data-i18n="tabs.favorites"
                 >
                   Избранное
                 </button>
@@ -151,6 +153,7 @@
                   class="nav-button tabs__nav-button"
                   data-open-sounds="uploads"
                   type="button"
+                  data-i18n="tabs.uploads"
                 >
                   Добавленные
                 </button>
@@ -160,12 +163,12 @@
                 <div class="sound-block tabs__content-item">
                   <header class="sound-block__header">
                     <div class="sound-block__quantity">
-                      <span class="sound-block__quantity-caption">Всего звуков -</span>
+                      <span class="sound-block__quantity-caption" data-i18n="sounds.total">Всего звуков -</span>
                       <span class="sound-block__quantity-value">0</span>
                     </div>
 
                     <div class="sound-block__category-dropdown dropdown">
-                      <button class="dropdown__trigger" type="button">Категории</button>
+                      <button class="dropdown__trigger" type="button" data-i18n="categories.title">Категории</button>
 
                       <div
                         class="dropdown__wrapper dropdown__wrapper--absolute dropdown__wrapper--right"
@@ -187,12 +190,12 @@
                 <div class="sound-block tabs__content-item is-active">
                   <header class="sound-block__header">
                     <div class="sound-block__quantity">
-                      <span class="sound-block__quantity-caption">Всего звуков -</span>
+                      <span class="sound-block__quantity-caption" data-i18n="sounds.total">Всего звуков -</span>
                       <span class="sound-block__quantity-value">0</span>
                     </div>
 
                     <div class="sound-block__category-dropdown dropdown">
-                      <button class="dropdown__trigger" type="button">Категории</button>
+                      <button class="dropdown__trigger" type="button" data-i18n="categories.title">Категории</button>
 
                       <div
                         class="dropdown__wrapper dropdown__wrapper--absolute dropdown__wrapper--right"
@@ -217,11 +220,11 @@
 
           <div class="tabs__content-item" id="tab-content-item-faq">
             <div class="text-tile tile">
-              <p class="text-tile__caption">Отказ от ответственности в отношении авторских прав</p>
+              <p class="text-tile__caption" data-i18n="faq.title">Отказ от ответственности в отношении авторских прав</p>
 
               <ol class="text-tile__list">
                 <li class="text-tile__list-item">
-                  <div class="text-tile__list-content">
+                  <div class="text-tile__list-content" data-i18n="faq.rule_1">
                     Вы можете загружать только треки,
                     <b>не защищённые авторскими правами</b> (общественное достояние, роялти-фри,
                     Creative Commons), либо те, на загрузку которых у вас есть официальное
@@ -230,14 +233,14 @@
                 </li>
 
                 <li class="text-tile__list-item">
-                  <div class="text-tile__list-content">
+                  <div class="text-tile__list-content" data-i18n="faq.rule_2">
                     Администрация бота <b>не несёт ответственности</b> за любой контент, загруженный
                     пользователями. Полная ответственность лежит на лице, загрузившем файл.
                   </div>
                 </li>
 
                 <li class="text-tile__list-item">
-                  <div class="text-tile__list-content">
+                  <div class="text-tile__list-content" data-i18n="faq.rule_3">
                     Если вы являетесь правообладателем и считаете, что ваши авторские права были
                     нарушены, пожалуйста, отправьте запрос на удаление контента
                     <b>в соответствии с Законом США «Об авторском праве в цифровую эпоху» (DMCA)</b>
@@ -246,7 +249,7 @@
                 </li>
               </ol>
 
-              <p class="text-tile__descr">
+              <p class="text-tile__descr" data-i18n="faq.footer">
                 Ваш запрос будет рассмотрен, а нарушающий права контент будет удалён.
               </p>
             </div>
@@ -282,7 +285,7 @@
               </defs>
             </svg>
 
-            <span class="button__caption"> Добавить звук </span>
+            <span class="button__caption" data-i18n="actions.add_sound"> Добавить звук </span>
           </button>
         </div>
       </footer>
@@ -316,7 +319,7 @@
                 <span class="emoji-selector__selected"></span>
               </div>
 
-              <span class="emoji-selector__caption">Выбрать эмодзи</span>
+              <span class="emoji-selector__caption" data-i18n="emoji.select">Выбрать эмодзи</span>
 
               <div class="emoji-selector__picker-container">
                 <emoji-picker></emoji-picker>
@@ -352,7 +355,7 @@
                   </defs>
                 </svg>
 
-                <span class="file-upload__field-caption"> Добавить звук </span>
+                <span class="file-upload__field-caption" data-i18n="actions.add_sound"> Добавить звук </span>
               </label>
 
               <div class="file-upload__player player form-field">
@@ -405,10 +408,10 @@
 
                 <div class="player__info">
                   <span class="player__duration">
-                    <span class="player__duration-current">00:00</span> /
-                    <span class="player__duration-total">длительность</span>
+                    <span class="player__duration-current" data-i18n="player.duration">00:00</span> /
+                    <span class="player__duration-total" data-i18n="player.size">длительность</span>
                   </span>
-                  <span class="player__size">вес файла</span>
+                  <span class="player__size" data-i18n="player.file_size">вес файла</span>
                 </div>
 
                 <button class="player__button player__button-reload" type="button">
@@ -469,18 +472,19 @@
                 <input
                   class="form__group-field form-field"
                   maxlength="30"
+                  data-i18n="form.sound_name"
                   type="text"
                   placeholder="Название"
                 />
 
-                <p class="form__group-descr">
+                <p class="form__group-descr" data-i18n="form.sound_name_hint">
                   Введите название для вашего звука. Например «смех», «звонок».
                 </p>
               </div>
 
               <div class="form__group">
                 <div class="form__group-field form-dropdown dropdown dropdown--select">
-                  <button class="form-field dropdown__trigger" type="button">Категории</button>
+                  <button class="form-field dropdown__trigger" type="button" data-i18n="categories.title">Категории</button>
 
                   <div class="dropdown__wrapper dropdown__wrapper--absolute">
                     <div class="dropdown__inner">
@@ -491,7 +495,7 @@
                   </div>
                 </div>
 
-                <p class="form__group-descr">Выберите категорию для своего звука из предложенных</p>
+                <p class="form__group-descr" data-i18n="form.category_hint">Выберите категорию для своего звука из предложенных</p>
               </div>
             </div>
 
@@ -526,7 +530,7 @@
                   </defs>
                 </svg>
 
-                <span class="button__caption">Опубликовать звук</span>
+                <span class="button__caption" data-i18n="actions.publish">Опубликовать звук</span>
               </button>
 
               <button
@@ -555,7 +559,7 @@
                   </defs>
                 </svg>
 
-                <span class="button__caption">Ознакомиться с правилами</span>
+                <span class="button__caption" data-i18n="actions.rules">Ознакомиться с правилами</span>
               </button>
             </div>
           </form>
