@@ -224,6 +224,16 @@ currentAudio.onended = () => {
   currentAudio.currentTime = 0
 }
 
+currentAudio.addEventListener(
+  'playing',
+  () => {
+    if (currentButton) {
+      currentButton.classList.remove('has-loading')
+    }
+  },
+  { once: true }
+)
+
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-open-sounds]')
   if (!btn) return
