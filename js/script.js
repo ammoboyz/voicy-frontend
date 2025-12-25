@@ -44,24 +44,11 @@ let soundState = {
 const currentAudio = new Audio()
 currentAudio.preload = 'auto'
 let currentButton = null
-let currentUrl = null
 
 let selectedAudioFile = null
 let selectedEmoji = ''
 
 let fetchActionOncePromise = null
-
-currentAudio.addEventListener('canplay', () => {
-  if (currentButton) {
-    currentButton.classList.remove('has-loading')
-  }
-})
-
-currentAudio.addEventListener('playing', () => {
-  if (currentButton) {
-    currentButton.classList.remove('has-loading')
-  }
-})
 
 document.addEventListener('click', (e) => {
   const trigger = e.target.closest('.dropdown__trigger')
@@ -156,83 +143,54 @@ document.addEventListener('click', (e) => {
   publishVoice()
 })
 
-document.addEventListener('click', (e) => {
+let playToken = 0
+
+function stopCurrent() {
+  currentAudio.pause()
+  currentAudio.currentTime = 0
+  if (currentButton) {
+    currentButton.classList.remove('is-active', 'has-loading')
+  }
+  currentButton = null
+  currentUrl = null
+}
+
+document.addEventListener('click', async (e) => {
   const btn = e.target.closest('.play-button')
   if (!btn) return
-
   const url = btn.dataset.url
   if (!url) return
 
-  // если нажали на ту же кнопку — стоп
   if (currentButton === btn) {
-    currentAudio.pause()
-    currentAudio.currentTime = 0
-
-    btn.classList.remove('is-active')
-    btn.classList.remove('has-loading')
-
-    currentButton = null
-    currentUrl = null
+    stopCurrent()
     return
   }
 
-  // если играло другое аудио — останавливаем
-  currentAudio.pause()
-  currentAudio.currentTime = 0
-
-  if (currentButton) {
-    currentButton.classList.remove('is-active')
-    currentButton.classList.remove('has-loading')
-  }
-
-  // ставим новый src (только если изменился)
-  if (currentUrl !== url) {
-    currentUrl = url
-    currentAudio.src = url
-    currentAudio.load()
-  }
+  stopCurrent()
 
   currentButton = btn
-  btn.classList.add('is-active')
-  btn.classList.add('has-loading')
+  currentUrl = url
+  btn.classList.add('is-active', 'has-loading')
 
-  currentAudio.play().catch((err) => {
-    if (err?.name === 'AbortError') return
+  const token = ++playToken
 
-    console.error('Audio play failed:', err)
-
-    let msg = 'Неизвестная ошибка'
-    if (err?.name) msg = err.name
-    if (err?.message) msg += `: ${err.message}`
-
-    alert(`Не удалось воспроизвести звук\n\n${msg}`)
-
-    btn.classList.remove('is-active')
-    btn.classList.remove('has-loading')
-
-    currentButton = null
-    currentUrl = null
-    currentAudio.pause()
-    currentAudio.currentTime = 0
-  })
+  currentAudio.src = url
+  try {
+    await currentAudio.play()
+    if (token !== playToken) return
+  } catch (err) {
+    if (token !== playToken) return
+    btn.classList.remove('is-active', 'has-loading')
+    stopCurrent()
+  }
 })
 
-currentAudio.onended = () => {
-  if (currentButton) currentButton.classList.remove('is-active')
-  currentButton = null
-  currentUrl = null
-  currentAudio.currentTime = 0
-}
+currentAudio.addEventListener('playing', () => {
+  if (currentButton) currentButton.classList.remove('has-loading')
+})
 
-currentAudio.addEventListener(
-  'playing',
-  () => {
-    if (currentButton) {
-      currentButton.classList.remove('has-loading')
-    }
-  },
-  { once: true }
-)
+currentAudio.addEventListener('ended', stopCurrent)
+currentAudio.addEventListener('error', stopCurrent)
 
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-open-sounds]')
