@@ -920,6 +920,7 @@ a {
 .play-button.is-active .play-button__icon-play {
   opacity: 0;
 }
+.play-button.is-transitioning .play-button__icon-play { opacity: 0; }
 .play-button__icon-stop {
   opacity: 0;
 }

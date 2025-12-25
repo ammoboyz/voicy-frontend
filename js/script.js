@@ -187,9 +187,17 @@ document.addEventListener('click', async (e) => {
 })
 
 currentAudio.addEventListener('playing', () => {
-  if (!currentButton) return
-  currentButton.classList.remove('has-loading')
-  setTimeout(() => currentButton?.classList.add('is-active'), 100)
+  const btn = currentButton
+  if (!btn) return
+
+  btn.classList.add('is-transitioning')
+  btn.classList.remove('has-loading')
+
+  setTimeout(() => {
+    if (currentButton !== btn) return
+    btn.classList.remove('is-transitioning')
+    btn.classList.add('is-active')
+  }, 100)
 })
 
 currentAudio.addEventListener('ended', stopCurrent)
