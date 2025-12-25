@@ -30,7 +30,7 @@ apiFetch(API_LANG_URL, {
   },
 })
   .then(r => setLang(r.language))
-  .catch(() => setLang('en'))
+  .catch(() => setLang('ru'))
 
 function t(key) {
   return DICT[key] ?? key
