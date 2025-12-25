@@ -935,6 +935,9 @@ a {
 .play-button.has-loading .play-button__icon-stop {
   opacity: 0 !important;
 }
+.play-button.has-loading .loader {
+  opacity: 1;
+}
 .play-button.is-active .play-button__icon-stop {
   opacity: 1;
 }
