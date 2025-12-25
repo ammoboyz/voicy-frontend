@@ -187,7 +187,9 @@ document.addEventListener('click', async (e) => {
 })
 
 currentAudio.addEventListener('playing', () => {
-  if (currentButton) currentButton.classList.remove('has-loading')
+  if (!currentButton) return
+  currentButton.classList.add('is-active')
+  currentButton.classList.remove('has-loading')
 })
 
 currentAudio.addEventListener('ended', stopCurrent)
