@@ -2,6 +2,7 @@ import { apiFetch } from './apiFetch.js'
 
 let DICT = {}
 const API_LANG_URL = '/api/user/lang'
+const tg = window.Telegram?.WebApp
 
 function applyI18n(root = document) {
   root.querySelectorAll('[data-i18n]').forEach(el => {
@@ -13,7 +14,7 @@ function applyI18n(root = document) {
 function setLang(lang) {
   const code = (lang || 'en').slice(0, 2)
 
-  fetch(`i18n/${code}.json`)
+  apiFetch(`i18n/${code}.json`)
     .then(r => r.json())
     .then(dict => {
       DICT = dict
@@ -22,8 +23,13 @@ function setLang(lang) {
     })
 }
 
-apiFetch(API_LANG_URL)
-  .then(r => setLang(r.lang))
+apiFetch(API_LANG_URL, {
+  method: 'GET',
+  headers: {
+    Authorization: `Bearer ${tg.initData}`,
+  },
+})
+  .then(r => setLang(r.language))
   .catch(() => setLang('en'))
 
 function t(key) {
