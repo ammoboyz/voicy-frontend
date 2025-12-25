@@ -62,7 +62,7 @@ document.addEventListener('click', (e) => {
 document.querySelectorAll('.sound-block__list').length
 
 document.addEventListener('DOMContentLoaded', function () {
-  setItemActive('.like-button')
+  // setItemActive('.like-button')
   setItemActive('.play-button')
 
   renderCategories()
@@ -171,7 +171,7 @@ document.addEventListener('click', async (e) => {
 
   currentButton = btn
   currentUrl = url
-  btn.classList.add('is-active', 'has-loading')
+  btn.classList.add('has-loading')
 
   const token = ++playToken
 
@@ -181,7 +181,7 @@ document.addEventListener('click', async (e) => {
     if (token !== playToken) return
   } catch (err) {
     if (token !== playToken) return
-    btn.classList.remove('is-active', 'has-loading')
+    btn.classList.remove('has-loading')
     stopCurrent()
   }
 })
