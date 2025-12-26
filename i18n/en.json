@@ -1,0 +1,58 @@
+{
+  "nav.popular": "Popular",
+  "nav.my_sounds": "My Sounds",
+  "nav.faq": "FAQ",
+
+  "tabs.favorites": "Favorites",
+  "tabs.uploads": "Uploads",
+
+  "search.placeholder": "Search for a sound",
+
+  "categories.title": "Categories",
+
+  "sounds.total": "Total sounds -",
+
+  "actions.send": "Send",
+  "actions.back": "Back",
+  "actions.add_sound": "Add sound",
+  "actions.publish": "Publish sound",
+  "actions.rules": "View the rules",
+
+  "moderation.pending": "Pending review",
+  "moderation.rejected": "Rejected",
+  "moderation.not_passed": "Did not pass review",
+
+  "errors.open_in_tg": "Open this mini app inside Telegram",
+  "errors.unknown": "Unknown error",
+  "errors.play_failed": "Failed to play the sound",
+
+  "form.pick_file": "Choose a file (sound)",
+  "form.enter_title": "Enter a title",
+  "form.pick_category": "Choose a category",
+  "form.thanks_sent": "Thank you!\nThe sound has been sent for moderation",
+  "form.placeholder": "Name",
+  "form.sound_name_hint": "Enter a name for your sound. For example, \"laughter\", \"ringtone\".",
+  "form.category_hint": "Choose a category for your sound from the list",
+  "form.emoji_select": "Select an emoji",
+
+  "faq.title": "Copyright Disclaimer",
+
+  "faq.rule_1": "You may upload only tracks that are not protected by copyright (public domain, royalty-free, Creative Commons), or tracks for which you have official permission from the copyright holder.",
+
+  "faq.rule_2": "The bot administration is not responsible for any content uploaded by users. Full responsibility lies with the person who uploaded the file.",
+
+  "faq.rule_3": "If you are a copyright holder and believe that your rights have been violated, please submit a content removal request in accordance with the U.S. Digital Millennium Copyright Act (DMCA) via Telegram: @let_support",
+
+  "faq.footer": "Your request will be reviewed and the infringing content will be removed.",
+
+  "categories.all": "All",
+  "categories.memes": "Memes",
+  "categories.cringe": "Cringe",
+  "categories.relationships": "Relationships",
+  "categories.work_study": "Work & Study",
+  "categories.games": "Games",
+  "categories.streams": "Streams",
+  "categories.movies": "Movies",
+  "categories.anime": "Anime",
+  "categories.ambience": "Ambience"
+}

@@ -1,0 +1,58 @@
+{
+  "nav.popular": "Популярное",
+  "nav.my_sounds": "Мои звуки",
+  "nav.faq": "FAQ",
+
+  "tabs.favorites": "Избранное",
+  "tabs.uploads": "Добавленные",
+
+  "search.placeholder": "Найти звук",
+
+  "categories.title": "Категории",
+
+  "sounds.total": "Всего звуков -",
+
+  "actions.send": "Отправить",
+  "actions.back": "Вернуться",
+  "actions.add_sound": "Добавить звук",
+  "actions.publish": "Опубликовать звук",
+  "actions.rules": "Ознакомиться с правилами",
+
+  "moderation.pending": "На проверке",
+  "moderation.rejected": "Отклонено",
+  "moderation.not_passed": "Не прошло проверку",
+
+  "errors.open_in_tg": "Открой мини-апп внутри Telegram",
+  "errors.unknown": "Неизвестная ошибка",
+  "errors.play_failed": "Не удалось воспроизвести звук",
+
+  "form.pick_file": "Выбери файл (звук)",
+  "form.enter_title": "Введи название",
+  "form.pick_category": "Выбери категорию",
+  "form.thanks_sent": "Спасибо!\nЗвук отправлен на модерацию",
+  "form.placeholder": "Название",
+  "form.sound_name_hint": "Введите название для вашего звука. Например «смех», «звонок».",
+  "form.category_hint": "Выберите категорию для своего звука из предложенных",
+  "form.emoji_select": "Выбрать эмодзи",
+
+  "faq.title": "Отказ от ответственности в отношении авторских прав",
+
+  "faq.rule_1": "Вы можете загружать только треки, не защищённые авторскими правами (общественное достояние, роялти-фри, Creative Commons), либо те, на загрузку которых у вас есть официальное разрешение правообладателя.",
+
+  "faq.rule_2": "Администрация бота не несёт ответственности за любой контент, загруженный пользователями. Полная ответственность лежит на лице, загрузившем файл.",
+
+  "faq.rule_3": "Если вы являетесь правообладателем и считаете, что ваши авторские права были нарушены, пожалуйста, отправьте запрос на удаление контента в соответствии с Законом США «Об авторском праве в цифровую эпоху» (DMCA) через Telegram: @let_support",
+
+  "faq.footer": "Ваш запрос будет рассмотрен, а нарушающий права контент будет удалён.",
+
+  "categories.all": "Все",
+  "categories.memes": "Мемы",
+  "categories.cringe": "Кринж",
+  "categories.relationships": "Отношения",
+  "categories.work_study": "Работа и учёба",
+  "categories.games": "Игры",
+  "categories.streams": "Стримы",
+  "categories.movies": "Кино",
+  "categories.anime": "Аниме",
+  "categories.ambience": "Атмосфера"
+}

@@ -1,5 +1,6 @@
 import '../lib/emoji-picker-element.js'
 import { apiFetch } from './apiFetch.js'
+import { applyI18n, t } from './i18n.js'
 
 const tg = window.Telegram?.WebApp
 
@@ -19,16 +20,16 @@ const API_TRACKER_URL = '/api/tracker'
 const SKELETON_COUNT = 6
 
 const AUDIO_CATEGORIES = {
-  all: 'Все',
-  memes: 'Мемы',
-  cringe: 'Кринж',
-  relationships: 'Отношения',
-  work_study: 'Работа и учёба',
-  games: 'Игры',
-  streams: 'Стримы',
-  movies: 'Кино',
-  anime: 'Аниме',
-  ambience: 'Атмосфера',
+  all: 'categories.all',
+  memes: 'categories.memes',
+  cringe: 'categories.cringe',
+  relationships: 'categories.relationships',
+  work_study: 'categories.work_study',
+  games: 'categories.games',
+  streams: 'categories.streams',
+  movies: 'categories.movies',
+  anime: 'categories.anime',
+  ambience: 'categories.ambience'
 }
 
 let soundState = {
@@ -115,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   fetchAction()
   fetchSounds(true)
+  applyI18n()
 })
 
 document.addEventListener('click', (e) => {
@@ -708,7 +710,7 @@ function renderSounds(items) {
             </defs>
           </svg>
 
-          <span class="button__caption">Отправить</span>
+          <span class="button__caption" data-i18n="actions.send">Отправить</span>
         </button>
       `
 
@@ -786,7 +788,7 @@ function renderSounds(items) {
 
             <div class="sound-card__top-text">
               <h3 class="sound-card__title">${truncate(sound.title ?? '')}</h3>
-              <p class="sound-card__category">${AUDIO_CATEGORIES[sound.category_id] ?? ''}</p>
+              <p class="sound-card__category" data-i18n="${AUDIO_CATEGORIES[sound.category_id] ?? ''}"></p>
             </div>
           </div>
 
@@ -802,6 +804,8 @@ function renderSounds(items) {
 
     list.appendChild(li)
   })
+
+  applyI18n()
 }
 
 function truncate(text = '', max = 30) {
@@ -823,7 +827,7 @@ function renderUploadStatusRight(status, soundId) {
           </g>
           <defs><clipPath id="clip0_0_259"><rect width="14" height="14" fill="white"/></clipPath></defs>
         </svg>
-        <span class="info-element__value">На проверке</span>
+        <span class="info-element__value" data-i18n="moderation.pending">На проверке</span>
       </div>
     `
   }
@@ -839,7 +843,7 @@ function renderUploadStatusRight(status, soundId) {
           </g>
           <defs><clipPath id="clip0_0_273"><rect width="14" height="14" fill="white"/></clipPath></defs>
         </svg>
-        <span class="info-element__value">Отклонено</span>
+        <span class="info-element__value" data-i18n="moderation.rejected">Отклонено</span>
       </div>
     `
   }
@@ -856,14 +860,14 @@ function renderUploadStatusRight(status, soundId) {
     </svg>
 
     <button class="button share-btn" data-share-sound-id="${soundId}" type="button">
-      <span class="button__caption">Отправить</span>
+      <span class="button__caption" data-i18n="actions.send">Отправить</span>
     </button>
   `
 }
 
 function renderUploadFootLeft(status) {
   if (status === 'rejected') {
-    return `<div class="info-element"><span class="info-element__value">Не прошло проверку</span></div>`
+    return `<div class="info-element"><span class="info-element__value" data-i18n="moderation.not_passed">Не прошло проверку</span></div>`
   }
   // pending/approved: слева остаётся views как обычно (ничего не добавляем)
   return ''
@@ -899,13 +903,15 @@ function renderCategories() {
             class="checkbox__input selection-list__element"
             data-category="${key}"
           />
-          <span class="checkbox__caption">${label}</span>
+          <span class="checkbox__caption" data-i18n="${label}"></span>
           <div class="checkbox__emulate"></div>
         </label>
       `
 
       list.appendChild(li)
     })
+
+    applyI18n()
 
     // просто реагируем на выбор
     list.addEventListener('change', () => {
@@ -993,7 +999,7 @@ function resetPublishForm() {
 
   const catTrigger = document.querySelector('.form-dropdown .dropdown__trigger')
   if (catTrigger) {
-    catTrigger.textContent = 'Категории'
+    catTrigger.textContent = t('categories.title')
     delete catTrigger.dataset.value
     catTrigger.classList.remove('is-choice')
   }
@@ -1204,7 +1210,7 @@ function init_audioplayer() {
     audio = new Audio(audioUrl)
 
     // Размер файла
-    sizeEl.textContent = `${(file.size / 1024).toFixed(2)} кб`
+    sizeEl.textContent = `${(file.size / 1024).toFixed(2)} kb`
 
     // Обработчики событий аудио
     audio.addEventListener('loadedmetadata', handleMetadataLoaded)
@@ -1288,9 +1294,7 @@ function initUploadCategories() {
 
     uploadList.innerHTML += `
       <li class="dropdown-list__item">
-        <button class="dropdown__select-item dropdown-list__button" type="button" data-value="${key}">
-          ${name}
-        </button>
+        <button class="dropdown__select-item dropdown-list__button" type="button" data-value="${key}" data-i18n="${name}"></button>
       </li>
     `
   })
