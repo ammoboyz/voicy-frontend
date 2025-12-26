@@ -6,9 +6,18 @@ const tg = window.Telegram?.WebApp
 
 function applyI18n(root = document) {
   root.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n
-    el.textContent = I18N_DICT[key] ?? key
-  })
+    const key = el.dataset.i18n;
+    const value = I18N_DICT[key] ?? key;
+
+    if (
+      el instanceof HTMLInputElement ||
+      el instanceof HTMLTextAreaElement
+    ) {
+      el.placeholder = value;
+    } else {
+      el.textContent = value;
+    }
+  });
 }
 
 function setLang(lang) {
