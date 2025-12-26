@@ -1315,7 +1315,7 @@ function initUploadCategories() {
 
     uploadList.innerHTML += `
       <li class="dropdown-list__item">
-        <button class="dropdown__select-item dropdown-list__button" type="button" data-value="${key}" data-i18n="${AUDIO_CATEGORIES[sound.category_id] ?? ''}"></button>
+        <button class="dropdown__select-item dropdown-list__button" type="button" data-value="${key}" data-i18n="${name}"></button>
       </li>
     `
   })
