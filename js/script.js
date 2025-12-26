@@ -1231,7 +1231,7 @@ function init_audioplayer() {
     audio = new Audio(audioUrl)
 
     // Размер файла
-    sizeEl.textContent = `${(file.size / 1024).toFixed(2)} кб`
+    sizeEl.textContent = `${(file.size / 1024).toFixed(2)} kb`
 
     // Обработчики событий аудио
     audio.addEventListener('loadedmetadata', handleMetadataLoaded)
