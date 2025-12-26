@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
   fetchAction()
   fetchSounds(true)
   applyI18n()
+  finishBoot()
 })
 
 document.addEventListener('click', (e) => {
@@ -147,6 +148,11 @@ document.addEventListener('click', (e) => {
 })
 
 let playToken = 0
+
+function finishBoot() {
+  document.body.classList.remove('app-loading')
+  document.body.classList.add('app-ready')
+}
 
 function stopCurrent() {
   currentAudio.pause()
