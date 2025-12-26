@@ -15,6 +15,8 @@
   "actions.send": "Отправить",
   "actions.back": "Вернуться",
   "actions.add_sound": "Добавить звук",
+  "actions.publish": "Опубликовать звук",
+  "actions.rules": "Ознакомиться с правилами",
 
   "moderation.pending": "На проверке",
   "moderation.rejected": "Отклонено",
@@ -28,6 +30,9 @@
   "form.enter_title": "Введи название",
   "form.pick_category": "Выбери категорию",
   "form.thanks_sent": "Спасибо!\nЗвук отправлен на модерацию",
+  "form.sound_name_hint": "Введите название для вашего звука. Например «смех», «звонок».",
+  "form.category_hint": "Выберите категорию для своего звука из предложенных",
+  "form.emoji_select": "Выбрать эмодзи",
 
   "faq.title": "Отказ от ответственности в отношении авторских прав",
 

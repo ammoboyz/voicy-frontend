@@ -809,7 +809,7 @@ function renderSounds(items) {
 
             <div class="sound-card__top-text">
               <h3 class="sound-card__title">${truncate(sound.title ?? '')}</h3>
-              <p class="sound-card__category">${AUDIO_CATEGORIES[sound.category_id] ?? ''}</p>
+              <p class="sound-card__category" data-i18n="${AUDIO_CATEGORIES[sound.category_id] ?? ''}"></p>
             </div>
           </div>
 
@@ -1315,9 +1315,7 @@ function initUploadCategories() {
 
     uploadList.innerHTML += `
       <li class="dropdown-list__item">
-        <button class="dropdown__select-item dropdown-list__button" type="button" data-value="${key}">
-          ${name}
-        </button>
+        <button class="dropdown__select-item dropdown-list__button" type="button" data-value="${key}" data-i18n="${AUDIO_CATEGORIES[sound.category_id] ?? ''}"></button>
       </li>
     `
   })
