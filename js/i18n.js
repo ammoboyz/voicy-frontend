@@ -1,13 +1,13 @@
 import { apiFetch } from './apiFetch.js'
 
-let DICT = {}
+let I18N_DICT = {}
 const API_LANG_URL = '/api/user/lang'
 const tg = window.Telegram?.WebApp
 
 function applyI18n(root = document) {
   root.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n
-    el.textContent = DICT[key] ?? key
+    el.textContent = I18N_DICT[key] ?? key
   })
 }
 
@@ -16,7 +16,7 @@ function setLang(lang) {
 
   apiFetch(`i18n/${code}.json`)
     .then(dict => {
-      DICT = dict
+      I18N_DICT = dict
       applyI18n()
       document.documentElement.lang = code
     })
@@ -32,7 +32,7 @@ apiFetch(API_LANG_URL, {
   .catch(() => setLang('ru'))
 
 function t(key) {
-  return DICT[key] ?? key
+  return I18N_DICT[key] ?? key
 }
 
 export { setLang, applyI18n, t }

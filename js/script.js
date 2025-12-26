@@ -51,17 +51,6 @@ let selectedAudioFile = null
 let selectedEmoji = ''
 
 let fetchActionOncePromise = null
-let scheduled = false;
-
-const observer = new MutationObserver(() => {
-  if (scheduled) return;
-  scheduled = true;
-  requestAnimationFrame(() => {
-    scheduled = false;
-    applyI18n();
-  });
-});
-observer.observe(document.body, { childList: true, subtree: true });
 
 currentAudio.addEventListener('canplay', () => {
   if (currentButton) {
@@ -139,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   fetchAction()
   fetchSounds(true)
+  applyI18n()
 })
 
 document.addEventListener('click', (e) => {
@@ -835,6 +825,8 @@ function renderSounds(items) {
 
     list.appendChild(li)
   })
+
+  applyI18n()
 }
 
 function truncate(text = '', max = 30) {
@@ -939,6 +931,8 @@ function renderCategories() {
 
       list.appendChild(li)
     })
+
+    applyI18n()
 
     // просто реагируем на выбор
     list.addEventListener('change', () => {
