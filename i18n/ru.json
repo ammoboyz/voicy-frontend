@@ -30,6 +30,9 @@
   "form.enter_title": "Введи название",
   "form.pick_category": "Выбери категорию",
   "form.thanks_sent": "Спасибо!\nЗвук отправлен на модерацию",
+  "form.only_audio": "Разрешены только аудиофайлы!",
+  "form.error_file": "Ошибка загрузки аудиофайла",
+
   "form.placeholder": "Название",
   "form.sound_name_hint": "Введите название для вашего звука. Например «смех», «звонок».",
   "form.category_hint": "Выберите категорию для своего звука из предложенных",
@@ -54,5 +57,15 @@
   "categories.streams": "Стримы",
   "categories.movies": "Кино",
   "categories.anime": "Аниме",
-  "categories.ambience": "Атмосфера"
+  "categories.ambience": "Атмосфера",
+
+  "warnings.like_too_fast": "⚠️ Пожалуйста подождите",
+  "warnings.upload_too_fast": "⚠️ Пожалуйста подождите",
+  "warnings.share_too_fast": "⚠️ Пожалуйста подождите",
+
+  "warnings.daily_upload_limit": "Вы исчерпали дневной лимит загрузок. Новые файлы можно будет добавить позже.",
+  "warnings.unauthorized": "Похоже, вы не авторизованы. Пожалуйста, войдите в аккаунт.",
+  "warnings.sound_not_found": "Этот звук больше недоступен или был удалён.",
+
+  "warnings.unknown_error": "Упс...\nЧто-то пошло не так. Пожалуйста, попробуйте ещё раз позже."
 }

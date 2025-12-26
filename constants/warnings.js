@@ -1,11 +1,11 @@
 export const WARNING_MESSAGES = {
-  LIKE_TOO_FAST: "⚠️ Пожалуйста подождите",
-  UPLOAD_TOO_FAST: "⚠️ Пожалуйста подождите",
-  SHARE_TOO_FAST: "⚠️ Пожалуйста подождите",
+  LIKE_TOO_FAST: 'warnings.like_too_fast',
+  UPLOAD_TOO_FAST: 'warnings.upload_too_fast',
+  SHARE_TOO_FAST: 'warnings.share_too_fast',
 
-  DAILY_UPLOAD_LIMIT: "Вы исчерпали дневной лимит загрузок. Новые файлы можно будет добавить позже.",
-  UNAUTHORIZED: "Похоже, вы не авторизованы. Пожалуйста, войдите в аккаунт.",
-  SOUND_NOT_FOUND: "Этот звук больше недоступен или был удалён.",
+  DAILY_UPLOAD_LIMIT: 'warnings.daily_upload_limit',
+  UNAUTHORIZED: 'warnings.unauthorized',
+  SOUND_NOT_FOUND: 'warnings.sound_not_found',
 
-  UNKNOWN_ERROR: "Упс...\nЧто-то пошло не так. Пожалуйста, попробуйте ещё раз позже."
-};
+  UNKNOWN_ERROR: 'warnings.unknown_error',
+}

@@ -955,7 +955,6 @@ async function shareVoiceLikeSounds(soundId) {
 
   const userId = tg.initDataUnsafe?.user?.id
   if (!userId) {
-    alert('Открой мини-апп внутри Telegram')
     return
   }
 
@@ -1041,9 +1040,9 @@ async function publishVoice() {
   const category =
     catTrigger?.dataset?.value || (catTrigger?.textContent || '').trim()
 
-  if (!file) return alert('Выбери файл (звук)')
-  if (!title) return alert('Введи название')
-  if (!category || category === 'Категории') return alert('Выбери категорию')
+  if (!file) return alert(t('form.pick_file'))
+  if (!title) return alert(t('form.enter_title'))
+  if (!category || category === 'Категории') return alert(t('form.pick_category'))
 
   const fd = new FormData()
 
@@ -1065,7 +1064,7 @@ async function publishVoice() {
     })
 
     console.log('Published:', created)
-    alert('Спасибо!\nЗвук отправлен на модерацию')
+    alert(t('form.thanks_sent'))
 
     resetPublishForm()
     goToPopularTab()
@@ -1196,7 +1195,7 @@ function init_audioplayer() {
 
     // Проверка на аудиофайл
     if (file && !file.type.startsWith('audio/')) {
-      alert('Разрешены только аудиофайлы!')
+      alert(t('form.only_audio'))
       input.value = ''
       wrapper.classList.remove('has-uploading')
       return
@@ -1225,7 +1224,7 @@ function init_audioplayer() {
     audio.addEventListener('error', () => {
       wrapper.classList.remove('has-uploading')
       resetPlayer()
-      alert('Ошибка загрузки аудиофайла')
+      alert(t('form.error_file'))
     })
 
     // Обработчик обновления времени

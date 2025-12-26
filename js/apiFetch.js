@@ -1,4 +1,5 @@
 import { WARNING_MESSAGES } from "../constants/warnings.js";
+import { t } from './i18n.js'
 
 export async function apiFetch(url, options = {}) {
   const headers = { ...(options.headers || {}) };
@@ -27,7 +28,11 @@ export async function apiFetch(url, options = {}) {
     detail = data?.detail;
   } catch {}
 
-  const message = (detail && WARNING_MESSAGES[detail]) || WARNING_MESSAGES.UNKNOWN_ERROR;
+  const messageKey =
+    (detail && WARNING_MESSAGES[detail]) ||
+    WARNING_MESSAGES.UNKNOWN_ERROR;
+
+  const message = t(messageKey);
 
   const error = new Error(message);
   error.status = response.status;

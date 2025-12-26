@@ -1,12 +1,12 @@
 {
   "nav.popular": "Popular",
-  "nav.my_sounds": "My Sounds",
+  "nav.my_sounds": "My sounds",
   "nav.faq": "FAQ",
 
   "tabs.favorites": "Favorites",
   "tabs.uploads": "Uploads",
 
-  "search.placeholder": "Search for a sound",
+  "search.placeholder": "Search sound",
 
   "categories.title": "Categories",
 
@@ -16,32 +16,35 @@
   "actions.back": "Back",
   "actions.add_sound": "Add sound",
   "actions.publish": "Publish sound",
-  "actions.rules": "View the rules",
+  "actions.rules": "Read the rules",
 
-  "moderation.pending": "Pending review",
+  "moderation.pending": "Under review",
   "moderation.rejected": "Rejected",
-  "moderation.not_passed": "Did not pass review",
+  "moderation.not_passed": "Did not pass moderation",
 
-  "errors.open_in_tg": "Open this mini app inside Telegram",
+  "errors.open_in_tg": "Please open this mini app inside Telegram",
   "errors.unknown": "Unknown error",
   "errors.play_failed": "Failed to play the sound",
 
-  "form.pick_file": "Choose a file (sound)",
+  "form.pick_file": "Select a file (audio)",
   "form.enter_title": "Enter a title",
-  "form.pick_category": "Choose a category",
+  "form.pick_category": "Select a category",
   "form.thanks_sent": "Thank you!\nThe sound has been sent for moderation",
-  "form.placeholder": "Name",
-  "form.sound_name_hint": "Enter a name for your sound. For example, \"laughter\", \"ringtone\".",
+  "form.only_audio": "Only audio files are allowed!",
+  "form.error_file": "Audio file upload error",
+
+  "form.placeholder": "Title",
+  "form.sound_name_hint": "Enter a name for your sound. For example: \"laugh\", \"ringtone\".",
   "form.category_hint": "Choose a category for your sound from the list",
-  "form.emoji_select": "Select an emoji",
+  "form.emoji_select": "Choose emoji",
 
   "faq.title": "Copyright Disclaimer",
 
-  "faq.rule_1": "You may upload only tracks that are not protected by copyright (public domain, royalty-free, Creative Commons), or tracks for which you have official permission from the copyright holder.",
+  "faq.rule_1": "You may upload only tracks that are not protected by copyright (public domain, royalty-free, Creative Commons), or those for which you have official permission from the copyright holder.",
 
   "faq.rule_2": "The bot administration is not responsible for any content uploaded by users. Full responsibility lies with the person who uploaded the file.",
 
-  "faq.rule_3": "If you are a copyright holder and believe that your rights have been violated, please submit a content removal request in accordance with the U.S. Digital Millennium Copyright Act (DMCA) via Telegram: @let_support",
+  "faq.rule_3": "If you are a copyright holder and believe your rights have been violated, please submit a takedown request in accordance with the U.S. Digital Millennium Copyright Act (DMCA) via Telegram: @let_support",
 
   "faq.footer": "Your request will be reviewed and the infringing content will be removed.",
 
@@ -54,5 +57,15 @@
   "categories.streams": "Streams",
   "categories.movies": "Movies",
   "categories.anime": "Anime",
-  "categories.ambience": "Ambience"
+  "categories.ambience": "Ambience",
+
+  "warnings.like_too_fast": "⚠️ Please wait",
+  "warnings.upload_too_fast": "⚠️ Please wait",
+  "warnings.share_too_fast": "⚠️ Please wait",
+
+  "warnings.daily_upload_limit": "You have reached the daily upload limit. New files can be added later.",
+  "warnings.unauthorized": "It looks like you are not authorized. Please sign in.",
+  "warnings.sound_not_found": "This sound is no longer available or has been removed.",
+
+  "warnings.unknown_error": "Oops...\nSomething went wrong. Please try again later."
 }
