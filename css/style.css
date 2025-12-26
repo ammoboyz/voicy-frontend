@@ -1264,3 +1264,15 @@ body.app-ready .page {
   opacity: 1;
   transition: opacity var(--transition-duration) var(--transition-timing-f);
 }
+
+/* пока грузимся — приложения не существует */
+body.app-loading #app {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* когда всё готово — плавно появляется */
+body.app-ready #app {
+  opacity: 1;
+  transition: opacity var(--transition-duration) var(--transition-timing-f);
+}

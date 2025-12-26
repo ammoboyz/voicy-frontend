@@ -13,154 +13,100 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css?v=2.3.1" />
+    <link rel="stylesheet" href="css/style.css?v=2.3.2" />
   </head>
 
   <body class="app-loading">
-    <div class="page page--main page--show tabs">
-      <header class="page__header">
-        <div class="container">
-          <nav class="nav-main">
-            <ul class="nav-main__list tabs__nav">
-              <li class="nav-main__item">
-                <button
-                  class="nav-button nav-button--has-icon is-active tabs__nav-button"
-                  type="button"
-                  data-open-sounds="popular"
-                >
-                  <span class="nav-main__button-caption" data-i18n="nav.popular">Популярное</span>
-
-                  <svg
-                    class="nav-main__button-icon"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
+    <div id="app">
+      <div class="page page--main page--show tabs">
+        <header class="page__header">
+          <div class="container">
+            <nav class="nav-main">
+              <ul class="nav-main__list tabs__nav">
+                <li class="nav-main__item">
+                  <button
+                    class="nav-button nav-button--has-icon is-active tabs__nav-button"
+                    type="button"
+                    data-open-sounds="popular"
                   >
-                    <g clip-path="url(#clip0_0_50)">
-                      <path
-                        d="M11.0867 1.93341C10.5621 1.48875 10.0121 1.02141 9.45207 0.512066C9.02248 0.121378 8.44229 -0.0596846 7.86673 0.0174092C7.30898 0.0910967 6.81273 0.408566 6.51207 0.884066C5.71739 2.21207 5.15551 3.6661 4.85073 5.18341C4.73114 5.01072 4.62504 4.8291 4.53339 4.64007C4.21764 3.97482 3.42239 3.69147 2.75714 4.00722C2.59607 4.08366 2.45198 4.19163 2.33339 4.32472C1.21517 5.46741 0.59526 7.00663 0.609385 8.60538C0.577604 11.9658 2.83795 14.9161 6.09073 15.7601C6.69595 15.9123 7.31732 15.9911 7.94139 15.9947C7.96139 15.9947 8.17404 15.9927 8.26004 15.9867C12.24 15.8578 15.3984 12.5915 15.3934 8.60938C15.3907 5.58941 13.3961 3.89607 11.0867 1.93341ZM7.92473 14.6567C7.42857 14.619 6.93826 14.418 6.56807 14.1194C5.98839 13.7092 5.60479 13.1077 5.51342 12.4147C5.40007 11.3334 6.06676 9.91938 7.42876 8.32207C7.57157 8.15525 7.78051 8.05966 8.0001 8.06072C8.21685 8.05916 8.42298 8.1545 8.5621 8.32072C9.8101 9.80207 10.4954 11.1687 10.4954 12.1694C10.4916 13.4841 9.46401 14.5241 8.15545 14.6507C8.09798 14.6563 8.00007 14.6647 7.92473 14.6567ZM11.7174 13.3887C11.6781 13.4194 11.6348 13.4441 11.5948 13.4734C11.7486 13.0553 11.8278 12.6135 11.8288 12.168C11.8288 10.4834 10.6054 8.67803 9.5801 7.46003C9.18782 6.99544 8.61082 6.72719 8.00276 6.72669H8.00007C7.39079 6.7256 6.8117 6.992 6.41607 7.45535C4.78607 9.36469 4.03742 11.08 4.19073 12.554C4.22714 12.8962 4.31454 13.231 4.45007 13.5473C2.86701 12.4003 1.93423 10.5603 1.94473 8.60535C1.93185 7.33538 2.43267 6.11407 3.33339 5.21869C3.48717 5.53838 3.67182 5.84225 3.88473 6.12603C4.17714 6.52135 4.67667 6.70479 5.15539 6.59269C5.64348 6.48472 6.02245 6.09975 6.12273 5.61003C6.39057 4.19428 6.90242 2.83585 7.63539 1.59538C7.72557 1.45357 7.87454 1.35963 8.04139 1.33938C8.22785 1.31428 8.41582 1.37313 8.55473 1.50003C9.12673 2.02003 9.68807 2.50003 10.2214 2.95138C12.4467 4.84138 14.0554 6.20672 14.0554 8.60938C14.0611 10.4792 13.198 12.2456 11.7194 13.39L11.7174 13.3887Z"
-                        fill="#00AAFF"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_0_50">
-                        <rect width="16" height="16" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </button>
-              </li>
+                    <span class="nav-main__button-caption" data-i18n="nav.popular">Популярное</span>
 
-              <li class="nav-main__item">
-                <button
-                  href="#"
-                  class="nav-button tabs__nav-button"
-                  type="button"
-                  data-open-sounds="favorites"
-                  data-i18n="nav.my_sounds"
-                >
-                  Мои звуки
-                </button>
-              </li>
-
-              <li class="nav-main__item">
-                <button href="#" data-i18n="nav.faq" class="nav-button tabs__nav-button" type="button">FAQ</button>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
-      <main class="page__content">
-        <div class="container tabs__content-wrapper">
-          <div class="tabs__content-item is-active">
-            <div class="sound-card-overview">
-              <div class="sound-card-overview__nav">
-                <label class="sound-card-overview__search form-field form-field--has-icon">
-                  <svg
-                    class="form-field__icon"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clip-path="url(#clip0_0_347)">
-                      <path
-                        d="M15.8045 14.8625L11.8252 10.8831C12.9096 9.55687 13.4428 7.86453 13.3144 6.15618C13.1861 4.44783 12.406 2.85416 11.1356 1.70482C9.86516 0.55548 8.20158 -0.0615992 6.48895 -0.018778C4.77632 0.0240432 3.14566 0.723488 1.93426 1.93488C0.72287 3.14627 0.0234252 4.77693 -0.019396 6.48957C-0.0622172 8.2022 0.554862 9.86578 1.7042 11.1362C2.85354 12.4066 4.44721 13.1867 6.15556 13.315C7.86392 13.4434 9.55625 12.9102 10.8825 11.8258L14.8619 15.8051C14.9876 15.9266 15.156 15.9938 15.3308 15.9923C15.5056 15.9907 15.6728 15.9206 15.7964 15.797C15.92 15.6734 15.9901 15.5062 15.9916 15.3314C15.9932 15.1566 15.926 14.9882 15.8045 14.8625ZM6.66652 12.0005C5.61169 12.0005 4.58054 11.6877 3.70348 11.1016C2.82642 10.5156 2.14283 9.68266 1.73916 8.70812C1.3355 7.73358 1.22988 6.66122 1.43567 5.62666C1.64145 4.59209 2.1494 3.64178 2.89529 2.8959C3.64117 2.15002 4.59147 1.64207 5.62604 1.43628C6.66061 1.2305 7.73296 1.33611 8.7075 1.73978C9.68204 2.14345 10.515 2.82704 11.101 3.7041C11.6871 4.58116 11.9999 5.61231 11.9999 6.66714C11.9983 8.08114 11.4359 9.43677 10.436 10.4366C9.43615 11.4365 8.08052 11.9989 6.66652 12.0005Z"
-                        fill="white"
-                        fill-opacity="0.6"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_0_347">
-                        <rect width="16" height="16" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-
-                  <input id="sound-search" class="form-field__input" data-i18n="search.placeholder" placeholder="" />
-                </label>
-              </div>
-
-              <div class="sound-card-overview__content sound-block">
-                <header class="sound-block__header">
-                  <div class="sound-block__quantity">
-                    <span class="sound-block__quantity-caption" data-i18n="sounds.total">Всего звуков -</span>
-                    <span class="sound-block__quantity-value">0</span>
-                  </div>
-
-                  <div class="sound-block__category-dropdown dropdown">
-                    <button class="dropdown__trigger" type="button" data-i18n="categories.title">Категории</button>
-
-                    <div
-                      class="dropdown__wrapper dropdown__wrapper--absolute dropdown__wrapper--right"
+                    <svg
+                      class="nav-main__button-icon"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <div class="dropdown__inner">
-                        <div class="dropdown__content">
-                          <ul
-                            class="dropdown-list selection-list selection-list--in-dropdown"
-                            data-selection-elem-count="9"
-                          ></ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </header>
+                      <g clip-path="url(#clip0_0_50)">
+                        <path
+                          d="M11.0867 1.93341C10.5621 1.48875 10.0121 1.02141 9.45207 0.512066C9.02248 0.121378 8.44229 -0.0596846 7.86673 0.0174092C7.30898 0.0910967 6.81273 0.408566 6.51207 0.884066C5.71739 2.21207 5.15551 3.6661 4.85073 5.18341C4.73114 5.01072 4.62504 4.8291 4.53339 4.64007C4.21764 3.97482 3.42239 3.69147 2.75714 4.00722C2.59607 4.08366 2.45198 4.19163 2.33339 4.32472C1.21517 5.46741 0.59526 7.00663 0.609385 8.60538C0.577604 11.9658 2.83795 14.9161 6.09073 15.7601C6.69595 15.9123 7.31732 15.9911 7.94139 15.9947C7.96139 15.9947 8.17404 15.9927 8.26004 15.9867C12.24 15.8578 15.3984 12.5915 15.3934 8.60938C15.3907 5.58941 13.3961 3.89607 11.0867 1.93341ZM7.92473 14.6567C7.42857 14.619 6.93826 14.418 6.56807 14.1194C5.98839 13.7092 5.60479 13.1077 5.51342 12.4147C5.40007 11.3334 6.06676 9.91938 7.42876 8.32207C7.57157 8.15525 7.78051 8.05966 8.0001 8.06072C8.21685 8.05916 8.42298 8.1545 8.5621 8.32072C9.8101 9.80207 10.4954 11.1687 10.4954 12.1694C10.4916 13.4841 9.46401 14.5241 8.15545 14.6507C8.09798 14.6563 8.00007 14.6647 7.92473 14.6567ZM11.7174 13.3887C11.6781 13.4194 11.6348 13.4441 11.5948 13.4734C11.7486 13.0553 11.8278 12.6135 11.8288 12.168C11.8288 10.4834 10.6054 8.67803 9.5801 7.46003C9.18782 6.99544 8.61082 6.72719 8.00276 6.72669H8.00007C7.39079 6.7256 6.8117 6.992 6.41607 7.45535C4.78607 9.36469 4.03742 11.08 4.19073 12.554C4.22714 12.8962 4.31454 13.231 4.45007 13.5473C2.86701 12.4003 1.93423 10.5603 1.94473 8.60535C1.93185 7.33538 2.43267 6.11407 3.33339 5.21869C3.48717 5.53838 3.67182 5.84225 3.88473 6.12603C4.17714 6.52135 4.67667 6.70479 5.15539 6.59269C5.64348 6.48472 6.02245 6.09975 6.12273 5.61003C6.39057 4.19428 6.90242 2.83585 7.63539 1.59538C7.72557 1.45357 7.87454 1.35963 8.04139 1.33938C8.22785 1.31428 8.41582 1.37313 8.55473 1.50003C9.12673 2.02003 9.68807 2.50003 10.2214 2.95138C12.4467 4.84138 14.0554 6.20672 14.0554 8.60938C14.0611 10.4792 13.198 12.2456 11.7194 13.39L11.7174 13.3887Z"
+                          fill="#00AAFF"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_0_50">
+                          <rect width="16" height="16" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </button>
+                </li>
 
-                <ul class="sound-block__list" data-sounds-context="popular"></ul>
-              </div>
-            </div>
+                <li class="nav-main__item">
+                  <button
+                    href="#"
+                    class="nav-button tabs__nav-button"
+                    type="button"
+                    data-open-sounds="favorites"
+                    data-i18n="nav.my_sounds"
+                  >
+                    Мои звуки
+                  </button>
+                </li>
+
+                <li class="nav-main__item">
+                  <button href="#" data-i18n="nav.faq" class="nav-button tabs__nav-button" type="button">FAQ</button>
+                </li>
+              </ul>
+            </nav>
           </div>
+        </header>
 
-          <div class="tabs__content-item">
-            <div class="sound-card-overview tabs">
-              <div class="sound-card-overview__nav tabs__nav">
-                <button
-                  href="#"
-                  class="nav-button tabs__nav-button"
-                  data-open-sounds="favorites"
-                  type="button"
-                  data-i18n="tabs.favorites"
-                >
-                  Избранное
-                </button>
+        <main class="page__content">
+          <div class="container tabs__content-wrapper">
+            <div class="tabs__content-item is-active">
+              <div class="sound-card-overview">
+                <div class="sound-card-overview__nav">
+                  <label class="sound-card-overview__search form-field form-field--has-icon">
+                    <svg
+                      class="form-field__icon"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clip-path="url(#clip0_0_347)">
+                        <path
+                          d="M15.8045 14.8625L11.8252 10.8831C12.9096 9.55687 13.4428 7.86453 13.3144 6.15618C13.1861 4.44783 12.406 2.85416 11.1356 1.70482C9.86516 0.55548 8.20158 -0.0615992 6.48895 -0.018778C4.77632 0.0240432 3.14566 0.723488 1.93426 1.93488C0.72287 3.14627 0.0234252 4.77693 -0.019396 6.48957C-0.0622172 8.2022 0.554862 9.86578 1.7042 11.1362C2.85354 12.4066 4.44721 13.1867 6.15556 13.315C7.86392 13.4434 9.55625 12.9102 10.8825 11.8258L14.8619 15.8051C14.9876 15.9266 15.156 15.9938 15.3308 15.9923C15.5056 15.9907 15.6728 15.9206 15.7964 15.797C15.92 15.6734 15.9901 15.5062 15.9916 15.3314C15.9932 15.1566 15.926 14.9882 15.8045 14.8625ZM6.66652 12.0005C5.61169 12.0005 4.58054 11.6877 3.70348 11.1016C2.82642 10.5156 2.14283 9.68266 1.73916 8.70812C1.3355 7.73358 1.22988 6.66122 1.43567 5.62666C1.64145 4.59209 2.1494 3.64178 2.89529 2.8959C3.64117 2.15002 4.59147 1.64207 5.62604 1.43628C6.66061 1.2305 7.73296 1.33611 8.7075 1.73978C9.68204 2.14345 10.515 2.82704 11.101 3.7041C11.6871 4.58116 11.9999 5.61231 11.9999 6.66714C11.9983 8.08114 11.4359 9.43677 10.436 10.4366C9.43615 11.4365 8.08052 11.9989 6.66652 12.0005Z"
+                          fill="white"
+                          fill-opacity="0.6"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_0_347">
+                          <rect width="16" height="16" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
 
-                <button
-                  href="#"
-                  class="nav-button tabs__nav-button"
-                  data-open-sounds="uploads"
-                  type="button"
-                  data-i18n="tabs.uploads"
-                >
-                  Добавленные
-                </button>
-              </div>
+                    <input id="sound-search" class="form-field__input" data-i18n="search.placeholder" placeholder="" />
+                  </label>
+                </div>
 
-              <div class="sound-card-overview__content tabs__content-wrapper">
-                <div class="sound-block tabs__content-item">
+                <div class="sound-card-overview__content sound-block">
                   <header class="sound-block__header">
                     <div class="sound-block__quantity">
                       <span class="sound-block__quantity-caption" data-i18n="sounds.total">Всего звуков -</span>
@@ -185,110 +131,166 @@
                     </div>
                   </header>
 
-                  <ul class="sound-block__list" data-sounds-context="favorites"></ul>
-                </div>
-                <div class="sound-block tabs__content-item is-active">
-                  <header class="sound-block__header">
-                    <div class="sound-block__quantity">
-                      <span class="sound-block__quantity-caption" data-i18n="sounds.total">Всего звуков -</span>
-                      <span class="sound-block__quantity-value">0</span>
-                    </div>
-
-                    <div class="sound-block__category-dropdown dropdown">
-                      <button class="dropdown__trigger" type="button" data-i18n="categories.title">Категории</button>
-
-                      <div
-                        class="dropdown__wrapper dropdown__wrapper--absolute dropdown__wrapper--right"
-                      >
-                        <div class="dropdown__inner">
-                          <div class="dropdown__content">
-                            <ul
-                              class="dropdown-list selection-list selection-list--in-dropdown"
-                              data-selection-elem-count="9"
-                            ></ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </header>
-
-                  <ul class="sound-block__list" data-sounds-context="uploads"></ul>
+                  <ul class="sound-block__list" data-sounds-context="popular"></ul>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="tabs__content-item" id="tab-content-item-faq">
-            <div class="text-tile tile">
-              <p class="text-tile__caption" data-i18n="faq.title">Отказ от ответственности в отношении авторских прав</p>
+            <div class="tabs__content-item">
+              <div class="sound-card-overview tabs">
+                <div class="sound-card-overview__nav tabs__nav">
+                  <button
+                    href="#"
+                    class="nav-button tabs__nav-button"
+                    data-open-sounds="favorites"
+                    type="button"
+                    data-i18n="tabs.favorites"
+                  >
+                    Избранное
+                  </button>
 
-              <ol class="text-tile__list">
-                <li class="text-tile__list-item">
-                  <div class="text-tile__list-content" data-i18n="faq.rule_1">
-                    Вы можете загружать только треки,
-                    <b>не защищённые авторскими правами</b> (общественное достояние, роялти-фри,
-                    Creative Commons), либо те, на загрузку которых у вас есть официальное
-                    разрешение правообладателя.
+                  <button
+                    href="#"
+                    class="nav-button tabs__nav-button"
+                    data-open-sounds="uploads"
+                    type="button"
+                    data-i18n="tabs.uploads"
+                  >
+                    Добавленные
+                  </button>
+                </div>
+
+                <div class="sound-card-overview__content tabs__content-wrapper">
+                  <div class="sound-block tabs__content-item">
+                    <header class="sound-block__header">
+                      <div class="sound-block__quantity">
+                        <span class="sound-block__quantity-caption" data-i18n="sounds.total">Всего звуков -</span>
+                        <span class="sound-block__quantity-value">0</span>
+                      </div>
+
+                      <div class="sound-block__category-dropdown dropdown">
+                        <button class="dropdown__trigger" type="button" data-i18n="categories.title">Категории</button>
+
+                        <div
+                          class="dropdown__wrapper dropdown__wrapper--absolute dropdown__wrapper--right"
+                        >
+                          <div class="dropdown__inner">
+                            <div class="dropdown__content">
+                              <ul
+                                class="dropdown-list selection-list selection-list--in-dropdown"
+                                data-selection-elem-count="9"
+                              ></ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </header>
+
+                    <ul class="sound-block__list" data-sounds-context="favorites"></ul>
                   </div>
-                </li>
+                  <div class="sound-block tabs__content-item is-active">
+                    <header class="sound-block__header">
+                      <div class="sound-block__quantity">
+                        <span class="sound-block__quantity-caption" data-i18n="sounds.total">Всего звуков -</span>
+                        <span class="sound-block__quantity-value">0</span>
+                      </div>
 
-                <li class="text-tile__list-item">
-                  <div class="text-tile__list-content" data-i18n="faq.rule_2">
-                    Администрация бота <b>не несёт ответственности</b> за любой контент, загруженный
-                    пользователями. Полная ответственность лежит на лице, загрузившем файл.
+                      <div class="sound-block__category-dropdown dropdown">
+                        <button class="dropdown__trigger" type="button" data-i18n="categories.title">Категории</button>
+
+                        <div
+                          class="dropdown__wrapper dropdown__wrapper--absolute dropdown__wrapper--right"
+                        >
+                          <div class="dropdown__inner">
+                            <div class="dropdown__content">
+                              <ul
+                                class="dropdown-list selection-list selection-list--in-dropdown"
+                                data-selection-elem-count="9"
+                              ></ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </header>
+
+                    <ul class="sound-block__list" data-sounds-context="uploads"></ul>
                   </div>
-                </li>
+                </div>
+              </div>
+            </div>
 
-                <li class="text-tile__list-item">
-                  <div class="text-tile__list-content" data-i18n="faq.rule_3">
-                    Если вы являетесь правообладателем и считаете, что ваши авторские права были
-                    нарушены, пожалуйста, отправьте запрос на удаление контента
-                    <b>в соответствии с Законом США «Об авторском праве в цифровую эпоху» (DMCA)</b>
-                    через Telegram: <a href="#">@let_support</a>
-                  </div>
-                </li>
-              </ol>
+            <div class="tabs__content-item" id="tab-content-item-faq">
+              <div class="text-tile tile">
+                <p class="text-tile__caption" data-i18n="faq.title">Отказ от ответственности в отношении авторских прав</p>
 
-              <p class="text-tile__descr" data-i18n="faq.footer">
-                Ваш запрос будет рассмотрен, а нарушающий права контент будет удалён.
-              </p>
+                <ol class="text-tile__list">
+                  <li class="text-tile__list-item">
+                    <div class="text-tile__list-content" data-i18n="faq.rule_1">
+                      Вы можете загружать только треки,
+                      <b>не защищённые авторскими правами</b> (общественное достояние, роялти-фри,
+                      Creative Commons), либо те, на загрузку которых у вас есть официальное
+                      разрешение правообладателя.
+                    </div>
+                  </li>
+
+                  <li class="text-tile__list-item">
+                    <div class="text-tile__list-content" data-i18n="faq.rule_2">
+                      Администрация бота <b>не несёт ответственности</b> за любой контент, загруженный
+                      пользователями. Полная ответственность лежит на лице, загрузившем файл.
+                    </div>
+                  </li>
+
+                  <li class="text-tile__list-item">
+                    <div class="text-tile__list-content" data-i18n="faq.rule_3">
+                      Если вы являетесь правообладателем и считаете, что ваши авторские права были
+                      нарушены, пожалуйста, отправьте запрос на удаление контента
+                      <b>в соответствии с Законом США «Об авторском праве в цифровую эпоху» (DMCA)</b>
+                      через Telegram: <a href="#">@let_support</a>
+                    </div>
+                  </li>
+                </ol>
+
+                <p class="text-tile__descr" data-i18n="faq.footer">
+                  Ваш запрос будет рассмотрен, а нарушающий права контент будет удалён.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
 
-      <footer class="page__footer bg-liquid-glass">
-        <div class="container">
-          <button
-            id="open-add-sound-form"
-            class="page__footer-button button button--lg"
-            type="button"
-          >
-            <svg
-              class="button__icon"
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+        <footer class="page__footer bg-liquid-glass">
+          <div class="container">
+            <button
+              id="open-add-sound-form"
+              class="page__footer-button button button--lg"
+              type="button"
             >
-              <g clip-path="url(#clip0_0_150)">
-                <path
-                  d="M14.25 0.750244H9.74996C8.75577 0.751435 7.80263 1.14691 7.09963 1.84991C6.39663 2.55291 6.00116 3.50605 5.99996 4.50024V10.5197C5.35467 10.0234 4.56407 9.753 3.74996 9.75024C3.00828 9.75024 2.28326 9.97018 1.66658 10.3822C1.04989 10.7943 0.569244 11.38 0.285415 12.0652C0.00158667 12.7504 -0.0726758 13.5044 0.0720188 14.2318C0.216713 14.9593 0.573866 15.6274 1.09831 16.1519C1.62276 16.6763 2.29095 17.0335 3.01838 17.1782C3.7458 17.3229 4.4998 17.2486 5.18503 16.9648C5.87025 16.681 6.45592 16.2003 6.86798 15.5836C7.28003 14.9669 7.49996 14.2419 7.49996 13.5002V4.50024C7.49996 3.90351 7.73702 3.33121 8.15897 2.90925C8.58093 2.4873 9.15323 2.25024 9.74996 2.25024H14.25C14.8467 2.25024 15.419 2.4873 15.841 2.90925C16.2629 3.33121 16.5 3.90351 16.5 4.50024V10.5197C15.8547 10.0234 15.0641 9.753 14.25 9.75024C13.5083 9.75024 12.7833 9.97018 12.1666 10.3822C11.5499 10.7943 11.0692 11.38 10.7854 12.0652C10.5016 12.7504 10.4273 13.5044 10.572 14.2318C10.7167 14.9593 11.0739 15.6274 11.5983 16.1519C12.1228 16.6763 12.7909 17.0335 13.5184 17.1782C14.2458 17.3229 14.9998 17.2486 15.685 16.9648C16.3703 16.681 16.9559 16.2003 17.368 15.5836C17.78 14.9669 18 14.2419 18 13.5002V4.50024C17.9988 3.50605 17.6033 2.55291 16.9003 1.84991C16.1973 1.14691 15.2442 0.751435 14.25 0.750244V0.750244ZM3.74996 15.7502C3.30496 15.7502 2.86994 15.6183 2.49993 15.3711C2.12992 15.1238 1.84153 14.7724 1.67123 14.3613C1.50094 13.9501 1.45638 13.4977 1.5432 13.0613C1.63001 12.6248 1.84431 12.2239 2.15897 11.9093C2.47364 11.5946 2.87455 11.3803 3.31101 11.2935C3.74747 11.2067 4.19987 11.2512 4.611 11.4215C5.02214 11.5918 5.37354 11.8802 5.62077 12.2502C5.868 12.6202 5.99996 13.0552 5.99996 13.5002C5.99996 14.097 5.76291 14.6693 5.34095 15.0912C4.919 15.5132 4.3467 15.7502 3.74996 15.7502ZM14.25 15.7502C13.805 15.7502 13.3699 15.6183 12.9999 15.3711C12.6299 15.1238 12.3415 14.7724 12.1712 14.3613C12.0009 13.9501 11.9564 13.4977 12.0432 13.0613C12.13 12.6248 12.3443 12.2239 12.659 11.9093C12.9736 11.5946 13.3746 11.3803 13.811 11.2935C14.2475 11.2067 14.6999 11.2512 15.111 11.4215C15.5221 11.5918 15.8735 11.8802 16.1208 12.2502C16.368 12.6202 16.5 13.0552 16.5 13.5002C16.5 14.097 16.2629 14.6693 15.841 15.0912C15.419 15.5132 14.8467 15.7502 14.25 15.7502Z"
-                  fill="white"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_0_150">
-                  <rect width="18" height="18" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
+              <svg
+                class="button__icon"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_0_150)">
+                  <path
+                    d="M14.25 0.750244H9.74996C8.75577 0.751435 7.80263 1.14691 7.09963 1.84991C6.39663 2.55291 6.00116 3.50605 5.99996 4.50024V10.5197C5.35467 10.0234 4.56407 9.753 3.74996 9.75024C3.00828 9.75024 2.28326 9.97018 1.66658 10.3822C1.04989 10.7943 0.569244 11.38 0.285415 12.0652C0.00158667 12.7504 -0.0726758 13.5044 0.0720188 14.2318C0.216713 14.9593 0.573866 15.6274 1.09831 16.1519C1.62276 16.6763 2.29095 17.0335 3.01838 17.1782C3.7458 17.3229 4.4998 17.2486 5.18503 16.9648C5.87025 16.681 6.45592 16.2003 6.86798 15.5836C7.28003 14.9669 7.49996 14.2419 7.49996 13.5002V4.50024C7.49996 3.90351 7.73702 3.33121 8.15897 2.90925C8.58093 2.4873 9.15323 2.25024 9.74996 2.25024H14.25C14.8467 2.25024 15.419 2.4873 15.841 2.90925C16.2629 3.33121 16.5 3.90351 16.5 4.50024V10.5197C15.8547 10.0234 15.0641 9.753 14.25 9.75024C13.5083 9.75024 12.7833 9.97018 12.1666 10.3822C11.5499 10.7943 11.0692 11.38 10.7854 12.0652C10.5016 12.7504 10.4273 13.5044 10.572 14.2318C10.7167 14.9593 11.0739 15.6274 11.5983 16.1519C12.1228 16.6763 12.7909 17.0335 13.5184 17.1782C14.2458 17.3229 14.9998 17.2486 15.685 16.9648C16.3703 16.681 16.9559 16.2003 17.368 15.5836C17.78 14.9669 18 14.2419 18 13.5002V4.50024C17.9988 3.50605 17.6033 2.55291 16.9003 1.84991C16.1973 1.14691 15.2442 0.751435 14.25 0.750244V0.750244ZM3.74996 15.7502C3.30496 15.7502 2.86994 15.6183 2.49993 15.3711C2.12992 15.1238 1.84153 14.7724 1.67123 14.3613C1.50094 13.9501 1.45638 13.4977 1.5432 13.0613C1.63001 12.6248 1.84431 12.2239 2.15897 11.9093C2.47364 11.5946 2.87455 11.3803 3.31101 11.2935C3.74747 11.2067 4.19987 11.2512 4.611 11.4215C5.02214 11.5918 5.37354 11.8802 5.62077 12.2502C5.868 12.6202 5.99996 13.0552 5.99996 13.5002C5.99996 14.097 5.76291 14.6693 5.34095 15.0912C4.919 15.5132 4.3467 15.7502 3.74996 15.7502ZM14.25 15.7502C13.805 15.7502 13.3699 15.6183 12.9999 15.3711C12.6299 15.1238 12.3415 14.7724 12.1712 14.3613C12.0009 13.9501 11.9564 13.4977 12.0432 13.0613C12.13 12.6248 12.3443 12.2239 12.659 11.9093C12.9736 11.5946 13.3746 11.3803 13.811 11.2935C14.2475 11.2067 14.6999 11.2512 15.111 11.4215C15.5221 11.5918 15.8735 11.8802 16.1208 12.2502C16.368 12.6202 16.5 13.0552 16.5 13.5002C16.5 14.097 16.2629 14.6693 15.841 15.0912C15.419 15.5132 14.8467 15.7502 14.25 15.7502Z"
+                    fill="white"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_0_150">
+                    <rect width="18" height="18" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
 
-            <span class="button__caption" data-i18n="actions.add_sound"> Добавить звук </span>
-          </button>
-        </div>
-      </footer>
+              <span class="button__caption" data-i18n="actions.add_sound"> Добавить звук </span>
+            </button>
+          </div>
+        </footer>
+      </div>
     </div>
 
     <div class="page page--form">
@@ -598,7 +600,7 @@
       </footer>
     </div>
 
-    <script src="js/script.js?v=2.3.1" type="module"></script>
+    <script src="js/script.js?v=2.3.2" type="module"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </body>
 </html>
