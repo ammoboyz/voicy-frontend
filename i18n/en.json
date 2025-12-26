@@ -30,6 +30,7 @@
   "form.enter_title": "Enter a title",
   "form.pick_category": "Choose a category",
   "form.thanks_sent": "Thank you!\nThe sound has been sent for moderation",
+  "form.placeholder": "Name",
   "form.sound_name_hint": "Enter a name for your sound. For example, \"laughter\", \"ringtone\".",
   "form.category_hint": "Choose a category for your sound from the list",
   "form.emoji_select": "Select an emoji",
