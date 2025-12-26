@@ -955,6 +955,7 @@ async function shareVoiceLikeSounds(soundId) {
 
   const userId = tg.initDataUnsafe?.user?.id
   if (!userId) {
+    alert('OPEN WEBAPP IN TELEGRAM')
     return
   }
 
@@ -999,7 +1000,7 @@ function resetPublishForm() {
   const fileInput = document.querySelector('.add-file-element__input')
   if (fileInput) fileInput.value = ''
 
-  const titleInput = document.querySelector('input[placeholder="Название"]')
+  const titleInput = document.querySelector('input[data-i18n="search.placeholder"]')
   if (titleInput) titleInput.value = ''
 
   const catTrigger = document.querySelector('.form-dropdown .dropdown__trigger')
@@ -1031,7 +1032,7 @@ function goToPopularTab() {
 }
 
 async function publishVoice() {
-  const titleInput = document.querySelector('input[placeholder="Название"]')
+  const titleInput = document.querySelector('input[data-i18n="form.placeholder"]')
 
   const file = selectedAudioFile
   const title = (titleInput?.value || '').trim()
