@@ -1,6 +1,12 @@
 services:
   frontend:
     build: .
-    ports:
-      - "8081:80"
+    expose:
+      - 80
     restart: unless-stopped
+    networks:
+      - nginx-network
+
+networks:
+  nginx-network:
+    external: true
