@@ -9,6 +9,21 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
     />
     <title>TG: Zvuki</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+
+      /* Пока идёт загрузка — НИЧЕГО кроме фона не показываем */
+      body.app-loading .page-wrapper {
+        display: none !important;
+      }
+
+      /* опционально — если не нужен текст Loading… */
+      /* body.app-loading #preloader { display: none !important; } */
+    </style>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap"
       rel="stylesheet"
