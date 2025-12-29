@@ -1,14 +1,9 @@
 @use '../helpers' as *;
 
 .page-wrapper {
-  opacity: 0;
-
-  transition: opacity 0.35s ease;
-  transform: translateY(0);
-  pointer-events: none;
+  visibility: hidden;
 }
 
-body.i18n-ready .page-wrapper {
-  opacity: 1;
-  pointer-events: auto;
+body.app-ready .page-wrapper {
+  visibility: visible;
 }

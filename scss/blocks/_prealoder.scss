@@ -16,3 +16,8 @@
   transition: opacity 0.25s ease;
   pointer-events: all;
 }
+
+body.app-ready #preloader {
+  opacity: 0;
+  pointer-events: none;
+}
