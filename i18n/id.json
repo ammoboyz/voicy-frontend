@@ -1,0 +1,69 @@
+{
+  "nav.popular": "Populer",
+  "nav.my_sounds": "Suara Saya",
+  "nav.faq": "FAQ",
+
+  "tabs.favorites": "Favorit",
+  "tabs.uploads": "Diunggah",
+
+  "search.placeholder": "Cari suara",
+
+  "categories.title": "Kategori",
+
+  "sounds.total": "Total suara -",
+
+  "actions.send": "Kirim",
+  "actions.back": "Kembali",
+  "actions.add_sound": "Tambah suara",
+  "actions.publish": "Publikasikan suara",
+  "actions.rules": "Baca aturan",
+
+  "moderation.pending": "Dalam peninjauan",
+  "moderation.rejected": "Ditolak",
+  "moderation.not_passed": "Tidak lolos peninjauan",
+
+  "errors.open_in_tg": "Buka mini-app di dalam Telegram",
+  "errors.unknown": "Kesalahan tidak diketahui",
+  "errors.play_failed": "Gagal memutar suara",
+
+  "form.pick_file": "Pilih file (audio)",
+  "form.enter_title": "Masukkan nama",
+  "form.pick_category": "Pilih kategori",
+  "form.thanks_sent": "Terima kasih!\nSuara telah dikirim untuk moderasi",
+  "form.only_audio": "Hanya file audio yang diperbolehkan!",
+  "form.error_file": "Gagal mengunggah file audio",
+
+  "form.placeholder": "Nama",
+  "form.sound_name_hint": "Masukkan nama untuk suara Anda. Contoh: «tawa», «nada dering».",
+  "form.category_hint": "Pilih kategori yang sesuai untuk suara Anda",
+  "form.emoji_select": "Pilih emoji",
+
+  "faq.title": "Penafian hak cipta",
+
+  "faq.rule_1": "Anda hanya boleh mengunggah trek yang tidak dilindungi hak cipta (domain publik, bebas royalti, Creative Commons) atau yang Anda miliki izin resminya.",
+  "faq.rule_2": "Administrasi bot tidak bertanggung jawab atas konten yang diunggah pengguna. Tanggung jawab penuh ada pada pengunggah.",
+  "faq.rule_3": "Jika Anda adalah pemegang hak cipta dan merasa hak Anda dilanggar, silakan kirim permintaan penghapusan sesuai DMCA AS melalui Telegram: @let_support",
+
+  "faq.footer": "Permintaan Anda akan ditinjau dan konten yang melanggar akan dihapus.",
+
+  "categories.all": "Semua",
+  "categories.memes": "Meme",
+  "categories.cringe": "Cringe",
+  "categories.relationships": "Hubungan",
+  "categories.work_study": "Kerja & studi",
+  "categories.games": "Game",
+  "categories.streams": "Streaming",
+  "categories.movies": "Film",
+  "categories.anime": "Anime",
+  "categories.ambience": "Suasana",
+
+  "warnings.like_too_fast": "⚠️ Harap tunggu",
+  "warnings.upload_too_fast": "⚠️ Harap tunggu",
+  "warnings.share_too_fast": "⚠️ Harap tunggu",
+
+  "warnings.daily_upload_limit": "Batas unggahan harian tercapai. Silakan coba lagi nanti.",
+  "warnings.unauthorized": "Sepertinya Anda belum masuk. Silakan login.",
+  "warnings.sound_not_found": "Suara ini sudah tidak tersedia atau telah dihapus.",
+
+  "warnings.unknown_error": "Ups...\nTerjadi kesalahan. Silakan coba lagi nanti."
+}

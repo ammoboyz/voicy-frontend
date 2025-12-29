@@ -1,0 +1,69 @@
+{
+  "nav.popular": "Popular",
+  "nav.my_sounds": "Mis sonidos",
+  "nav.faq": "FAQ",
+
+  "tabs.favorites": "Favoritos",
+  "tabs.uploads": "Subidos",
+
+  "search.placeholder": "Buscar sonido",
+
+  "categories.title": "Categorías",
+
+  "sounds.total": "Total de sonidos -",
+
+  "actions.send": "Enviar",
+  "actions.back": "Volver",
+  "actions.add_sound": "Añadir sonido",
+  "actions.publish": "Publicar sonido",
+  "actions.rules": "Leer las reglas",
+
+  "moderation.pending": "En revisión",
+  "moderation.rejected": "Rechazado",
+  "moderation.not_passed": "No pasó la revisión",
+
+  "errors.open_in_tg": "Abre la mini-app dentro de Telegram",
+  "errors.unknown": "Error desconocido",
+  "errors.play_failed": "No se pudo reproducir el sonido",
+
+  "form.pick_file": "Elige un archivo (audio)",
+  "form.enter_title": "Introduce un nombre",
+  "form.pick_category": "Elige una categoría",
+  "form.thanks_sent": "¡Gracias!\nEl sonido fue enviado a moderación",
+  "form.only_audio": "¡Solo se permiten archivos de audio!",
+  "form.error_file": "Error al subir el archivo de audio",
+
+  "form.placeholder": "Nombre",
+  "form.sound_name_hint": "Introduce un nombre para tu sonido. Por ejemplo: «risa», «timbre».",
+  "form.category_hint": "Selecciona una categoría adecuada para tu sonido",
+  "form.emoji_select": "Elegir emoji",
+
+  "faq.title": "Descargo de responsabilidad sobre derechos de autor",
+
+  "faq.rule_1": "Solo puedes subir pistas que no estén protegidas por derechos de autor (dominio público, royalty-free, Creative Commons) o para las que tengas permiso oficial del titular.",
+  "faq.rule_2": "La administración del bot no se responsabiliza del contenido subido por los usuarios. Toda la responsabilidad recae en quien sube el archivo.",
+  "faq.rule_3": "Si eres el titular de los derechos y crees que se han infringido, envía una solicitud de eliminación conforme a la ley DMCA de EE. UU. vía Telegram: @let_support",
+
+  "faq.footer": "Tu solicitud será revisada y el contenido infractor será eliminado.",
+
+  "categories.all": "Todos",
+  "categories.memes": "Memes",
+  "categories.cringe": "Cringe",
+  "categories.relationships": "Relaciones",
+  "categories.work_study": "Trabajo y estudio",
+  "categories.games": "Juegos",
+  "categories.streams": "Streams",
+  "categories.movies": "Cine",
+  "categories.anime": "Anime",
+  "categories.ambience": "Ambiente",
+
+  "warnings.like_too_fast": "⚠️ Por favor espera",
+  "warnings.upload_too_fast": "⚠️ Por favor espera",
+  "warnings.share_too_fast": "⚠️ Por favor espera",
+
+  "warnings.daily_upload_limit": "Has alcanzado el límite diario de subidas. Inténtalo más tarde.",
+  "warnings.unauthorized": "Parece que no has iniciado sesión. Por favor, accede a tu cuenta.",
+  "warnings.sound_not_found": "Este sonido ya no está disponible o fue eliminado.",
+
+  "warnings.unknown_error": "Ups...\nAlgo salió mal. Inténtalo de nuevo más tarde."
+}
