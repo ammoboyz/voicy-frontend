@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
   fetchAction()
   fetchSounds(true)
 
-  await waitForI18nReady()
+  waitForI18nReady()
   finishBoot()
 })
 
