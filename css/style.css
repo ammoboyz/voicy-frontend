@@ -1291,3 +1291,13 @@ body.app-ready #preloader {
 body.app-ready .page-wrapper {
   visibility: visible;
 }/*# sourceMappingURL=style.css.map */
+
+/* Пока приложение грузится — НЕ показываем контент вообще */
+body.app-loading .page-wrapper {
+  display: none;
+}
+
+/* Если хочешь вообще без "Loading..." текста — тоже прячем */
+body.app-loading #preloader {
+  display: none;
+}

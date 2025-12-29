@@ -116,7 +116,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   fetchAction()
   fetchSounds(true)
-  applyI18n()
+
+  await waitForI18nReady()
   finishBoot()
 })
 
@@ -1484,4 +1485,12 @@ async function fetchAction() {
   })
 
   return fetchActionOncePromise
+}
+
+function waitForI18nReady() {
+  return new Promise((resolve) => {
+    // если i18n уже успел прогрузиться до подписки
+    // можно сделать флаг, но проще: одноразовый listener
+    window.addEventListener('i18n:ready', resolve, { once: true })
+  })
 }

@@ -50,7 +50,8 @@ apiFetch(API_LANG_URL, {
   .then((r) => setLang(r.language))
   .catch(() => setLang('ru'))
   .finally(() => {
-    appReady()
+    // Сигналим наружу: i18n загрузился и applyI18n выполнен
+    window.dispatchEvent(new Event('i18n:ready'))
   })
 
 function t(key) {
