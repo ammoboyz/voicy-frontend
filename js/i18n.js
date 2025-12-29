@@ -5,27 +5,29 @@ const API_LANG_URL = '/api/user/lang'
 const tg = window.Telegram?.WebApp
 
 function applyI18n(root = document) {
-  const els = Array.from(root.querySelectorAll('[data-i18n]'))
+  document.body.setAttribute('aria-busy', 'true')
 
-  els.forEach((el, i) => {
+  const els = root.querySelectorAll('[data-i18n]')
+
+  els.forEach((el) => {
     const key = el.dataset.i18n
-    const value = I18N_DICT[key] ?? key
+    const value = I18N_DICT[key]
+
+    if (!value) {
+      console.warn(`Missing i18n key: ${key}`)
+      return
+    }
 
     if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
       el.placeholder = value
     } else {
       el.textContent = value
     }
-
-    el.classList.add('i18n-fade')
-    el.style.transitionDelay = `${i * 35}ms`
   })
 
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      document.body.classList.add('i18n-ready')
-      document.body.removeAttribute('aria-busy')
-    })
+    document.body.classList.add('i18n-ready')
+    document.body.removeAttribute('aria-busy')
   })
 }
 
@@ -49,7 +51,7 @@ apiFetch(API_LANG_URL, {
   .catch(() => setLang('ru'))
 
 function t(key) {
-  return I18N_DICT[key] ?? key
+  return I18N_DICT[key] ?? ''
 }
 
 export { setLang, applyI18n, t }
