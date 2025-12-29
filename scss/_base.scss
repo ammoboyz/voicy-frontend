@@ -87,15 +87,19 @@ a {
   transform: scale(0.97);
 }
 
-.i18n-fade {
+[data-i18n] {
+  visibility: hidden;
   opacity: 0;
-  transition:
-    opacity 0.35s cubic-bezier(0.2, 0.9, 0.2, 1),
-    transform 0.35s cubic-bezier(0.2, 0.9, 0.2, 1);
   transform: translateY(6px);
 }
 
-body.i18n-ready .i18n-fade {
-  opacity: 1;
-  transform: none;
+body.i18n-ready {
+  [data-i18n] {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.35s cubic-bezier(0.2, 0.9, 0.2, 1),
+      transform 0.35s cubic-bezier(0.2, 0.9, 0.2, 1);
+  }
 }
