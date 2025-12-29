@@ -1265,6 +1265,25 @@ body.i18n-ready [data-i18n] {
   }
 }
 
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background: var(--color-background-page);
+  opacity: 1;
+  transition: opacity 0.25s ease;
+  pointer-events: all;
+}
+
+body.app-ready #preloader {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .page-wrapper {
   visibility: hidden;
 }
