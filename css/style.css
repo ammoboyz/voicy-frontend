@@ -378,7 +378,7 @@ a {
   transform: translateY(6px);
 }
 
-body.i18n-ready [data-i18n] {
+body.app-ready [data-i18n] {
   visibility: visible;
   opacity: 1;
   transform: none;
