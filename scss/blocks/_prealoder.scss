@@ -1,0 +1,18 @@
+@use '../helpers' as *;
+
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+
+  background: var(--color-background-page);
+
+  opacity: 1;
+  transition: opacity 0.25s ease;
+  pointer-events: all;
+}
