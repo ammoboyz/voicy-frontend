@@ -2,6 +2,34 @@ import '../lib/emoji-picker-element.js'
 import { apiFetch } from './apiFetch.js'
 import { applyI18n, t, i18nReady } from './i18n.js'
 
+// === GLOBAL ERROR TRIGGER ===
+const SHOW_ALERT_ON_ERROR = true;
+
+function showFatalError(err) {
+  try {
+    const msg =
+      (err && (err.stack || err.message)) ? String(err.stack || err.message) : String(err);
+    console.error("[FATAL]", err);
+
+    if (SHOW_ALERT_ON_ERROR) {
+      alert("JS error:\n\n" + msg);
+    }
+
+    const loaderText = document.querySelector("#app-loader .loader-text");
+    if (loaderText) loaderText.textContent = "Ошибка загрузки";
+  } catch (e) {}
+}
+
+window.addEventListener("error", (e) => {
+  showFatalError(e.error || e.message || e);
+});
+
+window.addEventListener("unhandledrejection", (e) => {
+  showFatalError(e.reason || e);
+});
+
+console.log("[BOOT] script.js loaded");
+
 const tg = window.Telegram?.WebApp
 
 if (tg) {
