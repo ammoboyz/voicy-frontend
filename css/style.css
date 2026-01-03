@@ -1308,3 +1308,10 @@ body.app-ready #app {
     transform: rotate(360deg);
   }
 }
+
+.loader--app {
+  width: 5.5rem;
+  height: 5.5rem;
+  border-width: 0.75rem;
+  border-bottom-color: var(--color-white);
+}
