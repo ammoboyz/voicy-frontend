@@ -1276,3 +1276,35 @@ body.app-ready #app {
   opacity: 1;
   transition: opacity var(--transition-duration) var(--transition-timing-f);
 }
+
+
+/* ===== App boot loader (top layer) ===== */
+.app-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-background-page);
+  transition: opacity 0.2s ease;
+}
+
+.app-loader__logo {
+  width: 4.5rem;
+  height: 4.5rem;
+  color: var(--color-white);
+  animation: app-loader-spin 1s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+.app-loader.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes app-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

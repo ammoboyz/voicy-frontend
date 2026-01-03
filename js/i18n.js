@@ -1,6 +1,11 @@
 import { apiFetch } from './apiFetch.js'
 
 let I18N_DICT = {}
+
+let _i18nReadyResolve = null
+const i18nReady = new Promise((resolve) => {
+  _i18nReadyResolve = resolve
+})
 const API_LANG_URL = '/api/user/lang'
 const tg = window.Telegram?.WebApp
 
@@ -23,11 +28,24 @@ function applyI18n(root = document) {
 function setLang(lang) {
   const code = (lang || 'en').slice(0, 2)
 
-  apiFetch(`i18n/${code}.json`)
-    .then(dict => {
+  return apiFetch(`i18n/${code}.json`)
+    .then((dict) => {
       I18N_DICT = dict
       applyI18n()
       document.documentElement.lang = code
+    })
+    .catch(() => {
+      // если словарь не загрузился — всё равно выставляем язык,
+      // чтобы загрузка приложения не зависала
+      I18N_DICT = {}
+      applyI18n()
+      document.documentElement.lang = code
+    })
+    .finally(() => {
+      if (_i18nReadyResolve) {
+        _i18nReadyResolve()
+        _i18nReadyResolve = null
+      }
     })
 }
 
@@ -44,4 +62,4 @@ function t(key) {
   return I18N_DICT[key] ?? key
 }
 
-export { setLang, applyI18n, t }
+export { setLang, applyI18n, t, i18nReady }

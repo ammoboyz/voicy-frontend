@@ -1,6 +1,6 @@
 import '../lib/emoji-picker-element.js'
 import { apiFetch } from './apiFetch.js'
-import { applyI18n, t } from './i18n.js'
+import { applyI18n, t, i18nReady } from './i18n.js'
 
 const tg = window.Telegram?.WebApp
 
@@ -18,6 +18,8 @@ const searchInput = document.getElementById('sound-search')
 const API_SOUNDS_URL = '/api/sounds'
 const API_TRACKER_URL = '/api/tracker'
 const SKELETON_COUNT = 6
+
+const ARTIFICIAL_BOOT_DELAY = 500
 
 const AUDIO_CATEGORIES = {
   all: 'categories.all',
@@ -62,7 +64,7 @@ document.addEventListener('click', (e) => {
 
 document.querySelectorAll('.sound-block__list').length
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
   setItemActive('.like-button')
   setItemActive('.play-button')
 
@@ -113,9 +115,21 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     { passive: true },
   )
+  const initTasks = [
+    // language pack (async in i18n.js)
+    i18nReady,
+    // initial tracker/action
+    fetchAction(),
+    // initial sounds fetch + render
+    fetchSounds(true),
+  ]
 
-  fetchAction()
-  fetchSounds(true)
+  // wait until everything is settled (so loader doesn't disappear too early)
+  await Promise.allSettled(initTasks)
+
+  // extra artificial wait for smoother perception
+  await new Promise((resolve) => setTimeout(resolve, ARTIFICIAL_BOOT_DELAY))
+
   applyI18n()
   finishBoot()
 })
@@ -150,8 +164,18 @@ document.addEventListener('click', (e) => {
 let playToken = 0
 
 function finishBoot() {
+  // keep the old body flags (can be used elsewhere)
   document.body.classList.remove('app-loading')
   document.body.classList.add('app-ready')
+
+  // hide the top loader layer (it is always in initial markup)
+  const loader = document.getElementById('app-loader')
+  if (!loader) return
+
+  loader.classList.add('is-hidden')
+
+  // remove from DOM after fade-out (optional, keeps layout clean)
+  window.setTimeout(() => loader.remove(), 250)
 }
 
 function stopCurrent() {
