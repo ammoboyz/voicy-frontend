@@ -2,6 +2,7 @@ import { apiFetch } from './apiFetch.js'
 
 let I18N_DICT = {}
 
+// Promise that resolves when the initial language pack is applied
 let _i18nReadyResolve = null
 const i18nReady = new Promise((resolve) => {
   _i18nReadyResolve = resolve
@@ -49,14 +50,18 @@ function setLang(lang) {
     })
 }
 
-apiFetch(API_LANG_URL, {
-  method: 'GET',
-  headers: {
-    Authorization: `Bearer ${tg.initData}`,
-  },
-})
-  .then(r => setLang(r.language))
-  .catch(() => setLang('ru'))
+if (tg?.initData) {
+  apiFetch(API_LANG_URL, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${tg.initData}`,
+    },
+  })
+    .then((r) => setLang(r.language))
+    .catch(() => setLang('ru'))
+} else {
+  setLang('ru')
+}
 
 function t(key) {
   return I18N_DICT[key] ?? key
