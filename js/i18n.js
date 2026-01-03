@@ -7,23 +7,27 @@ let _i18nReadyResolve = null
 const i18nReady = new Promise((resolve) => {
   _i18nReadyResolve = resolve
 })
+
 const API_LANG_URL = '/api/user/lang'
 const tg = window.Telegram?.WebApp
 
 function applyI18n(root = document) {
   root.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    const value = I18N_DICT[key] ?? key;
+    const key = el.dataset.i18n
+    const value = I18N_DICT[key] ?? key
 
-    if (
-      el instanceof HTMLInputElement ||
-      el instanceof HTMLTextAreaElement
-    ) {
-      el.placeholder = value;
+    if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+      el.placeholder = value
     } else {
-      el.textContent = value;
+      el.textContent = value
     }
-  });
+  })
+
+  // resolve ONCE when first applied
+  if (_i18nReadyResolve) {
+    _i18nReadyResolve()
+    _i18nReadyResolve = null
+  }
 }
 
 function setLang(lang) {
@@ -31,22 +35,14 @@ function setLang(lang) {
 
   return apiFetch(`i18n/${code}.json`)
     .then((dict) => {
-      I18N_DICT = dict
+      I18N_DICT = dict || {}
       applyI18n()
       document.documentElement.lang = code
     })
     .catch(() => {
-      // если словарь не загрузился — всё равно выставляем язык,
-      // чтобы загрузка приложения не зависала
       I18N_DICT = {}
       applyI18n()
       document.documentElement.lang = code
-    })
-    .finally(() => {
-      if (_i18nReadyResolve) {
-        _i18nReadyResolve()
-        _i18nReadyResolve = null
-      }
     })
 }
 
