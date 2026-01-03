@@ -615,6 +615,24 @@
     </div>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="js/script.js?v=2.8.0" type="module"></script>
+    <script type="module">
+      const setText = (t) => {
+        const el = document.querySelector("#app-loader .loader-text");
+        if (el) el.textContent = t;
+      };
+
+      setText("loading modules…");
+
+      import("./js/script.js")
+        .then(() => {
+          setText("app started");
+        })
+        .catch((e) => {
+          const msg = "MODULE LOAD ERROR:\n\n" + (e?.stack || e?.message || String(e));
+          console.error(e);
+          setText("Ошибка модулей (см. alert)");
+          alert(msg);
+        });
+    </script>
   </body>
 </html>
