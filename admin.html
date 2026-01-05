@@ -22,6 +22,26 @@
       background: #ffffff;
     }
 
+    .tabs button {
+      margin-right: 6px;
+      padding: 8px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .tabs button.active {
+      font-weight: 600;
+      border-bottom: 2px solid #111;
+    }
+
+    .sound-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #e5e7eb;
+      cursor: pointer;
+    }
+
     .row {
       display: grid;
       grid-template-columns: 160px 1fr;
@@ -29,8 +49,6 @@
       align-items: center;
       margin: 10px 0;
     }
-
-    label { font-size: 14px; color: #374151; }
 
     input, select {
       width: 100%;
@@ -41,12 +59,10 @@
       background: #fff;
     }
 
-    .muted { color: #6b7280; font-size: 13px; }
-
     .btn {
-      padding: 10px 14px;
-      border-radius: 10px;
+      padding: 6px 10px;
       border: 1px solid #d1d5db;
+      border-radius: 8px;
       background: #fff;
       cursor: pointer;
     }
@@ -62,30 +78,7 @@
       cursor: not-allowed;
     }
 
-    .tabs button {
-      margin-right: 6px;
-    }
-
-    .tabs button.active {
-      font-weight: 600;
-      border-bottom: 2px solid #111;
-    }
-
-    .sound-item {
-      padding: 10px 0;
-      border-bottom: 1px solid #e5e7eb;
-      cursor: pointer;
-    }
-
-    .sound-item audio {
-      width: 100%;
-      margin-top: 6px;
-    }
-
-    audio {
-      width: 100%;
-    }
-
+    .muted { color: #6b7280; font-size: 13px; }
     .error { color: #b91c1c; }
     .ok { color: #065f46; }
   </style>
@@ -93,17 +86,17 @@
 <body>
 
 <div class="tabs" style="margin-bottom:16px">
-  <button id="tabList" class="btn active">Выбор звука</button>
-  <button id="tabEdit" class="btn" disabled>Редактирование</button>
+  <button id="tabList" class="active">Выбор звука</button>
+  <button id="tabEdit" disabled>Редактирование</button>
 </div>
 
-<!-- ===== TAB 1: LIST ===== -->
+<!-- ===== TAB 1 ===== -->
 <div id="tabListView" class="card">
   <input id="searchInput" placeholder="Поиск звука..." />
   <div id="soundList"></div>
 </div>
 
-<!-- ===== TAB 2: EDIT ===== -->
+<!-- ===== TAB 2 ===== -->
 <div id="tabEditView" style="display:none">
   <button id="backBtn" class="btn" style="margin-bottom:10px">← Назад</button>
 
@@ -111,7 +104,7 @@
     <h3>Редактирование войса</h3>
     <div id="status" class="muted"></div>
 
-    <audio id="editPlayer" controls></audio>
+    <button id="editPlayBtn" class="btn">▶ Play</button>
 
     <div class="row">
       <label>ID</label>
@@ -140,26 +133,36 @@
 </div>
 
 <script>
-let originalSound = null;
+/* ===== SIMPLE PLAYER ===== */
+function createSimplePlayer(button, url) {
+  let audio = null;
+  let playing = false;
 
-const SOUND_CATEGORIES_RU = {
-  all: "Все",
-  memes: "Мемы",
-  cringe: "Кринж",
-  relationships: "Отношения",
-  work_study: "Работа/Учёба",
-  games: "Игры",
-  streams: "Стримы",
-  movies: "Фильмы",
-  anime: "Аниме",
-  ambience: "Атмосфера"
-};
+  button.onclick = (e) => {
+    e.stopPropagation();
 
+    if (!audio) {
+      audio = new Audio(url);
+    }
+
+    if (playing) {
+      audio.pause();
+      button.textContent = "▶ Play";
+    } else {
+      audio.play();
+      button.textContent = "⏸ Pause";
+    }
+
+    playing = !playing;
+  };
+}
+
+/* ===== HELPERS ===== */
 function getAuthToken() {
   return Telegram?.WebApp?.initData || null;
 }
 
-async function apiFetch(path, opts={}) {
+async function apiFetch(path, opts = {}) {
   const token = getAuthToken();
   if (!token) throw new Error("Нет initData");
 
@@ -182,6 +185,22 @@ function setStatus(text, kind="muted") {
   status.textContent = text;
 }
 
+/* ===== STATE ===== */
+let originalSound = null;
+
+const SOUND_CATEGORIES_RU = {
+  all: "Все",
+  memes: "Мемы",
+  cringe: "Кринж",
+  relationships: "Отношения",
+  work_study: "Работа/Учёба",
+  games: "Игры",
+  streams: "Стримы",
+  movies: "Фильмы",
+  anime: "Аниме",
+  ambience: "Атмосфера"
+};
+
 /* ===== TAB 1 ===== */
 async function loadSounds(search="") {
   const q = search ? `?search=${encodeURIComponent(search)}` : "";
@@ -193,15 +212,17 @@ async function loadSounds(search="") {
     const div = document.createElement("div");
     div.className = "sound-item";
 
+    const playBtn = document.createElement("button");
+    playBtn.className = "btn";
+    playBtn.textContent = "▶ Play";
+    createSimplePlayer(playBtn, sound.url);
+
     div.innerHTML = `
       <strong>${sound.title}</strong><br>
-      <span class="muted">👁 ${sound.views_count}</span>
-      <audio
-        controls
-        src="${sound.url}"
-        onclick="event.stopPropagation()">
-      </audio>
+      <span class="muted">👁 ${sound.views_count}</span><br>
     `;
+
+    div.appendChild(playBtn);
 
     div.onclick = () => openEditor(sound.id);
     soundList.appendChild(div);
@@ -222,7 +243,7 @@ async function openEditor(soundId) {
   title.value = originalSound.title || "";
   views_count.value = originalSound.views_count || 0;
 
-  editPlayer.src = originalSound.url;
+  createSimplePlayer(editPlayBtn, originalSound.url);
 
   category_id.innerHTML = `<option value="">—</option>`;
   Object.keys(SOUND_CATEGORIES_RU).forEach(k => {
@@ -246,6 +267,7 @@ backBtn.onclick = () => {
   tabList.classList.add("active");
 };
 
+/* ===== SAVE ===== */
 applyBtn.onclick = async () => {
   try {
     setStatus("Сохраняю...");
