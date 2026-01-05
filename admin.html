@@ -15,17 +15,36 @@
     .btn { width: 100%; padding: 12px 14px; border: 0; border-radius: 12px; font-size: 16px; cursor: pointer; }
     .btn-primary { background: #111827; color: white; }
     .btn-disabled { opacity: .6; cursor: not-allowed; }
+    .tabs button { margin-right: 6px; padding: 8px 12px; border-radius: 10px; border: 1px solid #d1d5db; background: #f9fafb; cursor: pointer; }
+    .tabs button.active { background: #111827; color: #fff; }
+    .sound-item { padding: 10px; border-bottom: 1px solid #e5e7eb; cursor: pointer; }
+    .sound-item:hover { background: #f9fafb; }
     pre { background: #0b1020; color: #d1d5db; padding: 12px; border-radius: 12px; overflow: auto; }
     .error { color: #b91c1c; }
     .ok { color: #065f46; }
   </style>
 </head>
 <body>
+
+<div class="tabs" style="margin-bottom:16px">
+  <button id="tabList" class="active">Выбор звука</button>
+  <button id="tabEdit" disabled>Редактирование</button>
+</div>
+
+<!-- ===== TAB 1: LIST ===== -->
+<div id="tabListView" class="card">
+  <input id="searchInput" placeholder="Поиск звука..." />
+  <div style="height:10px"></div>
+  <div id="soundList"></div>
+</div>
+
+<!-- ===== TAB 2: EDIT ===== -->
+<div id="tabEditView" style="display:none">
+  <button id="backBtn" style="margin-bottom:10px">← Назад</button>
+
   <div class="card">
     <h2 style="margin:0 0 6px 0;">Редактирование войса</h2>
-    <div class="muted" id="meta"></div>
-
-    <div style="height:10px"></div>
+    <div id="status" class="muted"></div>
 
     <div class="row">
       <label>ID</label>
@@ -34,12 +53,12 @@
 
     <div class="row">
       <label>Title</label>
-      <input id="title" placeholder="Название" />
+      <input id="title" />
     </div>
 
     <div class="row">
       <label>Views count</label>
-      <input id="views_count" type="number" min="0" step="1" />
+      <input id="views_count" type="number" min="0" />
     </div>
 
     <div class="row">
@@ -49,235 +68,168 @@
 
     <div class="row">
       <label>URL</label>
-      <input id="url" placeholder="https://..." />
+      <input id="url" />
     </div>
 
     <div style="height:14px"></div>
+    <button id="applyBtn" class="btn btn-primary btn-disabled" disabled>
+      Применить изменения
+    </button>
 
-    <button id="applyBtn" class="btn btn-primary btn-disabled" disabled>Применить изменения</button>
-
-    <div style="height:12px"></div>
-    <div id="status" class="muted"></div>
-    <div style="height:8px"></div>
-    <pre id="result" style="display:none;"></pre>
+    <div style="height:10px"></div>
+    <pre id="result" style="display:none"></pre>
   </div>
+</div>
 
-  <script>
-    // ==== Fallback categories (code: ru) ====
-    const SOUND_CATEGORIES_RU = {
-      all: "Все",
-      memes: "Мемы",
-      cringe: "Кринж",
-      relationships: "Отношения",
-      work_study: "Работа/Учёба",
-      games: "Игры",
-      streams: "Стримы",
-      movies: "Фильмы",
-      anime: "Аниме",
-      ambience: "Атмосфера"
+<script>
+/* ================== STATE ================== */
+let selectedSound = null;
+let originalSound = null;
+
+const SOUND_CATEGORIES_RU = {
+  all: "Все",
+  memes: "Мемы",
+  cringe: "Кринж",
+  relationships: "Отношения",
+  work_study: "Работа/Учёба",
+  games: "Игры",
+  streams: "Стримы",
+  movies: "Фильмы",
+  anime: "Аниме",
+  ambience: "Атмосфера"
+};
+
+/* ================== HELPERS ================== */
+function getAuthTokenFromTelegram() {
+  return window.Telegram?.WebApp?.initData || null;
+}
+
+function setStatus(text, kind="muted") {
+  const el = document.getElementById("status");
+  el.className = kind === "error" ? "error" : kind === "ok" ? "ok" : "muted";
+  el.textContent = text || "";
+}
+
+async function apiFetch(path, { method="GET", body=null } = {}) {
+  const token = getAuthTokenFromTelegram();
+  if (!token) throw new Error("Нет Telegram initData");
+
+  const headers = { Authorization: token };
+  if (body) headers["Content-Type"] = "application/json";
+
+  const res = await fetch(path, {
+    method,
+    headers,
+    body: body ? JSON.stringify(body) : null
+  });
+
+  const text = await res.text();
+  const data = text ? JSON.parse(text) : null;
+
+  if (!res.ok) {
+    throw new Error(data?.detail || data?.message || res.status);
+  }
+  return data;
+}
+
+/* ================== TAB 1 ================== */
+async function loadSounds(search="") {
+  const q = search ? `?search=${encodeURIComponent(search)}` : "";
+  const data = await apiFetch(`/api/sounds${q}`);
+
+  const list = document.getElementById("soundList");
+  list.innerHTML = "";
+
+  data.items.forEach(sound => {
+    const div = document.createElement("div");
+    div.className = "sound-item";
+    div.innerHTML = `
+      <strong>${sound.title}</strong><br>
+      <span class="muted">
+        👁 ${sound.views_count}
+        ${sound.category_id ? " • " + sound.category_id : ""}
+      </span>
+    `;
+    div.onclick = () => openEditor(sound);
+    list.appendChild(div);
+  });
+}
+
+/* ================== TAB 2 ================== */
+async function openEditor(sound) {
+  selectedSound = sound;
+
+  document.getElementById("tabListView").style.display = "none";
+  document.getElementById("tabEditView").style.display = "block";
+  document.getElementById("tabList").classList.remove("active");
+  document.getElementById("tabEdit").classList.add("active");
+  document.getElementById("tabEdit").disabled = false;
+
+  setStatus("Загружаю данные...");
+  originalSound = await apiFetch(`/api/admin/sound?sound_id=${sound.id}`);
+
+  document.getElementById("id").value = originalSound.id;
+  document.getElementById("title").value = originalSound.title || "";
+  document.getElementById("views_count").value = originalSound.views_count || 0;
+  document.getElementById("url").value = originalSound.url || "";
+
+  const sel = document.getElementById("category_id");
+  sel.innerHTML = `<option value="">—</option>`;
+  Object.keys(SOUND_CATEGORIES_RU).forEach(k => {
+    const o = document.createElement("option");
+    o.value = k;
+    o.textContent = SOUND_CATEGORIES_RU[k];
+    sel.appendChild(o);
+  });
+  sel.value = originalSound.category_id || "";
+
+  document.getElementById("applyBtn").disabled = false;
+  document.getElementById("applyBtn").classList.remove("btn-disabled");
+
+  setStatus("Готово");
+}
+
+/* ================== EVENTS ================== */
+document.getElementById("searchInput").addEventListener("input", e => {
+  loadSounds(e.target.value.trim());
+});
+
+document.getElementById("backBtn").onclick = () => {
+  document.getElementById("tabEditView").style.display = "none";
+  document.getElementById("tabListView").style.display = "block";
+  document.getElementById("tabEdit").classList.remove("active");
+  document.getElementById("tabList").classList.add("active");
+};
+
+document.getElementById("applyBtn").onclick = async () => {
+  try {
+    setStatus("Сохраняю...");
+    const payload = {
+      ...originalSound,
+      title: title.value.trim(),
+      views_count: Number(views_count.value),
+      category_id: category_id.value || null,
+      url: url.value.trim()
     };
 
-    // ==== Helpers ====
-    const qs = new URLSearchParams(location.search);
+    const resp = await apiFetch("/api/admin/sound/change", {
+      method: "POST",
+      body: payload
+    });
 
-    function getSoundId() {
-      const fromQuery = qs.get("sound_id");
-      if (fromQuery && /^\d+$/.test(fromQuery)) return parseInt(fromQuery, 10);
+    setStatus("Изменения применены", "ok");
+    result.style.display = "block";
+    result.textContent = JSON.stringify(resp, null, 2);
+  } catch (e) {
+    setStatus(e.message, "error");
+  }
+};
 
-      const tg = window.Telegram?.WebApp;
-      const sp = tg?.initDataUnsafe?.start_param;
-      if (sp) {
-        if (/^\d+$/.test(sp)) return parseInt(sp, 10);
-        const m = sp.match(/sound_id=(\d+)/);
-        if (m) return parseInt(m[1], 10);
-      }
-      return null;
-    }
+/* ================== INIT ================== */
+Telegram?.WebApp?.ready?.();
+Telegram?.WebApp?.expand?.();
+loadSounds();
+</script>
 
-    function getAuthTokenFromTelegram() {
-      const tg = window.Telegram?.WebApp;
-      // Самый простой: использовать initData (query string от Telegram)
-      // Бэк должен валидировать подпись.
-      const token = tg?.initData;
-      return token && token.length ? token : null;
-    }
-
-    function setStatus(text, kind = "muted") {
-      const el = document.getElementById("status");
-      el.className = kind === "error" ? "error" : kind === "ok" ? "ok" : "muted";
-      el.textContent = text || "";
-    }
-
-    async function apiFetch(path, { method="GET", body=null } = {}) {
-      const token = getAuthTokenFromTelegram();
-      if (!token) throw new Error("Нет Telegram.WebApp.initData (открой как Telegram WebApp внутри клиента Telegram).");
-
-      const headers = {
-        // Если у тебя на бэке ждут Bearer — измени на: `Authorization: "Bearer " + token`
-        "Authorization": token
-      };
-      if (body !== null) headers["Content-Type"] = "application/json";
-
-      const res = await fetch(path, {
-        method,
-        headers,
-        body: body !== null ? JSON.stringify(body) : null
-      });
-
-      const text = await res.text();
-      let data;
-      try { data = text ? JSON.parse(text) : null; }
-      catch { data = { raw: text }; }
-
-      if (!res.ok) {
-        const msg = (data && (data.detail || data.message)) ? (data.detail || data.message) : `HTTP ${res.status}`;
-        const e = new Error(msg);
-        e.status = res.status;
-        e.data = data;
-        throw e;
-      }
-      return data;
-    }
-
-    function fillCategorySelect(categoryCodes, selectedValue) {
-      const sel = document.getElementById("category_id");
-      sel.innerHTML = "";
-
-      const optEmpty = document.createElement("option");
-      optEmpty.value = "";
-      optEmpty.textContent = "—";
-      sel.appendChild(optEmpty);
-
-      for (const code of categoryCodes) {
-        const opt = document.createElement("option");
-        opt.value = code;
-        opt.textContent = SOUND_CATEGORIES_RU[code] || code;
-        sel.appendChild(opt);
-      }
-
-      sel.value = selectedValue ?? "";
-    }
-
-    function getFormValue() {
-      return {
-        id: parseInt(document.getElementById("id").value, 10),
-        title: document.getElementById("title").value.trim(),
-        views_count: parseInt(document.getElementById("views_count").value || "0", 10),
-        category_id: document.getElementById("category_id").value || null,
-        url: document.getElementById("url").value.trim()
-      };
-    }
-
-    // ==== Main ====
-    (async function main() {
-      const tg = window.Telegram?.WebApp;
-      tg?.ready?.();
-      tg?.expand?.();
-
-      const soundId = getSoundId();
-      const hasInitData = !!getAuthTokenFromTelegram();
-
-      document.getElementById("meta").textContent =
-        `sound_id: ${soundId ?? "не найден"} • initData: ${hasInitData ? "ok" : "нет"}`;
-
-      if (!soundId) {
-        setStatus("Не найден sound_id. Открой так: /webapp?sound_id=123", "error");
-        return;
-      }
-      if (!hasInitData) {
-        setStatus("Открой этот вебапп внутри Telegram (иначе нет initData).", "error");
-        return;
-      }
-
-      setStatus("Загружаю данные...");
-
-      // 1) categories: backend returns ["memes","games",...]
-      let categoryCodes = [];
-      try {
-        const resp = await apiFetch("/api/admin/sound/categories");
-        if (Array.isArray(resp) && resp.every(x => typeof x === "string")) {
-          categoryCodes = resp;
-        } else {
-          throw new Error("categories: unexpected response");
-        }
-      } catch (e) {
-        // fallback: keys from RU dict
-        categoryCodes = Object.keys(SOUND_CATEGORIES_RU);
-      }
-
-      // 2) load sound
-      let sound;
-      try {
-        sound = await apiFetch(`/api/admin/sound?sound_id=${soundId}`);
-      } catch (e) {
-        setStatus(`Ошибка загрузки sound: ${e.message}`, "error");
-        return;
-      }
-
-      // Fill fields
-      document.getElementById("id").value = sound.id ?? soundId;
-      document.getElementById("title").value = sound.title ?? "";
-      document.getElementById("views_count").value = (sound.views_count ?? 0);
-      document.getElementById("url").value = sound.url ?? "";
-
-      // category_id: может быть строка-код, объект с code, либо null
-      let selectedCategory = null;
-      if (sound.category_id == null) selectedCategory = null;
-      else if (typeof sound.category_id === "string") selectedCategory = sound.category_id;
-      else if (typeof sound.category_id === "object" && sound.category_id.code) selectedCategory = sound.category_id.code;
-
-      fillCategorySelect(categoryCodes, selectedCategory);
-
-      setStatus("Готово.");
-      const applyBtn = document.getElementById("applyBtn");
-      applyBtn.disabled = false;
-      applyBtn.classList.remove("btn-disabled");
-
-      // Original payload (as received)
-      const original = sound;
-
-      applyBtn.addEventListener("click", async () => {
-        try {
-          setStatus("Отправляю изменения...");
-          applyBtn.disabled = true;
-          applyBtn.classList.add("btn-disabled");
-
-          const changed = getFormValue();
-
-          // payload: "все что пришло", но поля перетираем изменёнными
-          const payload = {
-            ...original,
-            title: changed.title,
-            views_count: changed.views_count,
-            category_id: changed.category_id,
-            url: changed.url
-          };
-
-          const resp = await apiFetch("/api/admin/sound/change", {
-            method: "POST",
-            body: payload
-          });
-
-          setStatus("Изменения применены.", "ok");
-          const pre = document.getElementById("result");
-          pre.style.display = "block";
-          pre.textContent = JSON.stringify(resp, null, 2);
-
-          // опционально:
-          // tg?.sendData?.(JSON.stringify({ ok: true, sound_id: payload.id }));
-          // tg?.close?.();
-
-        } catch (e) {
-          setStatus(`Ошибка: ${e.message}`, "error");
-          const pre = document.getElementById("result");
-          pre.style.display = "block";
-          pre.textContent = JSON.stringify(e.data ?? { error: e.message }, null, 2);
-        } finally {
-          applyBtn.disabled = false;
-          applyBtn.classList.remove("btn-disabled");
-        }
-      });
-    })();
-  </script>
 </body>
 </html>
