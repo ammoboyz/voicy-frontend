@@ -94,9 +94,6 @@
 <div id="tabListView" class="card">
   <input id="searchInput" placeholder="Поиск звука..." />
   <div id="soundList"></div>
-  <button id="loadMoreBtn" class="btn" style="margin-top:10px; display:none">
-    Загрузить ещё
-  </button>
 </div>
 
 <!-- ===== TAB 2 ===== -->
@@ -188,7 +185,9 @@ async function apiFetch(path, opts = {}) {
 let originalSound = null;
 let page = 1;
 let currentSearch = "";
-let hasNext = false;
+let hasNext = true;
+let loading = false;
+let stopped = false;
 
 const SOUND_CATEGORIES_RU = {
   all: "Все",
@@ -204,17 +203,29 @@ const SOUND_CATEGORIES_RU = {
 };
 
 /* ===== TAB 1 ===== */
-async function loadSounds(reset=false) {
+async function loadSounds(reset = false) {
+  if (loading || stopped) return;
+
   if (reset) {
     page = 1;
+    hasNext = true;
+    stopped = false;
     soundList.innerHTML = "";
   }
+
+  loading = true;
 
   const params = new URLSearchParams();
   params.set("page", page);
   if (currentSearch) params.set("search", currentSearch);
 
   const data = await apiFetch(`/api/sounds?${params.toString()}`);
+
+  if (data.items.length === 0 && data.has_next === false) {
+    stopped = true;
+    loading = false;
+    return;
+  }
 
   data.items.forEach(sound => {
     const div = document.createElement("div");
@@ -236,8 +247,22 @@ async function loadSounds(reset=false) {
   });
 
   hasNext = data.has_next;
-  loadMoreBtn.style.display = hasNext ? "block" : "none";
+  if (hasNext) page += 1;
+
+  loading = false;
 }
+
+/* ===== SCROLL DETECT ===== */
+window.addEventListener("scroll", () => {
+  if (!hasNext || loading || stopped) return;
+
+  const scrollBottom =
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
+
+  if (scrollBottom) {
+    loadSounds();
+  }
+});
 
 /* ===== TAB 2 ===== */
 async function openEditor(soundId) {
@@ -293,7 +318,6 @@ applyBtn.onclick = async () => {
     });
 
     saveNotice.style.display = "block";
-
     Telegram?.WebApp?.showAlert?.("Звук успешно изменён ✅");
   } catch (e) {
     alert(e.message);
@@ -304,11 +328,6 @@ applyBtn.onclick = async () => {
 searchInput.oninput = e => {
   currentSearch = e.target.value.trim();
   loadSounds(true);
-};
-
-loadMoreBtn.onclick = () => {
-  page += 1;
-  loadSounds();
 };
 
 /* ===== INIT ===== */
