@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edit Sound</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 16px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px; max-width: 720px; }
+    .row { display: grid; grid-template-columns: 160px 1fr; gap: 10px; align-items: center; margin: 10px 0; }
+    label { color: #374151; font-size: 14px; }
+    input, select { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 14px; }
+    .muted { color: #6b7280; font-size: 13px; }
+    .btn { width: 100%; padding: 12px 14px; border: 0; border-radius: 12px; font-size: 16px; cursor: pointer; }
+    .btn-primary { background: #111827; color: white; }
+    .btn-disabled { opacity: .6; cursor: not-allowed; }
+    pre { background: #0b1020; color: #d1d5db; padding: 12px; border-radius: 12px; overflow: auto; }
+    .error { color: #b91c1c; }
+    .ok { color: #065f46; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2 style="margin:0 0 6px 0;">Редактирование войса</h2>
+    <div class="muted" id="meta"></div>
+
+    <div style="height:10px"></div>
+
+    <div class="row">
+      <label>ID</label>
+      <input id="id" disabled />
+    </div>
+
+    <div class="row">
+      <label>Title</label>
+      <input id="title" placeholder="Название" />
+    </div>
+
+    <div class="row">
+      <label>Views count</label>
+      <input id="views_count" type="number" min="0" step="1" />
+    </div>
+
+    <div class="row">
+      <label>Category</label>
+      <select id="category_id"></select>
+    </div>
+
+    <div class="row">
+      <label>URL</label>
+      <input id="url" placeholder="https://..." />
+    </div>
+
+    <div style="height:14px"></div>
+
+    <button id="applyBtn" class="btn btn-primary btn-disabled" disabled>Применить изменения</button>
+
+    <div style="height:12px"></div>
+    <div id="status" class="muted"></div>
+    <div style="height:8px"></div>
+    <pre id="result" style="display:none;"></pre>
+  </div>
+
+  <script>
+    // ==== Fallback categories (code: ru) ====
+    const SOUND_CATEGORIES_RU = {
+      all: "Все",
+      memes: "Мемы",
+      cringe: "Кринж",
+      relationships: "Отношения",
+      work_study: "Работа/Учёба",
+      games: "Игры",
+      streams: "Стримы",
+      movies: "Фильмы",
+      anime: "Аниме",
+      ambience: "Атмосфера"
+    };
+
+    // ==== Helpers ====
+    const qs = new URLSearchParams(location.search);
+
+    function getSoundId() {
+      const fromQuery = qs.get("sound_id");
+      if (fromQuery && /^\d+$/.test(fromQuery)) return parseInt(fromQuery, 10);
+
+      const tg = window.Telegram?.WebApp;
+      const sp = tg?.initDataUnsafe?.start_param;
+      if (sp) {
+        if (/^\d+$/.test(sp)) return parseInt(sp, 10);
+        const m = sp.match(/sound_id=(\d+)/);
+        if (m) return parseInt(m[1], 10);
+      }
+      return null;
+    }
+
+    function getAuthTokenFromTelegram() {
+      const tg = window.Telegram?.WebApp;
+      // Самый простой: использовать initData (query string от Telegram)
+      // Бэк должен валидировать подпись.
+      const token = tg?.initData;
+      return token && token.length ? token : null;
+    }
+
+    function setStatus(text, kind = "muted") {
+      const el = document.getElementById("status");
+      el.className = kind === "error" ? "error" : kind === "ok" ? "ok" : "muted";
+      el.textContent = text || "";
+    }
+
+    async function apiFetch(path, { method="GET", body=null } = {}) {
+      const token = getAuthTokenFromTelegram();
+      if (!token) throw new Error("Нет Telegram.WebApp.initData (открой как Telegram WebApp внутри клиента Telegram).");
+
+      const headers = {
+        // Если у тебя на бэке ждут Bearer — измени на: `Authorization: "Bearer " + token`
+        "Authorization": token
+      };
+      if (body !== null) headers["Content-Type"] = "application/json";
+
+      const res = await fetch(path, {
+        method,
+        headers,
+        body: body !== null ? JSON.stringify(body) : null
+      });
+
+      const text = await res.text();
+      let data;
+      try { data = text ? JSON.parse(text) : null; }
+      catch { data = { raw: text }; }
+
+      if (!res.ok) {
+        const msg = (data && (data.detail || data.message)) ? (data.detail || data.message) : `HTTP ${res.status}`;
+        const e = new Error(msg);
+        e.status = res.status;
+        e.data = data;
+        throw e;
+      }
+      return data;
+    }
+
+    function fillCategorySelect(categoryCodes, selectedValue) {
+      const sel = document.getElementById("category_id");
+      sel.innerHTML = "";
+
+      const optEmpty = document.createElement("option");
+      optEmpty.value = "";
+      optEmpty.textContent = "—";
+      sel.appendChild(optEmpty);
+
+      for (const code of categoryCodes) {
+        const opt = document.createElement("option");
+        opt.value = code;
+        opt.textContent = SOUND_CATEGORIES_RU[code] || code;
+        sel.appendChild(opt);
+      }
+
+      sel.value = selectedValue ?? "";
+    }
+
+    function getFormValue() {
+      return {
+        id: parseInt(document.getElementById("id").value, 10),
+        title: document.getElementById("title").value.trim(),
+        views_count: parseInt(document.getElementById("views_count").value || "0", 10),
+        category_id: document.getElementById("category_id").value || null,
+        url: document.getElementById("url").value.trim()
+      };
+    }
+
+    // ==== Main ====
+    (async function main() {
+      const tg = window.Telegram?.WebApp;
+      tg?.ready?.();
+      tg?.expand?.();
+
+      const soundId = getSoundId();
+      const hasInitData = !!getAuthTokenFromTelegram();
+
+      document.getElementById("meta").textContent =
+        `sound_id: ${soundId ?? "не найден"} • initData: ${hasInitData ? "ok" : "нет"}`;
+
+      if (!soundId) {
+        setStatus("Не найден sound_id. Открой так: /webapp?sound_id=123", "error");
+        return;
+      }
+      if (!hasInitData) {
+        setStatus("Открой этот вебапп внутри Telegram (иначе нет initData).", "error");
+        return;
+      }
+
+      setStatus("Загружаю данные...");
+
+      // 1) categories: backend returns ["memes","games",...]
+      let categoryCodes = [];
+      try {
+        const resp = await apiFetch("/api/admin/sound/categories");
+        if (Array.isArray(resp) && resp.every(x => typeof x === "string")) {
+          categoryCodes = resp;
+        } else {
+          throw new Error("categories: unexpected response");
+        }
+      } catch (e) {
+        // fallback: keys from RU dict
+        categoryCodes = Object.keys(SOUND_CATEGORIES_RU);
+      }
+
+      // 2) load sound
+      let sound;
+      try {
+        sound = await apiFetch(`/api/admin/sound?sound_id=${soundId}`);
+      } catch (e) {
+        setStatus(`Ошибка загрузки sound: ${e.message}`, "error");
+        return;
+      }
+
+      // Fill fields
+      document.getElementById("id").value = sound.id ?? soundId;
+      document.getElementById("title").value = sound.title ?? "";
+      document.getElementById("views_count").value = (sound.views_count ?? 0);
+      document.getElementById("url").value = sound.url ?? "";
+
+      // category_id: может быть строка-код, объект с code, либо null
+      let selectedCategory = null;
+      if (sound.category_id == null) selectedCategory = null;
+      else if (typeof sound.category_id === "string") selectedCategory = sound.category_id;
+      else if (typeof sound.category_id === "object" && sound.category_id.code) selectedCategory = sound.category_id.code;
+
+      fillCategorySelect(categoryCodes, selectedCategory);
+
+      setStatus("Готово.");
+      const applyBtn = document.getElementById("applyBtn");
+      applyBtn.disabled = false;
+      applyBtn.classList.remove("btn-disabled");
+
+      // Original payload (as received)
+      const original = sound;
+
+      applyBtn.addEventListener("click", async () => {
+        try {
+          setStatus("Отправляю изменения...");
+          applyBtn.disabled = true;
+          applyBtn.classList.add("btn-disabled");
+
+          const changed = getFormValue();
+
+          // payload: "все что пришло", но поля перетираем изменёнными
+          const payload = {
+            ...original,
+            title: changed.title,
+            views_count: changed.views_count,
+            category_id: changed.category_id,
+            url: changed.url
+          };
+
+          const resp = await apiFetch("/api/admin/sound/change", {
+            method: "POST",
+            body: payload
+          });
+
+          setStatus("Изменения применены.", "ok");
+          const pre = document.getElementById("result");
+          pre.style.display = "block";
+          pre.textContent = JSON.stringify(resp, null, 2);
+
+          // опционально:
+          // tg?.sendData?.(JSON.stringify({ ok: true, sound_id: payload.id }));
+          // tg?.close?.();
+
+        } catch (e) {
+          setStatus(`Ошибка: ${e.message}`, "error");
+          const pre = document.getElementById("result");
+          pre.style.display = "block";
+          pre.textContent = JSON.stringify(e.data ?? { error: e.message }, null, 2);
+        } finally {
+          applyBtn.disabled = false;
+          applyBtn.classList.remove("btn-disabled");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
