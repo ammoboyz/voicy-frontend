@@ -196,7 +196,11 @@ async function loadSounds(search="") {
     div.innerHTML = `
       <strong>${sound.title}</strong><br>
       <span class="muted">👁 ${sound.views_count}</span>
-      <audio controls src="${sound.url}"></audio>
+      <audio
+        controls
+        src="${sound.url}"
+        onclick="event.stopPropagation()">
+      </audio>
     `;
 
     div.onclick = () => openEditor(sound.id);
