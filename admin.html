@@ -79,8 +79,8 @@
     }
 
     .muted { color: #6b7280; font-size: 13px; }
-    .error { color: #b91c1c; }
     .ok { color: #065f46; }
+    .error { color: #b91c1c; }
   </style>
 </head>
 <body>
@@ -94,6 +94,9 @@
 <div id="tabListView" class="card">
   <input id="searchInput" placeholder="Поиск звука..." />
   <div id="soundList"></div>
+  <button id="loadMoreBtn" class="btn" style="margin-top:10px; display:none">
+    Загрузить ещё
+  </button>
 </div>
 
 <!-- ===== TAB 2 ===== -->
@@ -129,6 +132,10 @@
     <button id="applyBtn" class="btn btn-primary btn-disabled" disabled>
       Применить изменения
     </button>
+
+    <div id="saveNotice" class="ok" style="display:none; margin-top:8px">
+      ✅ Звук успешно изменён
+    </div>
   </div>
 </div>
 
@@ -141,9 +148,7 @@ function createSimplePlayer(button, url) {
   button.onclick = (e) => {
     e.stopPropagation();
 
-    if (!audio) {
-      audio = new Audio(url);
-    }
+    if (!audio) audio = new Audio(url);
 
     if (playing) {
       audio.pause();
@@ -152,7 +157,6 @@ function createSimplePlayer(button, url) {
       audio.play();
       button.textContent = "⏸ Pause";
     }
-
     playing = !playing;
   };
 }
@@ -180,13 +184,11 @@ async function apiFetch(path, opts = {}) {
   return data;
 }
 
-function setStatus(text, kind="muted") {
-  status.className = kind;
-  status.textContent = text;
-}
-
 /* ===== STATE ===== */
 let originalSound = null;
+let page = 1;
+let currentSearch = "";
+let hasNext = false;
 
 const SOUND_CATEGORIES_RU = {
   all: "Все",
@@ -202,11 +204,17 @@ const SOUND_CATEGORIES_RU = {
 };
 
 /* ===== TAB 1 ===== */
-async function loadSounds(search="") {
-  const q = search ? `?search=${encodeURIComponent(search)}` : "";
-  const data = await apiFetch(`/api/sounds${q}`);
+async function loadSounds(reset=false) {
+  if (reset) {
+    page = 1;
+    soundList.innerHTML = "";
+  }
 
-  soundList.innerHTML = "";
+  const params = new URLSearchParams();
+  params.set("page", page);
+  if (currentSearch) params.set("search", currentSearch);
+
+  const data = await apiFetch(`/api/sounds?${params.toString()}`);
 
   data.items.forEach(sound => {
     const div = document.createElement("div");
@@ -223,10 +231,12 @@ async function loadSounds(search="") {
     `;
 
     div.appendChild(playBtn);
-
     div.onclick = () => openEditor(sound.id);
     soundList.appendChild(div);
   });
+
+  hasNext = data.has_next;
+  loadMoreBtn.style.display = hasNext ? "block" : "none";
 }
 
 /* ===== TAB 2 ===== */
@@ -236,6 +246,8 @@ async function openEditor(soundId) {
   tabList.classList.remove("active");
   tabEdit.classList.add("active");
   tabEdit.disabled = false;
+
+  saveNotice.style.display = "none";
 
   originalSound = await apiFetch(`/api/admin/sound?sound_id=${soundId}`);
 
@@ -256,8 +268,6 @@ async function openEditor(soundId) {
 
   applyBtn.disabled = false;
   applyBtn.classList.remove("btn-disabled");
-
-  setStatus("Готово");
 }
 
 backBtn.onclick = () => {
@@ -270,7 +280,6 @@ backBtn.onclick = () => {
 /* ===== SAVE ===== */
 applyBtn.onclick = async () => {
   try {
-    setStatus("Сохраняю...");
     const payload = {
       ...originalSound,
       title: title.value.trim(),
@@ -283,17 +292,29 @@ applyBtn.onclick = async () => {
       body: payload
     });
 
-    setStatus("Изменения сохранены", "ok");
+    saveNotice.style.display = "block";
+
+    Telegram?.WebApp?.showAlert?.("Звук успешно изменён ✅");
   } catch (e) {
-    setStatus(e.message, "error");
+    alert(e.message);
   }
 };
 
-searchInput.oninput = e => loadSounds(e.target.value.trim());
+/* ===== EVENTS ===== */
+searchInput.oninput = e => {
+  currentSearch = e.target.value.trim();
+  loadSounds(true);
+};
 
+loadMoreBtn.onclick = () => {
+  page += 1;
+  loadSounds();
+};
+
+/* ===== INIT ===== */
 Telegram?.WebApp?.ready?.();
 Telegram?.WebApp?.expand?.();
-loadSounds();
+loadSounds(true);
 </script>
 
 </body>
