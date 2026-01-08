@@ -1062,12 +1062,12 @@ async function publishVoice() {
   const title = (titleInput?.value || '').trim()
 
   const catTrigger = document.querySelector('.form-dropdown .dropdown__trigger')
-  const category =
-    catTrigger?.dataset?.value || (catTrigger?.textContent || '').trim()
+  const category = (catTrigger?.dataset?.value || '').trim()
 
+  if (!category) return alert(t('form.pick_category'))
+  if (category === 'all' || !(category in AUDIO_CATEGORIES)) return alert(t('form.pick_category'))
   if (!file) return alert(t('form.pick_file'))
   if (!title) return alert(t('form.enter_title'))
-  if (!category || category === 'Категории') return alert(t('form.pick_category'))
 
   const fd = new FormData()
 
