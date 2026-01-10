@@ -73,6 +73,12 @@
       border: none;
     }
 
+    .btn-danger {
+      background: #dc2626;
+      color: #fff;
+      border: none;
+    }
+
     .btn-disabled {
       opacity: .5;
       cursor: not-allowed;
@@ -128,6 +134,10 @@
 
     <button id="applyBtn" class="btn btn-primary btn-disabled" disabled>
       Применить изменения
+    </button>
+
+    <button id="deleteBtn" class="btn btn-danger" style="margin-top:10px">
+      🗑 Удалить войс
     </button>
 
     <div id="saveNotice" class="ok" style="display:none; margin-top:8px">
@@ -295,12 +305,19 @@ async function openEditor(soundId) {
   applyBtn.classList.remove("btn-disabled");
 }
 
-backBtn.onclick = () => {
+function goToList(reset = false) {
   tabEditView.style.display = "none";
   tabListView.style.display = "block";
   tabEdit.classList.remove("active");
   tabList.classList.add("active");
-};
+  tabEdit.disabled = true;
+
+  if (reset) {
+    loadSounds(true);
+  }
+}
+
+backBtn.onclick = () => goToList();
 
 /* ===== SAVE ===== */
 applyBtn.onclick = async () => {
@@ -319,6 +336,20 @@ applyBtn.onclick = async () => {
 
     saveNotice.style.display = "block";
     Telegram?.WebApp?.showAlert?.("Звук успешно изменён ✅");
+  } catch (e) {
+    alert(e.message);
+  }
+};
+
+
+/* ===== DELETE ===== */
+deleteBtn.onclick = async () => {
+  try {
+    const soundId = id.value;
+    await apiFetch(`/api/admin/sound?sound_id=${soundId}`, { method: "DELETE" });
+
+    Telegram?.WebApp?.showAlert?.("Войс удалён ✅");
+    goToList(true);
   } catch (e) {
     alert(e.message);
   }
